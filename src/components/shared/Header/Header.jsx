@@ -5,6 +5,7 @@ import Navbar from "./navigation/Navbar";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ToggleButton from "../button/ToggleButton";
 const navLinks = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
@@ -17,7 +18,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 bg-slate-800 z-50 py-4">
+    <header className="w-full sticky top-0 bg-slate-800 dark:bg-white z-50 py-4 transition-colors duration-600">
       <div className="mx-auto flex items-center justify-between w-11/12 max-w-360">
         {/* Left: Logo + Name */}
         <div className="flex items-center gap-1 relative">
@@ -35,7 +36,7 @@ const Header = () => {
 
             {/* SM and md Navigation */}
             <div
-              className={`dark:bg-black border-l-4 border-green-500 rounded-[2rem] shadow-2xl z-20 transform transition-all duration-500 top-full absolute w-56 left-0 ${
+              className={`dark:bg-slate-800 border border-green-500 rounded-xl shadow-xl z-20 transform transition-all duration-500 top-full absolute w-56 left-0 ${
                 menuOpen
                   ? "translate-y-2 opacity-100 pointer-events-auto"
                   : "-translate-y-5 opacity-0 pointer-events-none"
@@ -66,6 +67,7 @@ const Header = () => {
         {/* Right: Login / Register */}
 
         <div className="flex gap-6 items-center">
+          <ToggleButton />
           <Link
             href="/login"
             className="px-8 py-3 bg-green-400 text-slate-800 hover:bg-green-800 rounded-full flex justify-center transition-all duration-500 items-center font-black text-xs uppercase tracking-widest shadow-sm shadow-green-100"

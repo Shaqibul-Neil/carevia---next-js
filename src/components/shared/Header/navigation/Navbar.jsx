@@ -24,8 +24,8 @@ const Navbar = ({ navLinks }) => {
                 className={cn(
                   "px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] transition-all relative overflow-hidden group",
                   path === link.href
-                    ? "text-green-400"
-                    : "text-slate-400 hover:text-green-400",
+                    ? "text-green-600"
+                    : "text-slate-200 hover:text-green-600 hover:dark:text-green-600 dark:text-slate-800",
                 )}
               >
                 {link.title}
