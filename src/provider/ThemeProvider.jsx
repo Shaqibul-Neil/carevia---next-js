@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children }) => {
   //apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    console.log(root);
+    //console.log(document.documentElement);
     if (theme === "dark") root.classList.add("dark");
     else root.classList.remove("dark");
     localStorage.setItem("theme", theme);
