@@ -14,6 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import {
+  showErrorAlert,
+  showLoadingAlert,
+  showSuccessAlert,
+} from "@/lib/utils";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
   //defining the form with default values
@@ -33,18 +39,26 @@ const RegisterForm = () => {
   });
   //defining the submit handler
   const onSubmit = async (formData) => {
+    showLoadingAlert("Creating account...", "Please wait", 100000);
     try {
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      console.log(response);
       const result = await response.json();
-      console.log(result);
+      //Close sweet alert loading
+      Swal.close();
       if (result.success) {
-        console.log("Reg success");
+        showSuccessAlert("Success", "Account created successfully");
+      } else {
+        showErrorAlert("Failed", result.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      Swal.close();
+      showErrorAlert();
+    }
   };
 
   const { isSubmitting } = form.formState;

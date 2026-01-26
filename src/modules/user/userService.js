@@ -51,7 +51,9 @@ export const registerUser = async (payload) => {
   // 5. Save to database
   const createdUser = await createUser(newUser);
   if (!createdUser) return { success: false, message: "Failed to create user" };
-  return { success: true, message: "Registration Successful", data: newUser };
+  //6. Remove Password
+  const {password, ...safeUser}= createdUser
+  return { success: true, message: "Registration Successful", data: {...safeUser, _id: safeUser._id.toString()} };
 };
 
 // ==========================================
