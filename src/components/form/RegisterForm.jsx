@@ -40,6 +40,7 @@ const RegisterForm = () => {
         body: JSON.stringify(formData),
       });
       const result = await response.json();
+      console.log(result);
       if (result.success) {
         console.log("Reg success");
       }

@@ -22,3 +22,5 @@ export async function POST(request) {
     return ApiResponse.error("Internal server error", 500);
   }
 }
+
+// GET /api/users - Get all users (for admin)

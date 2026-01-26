@@ -21,11 +21,11 @@ export const userRegistrationSchema = z.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       "Must contain at least one special character",
     ),
-  nid: z.string().trim(),
+  nid: z.string().trim().regex(/^\d+$/, "NID must be numeric"),
   phoneNumber: z
     .string()
     .trim()
-    .min(11, "Phone number must be at least 11 digits"),
+    .regex(/^01[3-9]\d{8}$/, "Invalid phone number"),
   address: z.string().trim(),
   city: z.string().trim().min(1, "City is required"),
   postalCode: z.string().trim().optional(),
