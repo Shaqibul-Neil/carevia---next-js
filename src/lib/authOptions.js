@@ -1,3 +1,4 @@
+import { loginUser } from "@/modules/user/userService";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -6,12 +7,47 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        // email: { label: "Email", type: "email" },
-        // password: { label: "Password", type: "password" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Enter your email address",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Enter your password",
+        },
       },
       async authorize(credentials) {
+        const { email, password } = credentials || {};
+        if (!email || !password) return null;
+        // Call login service
+        const user = await loginUser(email, password);
+        if (user) console.log(user);
         return null;
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+    async session({ session, token, user }) {
+      //Always add data from token for security purposes.
+      if (token) {
+        session.role = token.role;
+      }
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.email = user.email;
+        token.role = user.role;
+      }
+      return token;
+    },
+  },
 };

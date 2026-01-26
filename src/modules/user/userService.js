@@ -1,5 +1,9 @@
 import bcrypt from "bcryptjs";
-import { createUser, findUserByEmail } from "./userRepository";
+import {
+  createUser,
+  findUserByEmail,
+  updateUserLastLogin,
+} from "./userRepository";
 import { userRegistrationSchema } from "@/lib/formSchema/userSchema";
 
 // ==========================================
@@ -32,14 +36,18 @@ export const registerUser = async (payload) => {
   const validation = await validateUserData(payload);
   if (!validation.success) return validation;
   const data = validation.data;
+
   //2. Check if user already exists
   const existingUser = await findUserByEmail(data.email.toLowerCase().trim());
   if (existingUser) return { success: false, message: "User already exists" };
+
   // 3. Hash password
   const encryptedPassword = await bcrypt.hash(data.password, 12);
+
   // 4. Create new user object
   const newUser = {
     ...data,
+    provider: "Credentials",
     email: data.email.toLowerCase().trim(),
     password: encryptedPassword,
     role: "user",
@@ -48,17 +56,41 @@ export const registerUser = async (payload) => {
     createdAt: new Date().toISOString(),
     lastLoginAt: new Date().toISOString(),
   };
+
   // 5. Save to database
   const createdUser = await createUser(newUser);
   if (!createdUser) return { success: false, message: "Failed to create user" };
+
   //6. Remove Password
-  const {password, ...safeUser}= createdUser
-  return { success: true, message: "Registration Successful", data: {...safeUser, _id: safeUser._id.toString()} };
+  const { password, ...safeUser } = createdUser;
+  return {
+    success: true,
+    message: "Registration Successful",
+    data: { ...safeUser, _id: safeUser._id.toString() },
+  };
 };
 
 // ==========================================
 // Login user
 // ==========================================
+export const loginUser = async (email, password) => {
+  if (!email || !password) return null;
+
+  // 1. Find user
+  const user = await findUserByEmail(email.toLowerCase().trim());
+  if (!user) return null;
+
+  //2. Match password
+  const isPasswordOk = await bcrypt.compare(password, user.password);
+  if (!isPasswordOk) return null;
+
+  // 3. Update last login
+  await updateUserLastLogin(user.email.toLowerCase().trim());
+
+  // 4. Return user without password
+  const { password: _, ...safeUser } = user;
+  return safeUser;
+};
 
 // ==========================================
 // Save OAuth user (Google login)

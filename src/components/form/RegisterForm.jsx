@@ -20,8 +20,10 @@ import {
   showSuccessAlert,
 } from "@/lib/utils";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   //defining the form with default values
   const form = useForm({
     resolver: zodResolver(userRegistrationSchema),
@@ -39,7 +41,7 @@ const RegisterForm = () => {
   });
   //defining the submit handler
   const onSubmit = async (formData) => {
-    showLoadingAlert("Creating account...", "Please wait", 100000);
+    showLoadingAlert("Creating account...", "Please wait");
     try {
       const response = await fetch("/api/users", {
         method: "POST",
@@ -52,6 +54,7 @@ const RegisterForm = () => {
       Swal.close();
       if (result.success) {
         showSuccessAlert("Success", "Account created successfully");
+        router.push("/bookings");
       } else {
         showErrorAlert("Failed", result.message);
       }

@@ -5,7 +5,9 @@ import { registerUser } from "@/modules/user/userService";
 export async function POST(request) {
   try {
     //parse request body
+    //console.log(request);
     const body = await request.json();
+    //console.log("body---------", body);
     //call service
     const result = await registerUser(body);
     //handle response
