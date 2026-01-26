@@ -2,7 +2,7 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { userRegistrationSchema } from "@/lib/formSchema/formSchema";
+import { userRegistrationSchema } from "@/lib/formSchema/userSchema";
 import {
   Form,
   FormControl,
@@ -32,8 +32,18 @@ const RegisterForm = () => {
     },
   });
   //defining the submit handler
-  const onSubmit = async (values) => {
-    console.log(values);
+  const onSubmit = async (formData) => {
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (result.success) {
+        console.log("Reg success");
+      }
+    } catch (error) {}
   };
 
   const { isSubmitting } = form.formState;

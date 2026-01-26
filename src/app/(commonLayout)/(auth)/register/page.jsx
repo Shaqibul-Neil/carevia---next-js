@@ -1,6 +1,5 @@
 "use client";
 import RegisterForm from "@/components/form/RegisterForm";
-import { Heart, MapPin, HandHeart, Users, HeartHandshake } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { GiHeartInside } from "react-icons/gi";

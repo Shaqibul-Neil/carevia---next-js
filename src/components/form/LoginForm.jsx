@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { loginFormSchema } from "@/lib/formSchema/formSchema";
+import { loginFormSchema } from "@/lib/formSchema/userSchema";
 
 const LoginForm = () => {
   //defining the form with default values
