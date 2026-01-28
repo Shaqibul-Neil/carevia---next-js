@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const router = useRouter();
+
   //defining the form with default values
   const form = useForm({
     resolver: zodResolver(loginFormSchema),
@@ -32,9 +33,11 @@ const LoginForm = () => {
       password: "",
     },
   });
+
   //defining the submit handler
   const onSubmit = async (values) => {
     showLoadingAlert("Signing in...", "Please wait");
+
     try {
       // Use NextAuth signIn with credentials
       const result = await signIn("credentials", {
@@ -43,8 +46,10 @@ const LoginForm = () => {
         redirect: false, // Handle redirect manually
       });
       console.log(result);
+
       //Close sweet alert loading
       Swal.close();
+
       if (result?.ok) {
         //Show success and redirect
         showSuccessAlert("Welcome to Carevia!", "Logged in successfully");
@@ -59,7 +64,7 @@ const LoginForm = () => {
       }
     } catch (error) {
       Swal.close();
-      console.error("Login error:", error);
+      //console.error("Login error:", error);
       showErrorAlert("Login Failed", "Something went wrong. Please try again.");
     }
   };

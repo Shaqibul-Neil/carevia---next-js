@@ -7,11 +7,10 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
-
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const Navbar = ({ navLinks }) => {
+const MiddleNavbar = ({ navLinks }) => {
   const path = usePathname();
   return (
     <NavigationMenu className="hidden lg:block">
@@ -38,4 +37,4 @@ const Navbar = ({ navLinks }) => {
   );
 };
 
-export default Navbar;
+export default MiddleNavbar;
