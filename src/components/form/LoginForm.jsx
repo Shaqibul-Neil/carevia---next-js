@@ -47,9 +47,6 @@ const LoginForm = () => {
       });
       console.log(result);
 
-      //Close sweet alert loading
-      Swal.close();
-
       if (result?.ok) {
         //Show success and redirect
         showSuccessAlert("Welcome to Carevia!", "Logged in successfully");

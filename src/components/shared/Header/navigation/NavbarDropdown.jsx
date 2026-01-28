@@ -10,7 +10,11 @@ import {
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 const NavbarDropdown = ({ session }) => {
+  const handleSignOut = async () => {
+    await signOut();
+  };
   return (
     <div className="flex items-center">
       <DropdownMenu>
@@ -29,36 +33,39 @@ const NavbarDropdown = ({ session }) => {
         <DropdownMenuContent
           side="bottom"
           align="end"
-          className="w-56 p-2 bg-slate-800 border border-green-500 rounded-xl shadow-xl z-50"
+          className="w-56 p-2 dark:bg-slate-800 bg-slate-100 border border-green-800 dark:border-green-500 rounded-xl shadow-xl z-50"
         >
           <div className="px-4 py-3 border-b border-slate-50 mb-2">
-            <DropdownMenuLabel className="p-0 font-black text-gray-200 text-sm">
+            <DropdownMenuLabel className="p-0 font-black dark:text-gray-200 text-slate-600 text-sm">
               {session?.user?.name || "Guest"}
             </DropdownMenuLabel>
-            <p className="text-xs font-bold text-slate-400 mt-0.5">
+            <p className="text-xs font-bold dark:text-gray-400 text-slate-400 mt-0.5">
               {session?.user?.email}
             </p>
           </div>
 
-          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent text-gray-200">
+          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent">
             <Link
               href={"/dashboard/profile"}
-              className="font-semibold text-gray-200 hover:text-green-600 transition-colors duration-500"
+              className="font-semibold dark:text-gray-200 text-slate-600 hover:text-green-600 transition-colors duration-500"
             >
               My Profile
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent text-gray-200">
+          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent ">
             <Link
               href={"/dashboard"}
-              className="font-semibold text-gray-200 hover:text-green-600 transition-colors duration-500"
+              className="font-semibold dark:text-gray-200 text-slate-600 hover:text-green-600 transition-colors duration-500"
             >
               Dashboard
             </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent text-gray-200">
-            <button className="font-semibold text-gray-200 hover:text-green-600 transition-colors duration-500 cursor-pointer">
+          <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent">
+            <button
+              onClick={handleSignOut}
+              className="font-semibold dark:text-gray-200 text-slate-600 hover:text-green-600 transition-colors duration-500 cursor-pointer"
+            >
               Logout
             </button>
           </DropdownMenuItem>

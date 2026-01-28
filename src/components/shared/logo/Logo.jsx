@@ -8,7 +8,7 @@ const Logo = () => {
       <div>
         <Link
           href={"/"}
-          className="flex items-center gap-1 text-green-500 group"
+          className="flex items-center gap-1 text-green-800 dark:text-green-500 group"
         >
           <div className="md:flex items-center justify-center group-hover:text-slate-200 transition-all duration-500 hidden">
             <GiHeartInside className="w-6 h-6" />
