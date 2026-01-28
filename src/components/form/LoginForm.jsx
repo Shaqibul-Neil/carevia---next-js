@@ -20,10 +20,13 @@ import {
 } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const router = useRouter();
+  //to get the desired path before login
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl" || "/");
 
   //defining the form with default values
   const form = useForm({
@@ -45,12 +48,12 @@ const LoginForm = () => {
         password: values.password,
         redirect: false, // Handle redirect manually
       });
-      console.log(result);
+      //console.log(result);
 
       if (result?.ok) {
         //Show success and redirect
         showSuccessAlert("Welcome to Carevia!", "Logged in successfully");
-        router.push("/");
+        router.push(callbackUrl);
         router.refresh(); //refresh to update session
       } else {
         // Login failed - show error

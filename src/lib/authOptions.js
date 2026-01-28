@@ -83,10 +83,10 @@ export const authOptions = {
       return true;
     },
     // Redirect Callback
-    async redirect({ url, baseUrl }) {
-      // Redirect to home after login
-      return baseUrl;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   // Redirect to home after login
+    //   return baseUrl;
+    // },
     // Session Callback - Add user data to session
     async session({ session, token, user }) {
       //Always add data from token for security purposes.

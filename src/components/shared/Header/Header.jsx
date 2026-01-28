@@ -17,7 +17,7 @@ const navLinks = [
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  //console.log(session);
   return (
     <header className="w-full sticky top-0 bg-slate-50 dark:bg-slate-800 z-50 py-4 transition-colors duration-600 border-b border-border">
       <div className="mx-auto flex items-center justify-between w-11/12 max-w-360">

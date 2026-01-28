@@ -6,7 +6,7 @@ import React from "react";
 const ToggleButton = () => {
   const { theme, toggleTheme } = useTheme();
 
-  console.log(theme);
+  //console.log(theme);
   return (
     <button
       onClick={toggleTheme}
