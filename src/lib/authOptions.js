@@ -2,6 +2,9 @@ import { loginUser } from "@/modules/user/userService";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
+   // ==========================================
+  // Authentication Providers
+  // ==========================================
   providers: [
     // Credentials Provider (Email/Password)
     CredentialsProvider({
@@ -23,12 +26,16 @@ export const authOptions = {
         if (!email || !password) return null;
         // Call login service
         const user = await loginUser(email, password);
-        if (user) console.log(user);
+        if (user) {
+          console.log(user);
+          return user;
+        }
         return null;
       },
     }),
   ],
   callbacks: {
+     // Sign In Callback - Handle OAuth user creation
     async signIn({ user, account, profile, email, credentials }) {
       return true;
     },
@@ -42,6 +49,7 @@ export const authOptions = {
       }
       return session;
     },
+     // JWT Callback - Add user data to token
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
         token.email = user.email;

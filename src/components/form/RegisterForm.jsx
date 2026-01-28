@@ -21,6 +21,7 @@ import {
 } from "@/lib/utils";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -43,20 +44,49 @@ const RegisterForm = () => {
   const onSubmit = async (formData) => {
     showLoadingAlert("Creating account...", "Please wait");
     try {
+      // Register the user
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      console.log(response);
+
       const result = await response.json();
-      //Close sweet alert loading
-      Swal.close();
+
       if (result.success) {
-        showSuccessAlert("Success", "Account created successfully");
-        router.push("/bookings");
+        // Auto login after successful registration
+        Swal.update({
+          title: "Account created successfully. ",
+          text: "Signing you in...",
+          allowOutsideClick: false,
+        });
+        const signInResult = await signIn("credentials", {
+          email: formData.email,
+          password: formData.password,
+          redirect: false, // Handle redirect manually
+        });
+        //Close sweet alert loading
+        Swal.close();
+        console.log(signInResult);
+        if (signInResult?.ok) {
+          //Show success and redirect
+          showSuccessAlert(
+            "Welcome to Carevia!",
+            "Your account has been created successfully",
+          );
+          router.push("/bookings");
+          router.refresh(); //refresh to update session
+        } else {
+          // Registration successful but auto-login failed
+          // Still show success but redirect to login
+          await showSuccessAlert(
+            "Account Created!",
+            "Please login with your credentials",
+          );
+          router.push("/login");
+        }
       } else {
-        showErrorAlert("Failed", result.message);
+        showErrorAlert("Registration Failed", result.message);
       }
     } catch (error) {
       Swal.close();

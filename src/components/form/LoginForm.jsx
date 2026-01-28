@@ -13,6 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { loginFormSchema } from "@/lib/formSchema/userSchema";
+import { showErrorAlert, showSuccessAlert } from "@/lib/utils";
+import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
   //defining the form with default values
@@ -25,7 +27,24 @@ const LoginForm = () => {
   });
   //defining the submit handler
   const onSubmit = async (values) => {
-    console.log(values);
+    try {
+      // Use NextAuth signIn with credentials
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false, // Handle redirect manually
+      });
+      console.log(result);
+      if (result?.ok) {
+        //Show success and redirect
+        showSuccessAlert("Welcome to Carevia!", "Logged in successfully");
+        router.push("/");
+        router.refresh(); //refresh to update session
+      }
+    } catch (error) {
+      console.log(error);
+      showErrorAlert("Login Failed", error.message);
+    }
   };
 
   const { isSubmitting } = form.formState;
