@@ -13,10 +13,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { loginFormSchema } from "@/lib/formSchema/userSchema";
-import { showErrorAlert, showSuccessAlert } from "@/lib/utils";
+import {
+  showErrorAlert,
+  showLoadingAlert,
+  showSuccessAlert,
+} from "@/lib/utils";
 import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   //defining the form with default values
   const form = useForm({
     resolver: zodResolver(loginFormSchema),
@@ -27,6 +34,7 @@ const LoginForm = () => {
   });
   //defining the submit handler
   const onSubmit = async (values) => {
+    showLoadingAlert("Signing in...", "Please wait");
     try {
       // Use NextAuth signIn with credentials
       const result = await signIn("credentials", {
@@ -35,15 +43,24 @@ const LoginForm = () => {
         redirect: false, // Handle redirect manually
       });
       console.log(result);
+      //Close sweet alert loading
+      Swal.close();
       if (result?.ok) {
         //Show success and redirect
         showSuccessAlert("Welcome to Carevia!", "Logged in successfully");
         router.push("/");
         router.refresh(); //refresh to update session
+      } else {
+        // Login failed - show error
+        showErrorAlert(
+          "Login Failed",
+          result?.error || "Invalid email or password",
+        );
       }
     } catch (error) {
-      console.log(error);
-      showErrorAlert("Login Failed", error.message);
+      Swal.close();
+      console.error("Login error:", error);
+      showErrorAlert("Login Failed", "Something went wrong. Please try again.");
     }
   };
 
