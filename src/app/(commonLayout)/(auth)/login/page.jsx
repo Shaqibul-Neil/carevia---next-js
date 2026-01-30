@@ -22,13 +22,11 @@ const LoginPage = () => {
           <div className="absolute -top-[100px] -left-[60px] w-[420px] h-[420px] rounded-full bg-white dark:bg-slate-800 shadow-[5px_15px_15px_rgba(34,197,94,0.15)] border border-white/50 dark:border-slate-700/50 justify-center items-start pl-20 pt-20 overflow-hidden flex flex-col">
             <div className="relative z-10 scale-90 origin-top-left inset-0">
               <div className="relative pt-8 ml-4 hidden xl:flex flex-col">
-                <h2 className="text-7xl font-semibold text-[#0F172A] dark:text-white mb-1">
-                  Carevia<span className="text-primary text-xl">■</span>
+                <h2 className="text-5xl font-semibold text-slate-800 dark:text-white mb-1">
+                  Give Care
+                  <span className="font-bold text-primary"> Give peace</span>
                 </h2>
-                <h3 className="text-3xl font-light text-slate-500 dark:text-slate-400 tracking-wide mb-4">
-                  Give Care.
-                  <span className="font-bold text-primary"> Give peace.</span>
-                </h3>
+
                 <div className="w-18 h-1.5 bg-gradient-to-r from-primary to-emerald-400 rounded-full"></div>
               </div>
             </div>

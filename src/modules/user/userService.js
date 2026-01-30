@@ -47,7 +47,7 @@ export const registerUser = async (payload) => {
   // 4. Create new user object
   const newUser = {
     ...data,
-    provider: "Credentials",
+    provider: ["Credentials"],
     email: data.email.toLowerCase().trim(),
     password: encryptedPassword,
     role: "user",
@@ -56,6 +56,7 @@ export const registerUser = async (payload) => {
     createdAt: new Date().toISOString(),
     lastLoginAt: new Date().toISOString(),
   };
+  console.log("Saving User Data:", newUser); 
 
   // 5. Save to database
   const createdUser = await createUser(newUser);

@@ -8,13 +8,12 @@ const Logo = () => {
       <div>
         <Link
           href={"/"}
-          className="flex items-center gap-1 text-green-800 dark:text-green-500 group"
+          className="flex items-center text-green-800 dark:text-green-500"
         >
-          <div className="md:flex items-center justify-center group-hover:text-slate-200 transition-all duration-500 hidden">
-            <GiHeartInside className="w-6 h-6" />
-          </div>
-          <span className="font-black text-2xl tracking-tighter group-hover:text-slate-200 transition-all duration-500">
-            Carevia
+          <span className="font-black text-2xl tracking-tighter hover:scale-105 transition-all duration-500 transform-gpu will-change-transform flex items-center">
+            <span>Carev</span>
+            <GiHeartInside className="w-6 h-6 shrink-0" />
+            <span className="-ml-1">a</span>
           </span>
         </Link>
       </div>

@@ -1,5 +1,6 @@
 import { loginUser } from "@/modules/user/userService";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   // ==========================================
@@ -55,6 +56,11 @@ export const authOptions = {
           throw new Error(error.message || "Authentication failed");
         }
       },
+    }),
+    // Google OAuth Provider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   // ==========================================

@@ -54,7 +54,7 @@ export async function proxy(req) {
     }
     if (userRole !== "admin") {
       // User is logged in but not admin → unauthorized page
-      return NextResponse.redirect(new URL("/unauthorized", req.url));
+      return NextResponse.rewrite(new URL("/unauthorized", req.url));
     }
   }
 
