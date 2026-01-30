@@ -1,7 +1,9 @@
 import bcrypt from "bcryptjs";
 import {
+  addProviderToUser,
   createUser,
   findUserByEmail,
+  updateUser,
   updateUserLastLogin,
 } from "./userRepository";
 import { userRegistrationSchema } from "@/lib/formSchema/userSchema";
@@ -36,19 +38,45 @@ export const registerUser = async (payload) => {
   const validation = await validateUserData(payload);
   if (!validation.success) return validation;
   const data = validation.data;
+  const email = data.email.toLowerCase().trim();
 
-  //2. Check if user already exists
-  const existingUser = await findUserByEmail(data.email.toLowerCase().trim());
-  if (existingUser) return { success: false, message: "User already exists" };
-
-  // 3. Hash password
+  // 2. Hash password
   const encryptedPassword = await bcrypt.hash(data.password, 12);
 
-  // 4. Create new user object
+  //3. Check if user already exists
+  const existingUser = await findUserByEmail(data.email.toLowerCase().trim());
+
+  if (existingUser) {
+    //if provider array includes Credentials then
+    if (existingUser.provider.includes("Credentials"))
+      return { success: false, message: "User already exists" };
+    //if provider array doesn't include Credentials but includes other providers then link Credentials to existing user
+    const updatedData = {
+      password: encryptedPassword,
+      firstName: existingUser.firstName || data.firstName,
+      lastName: existingUser.lastName || data.lastName,
+      image: existingUser.image || data.image,
+    };
+    //update the user information
+    await updateUser(email, updatedData);
+    //add Credentials to provider array
+    await addProviderToUser(email, "Credentials");
+    return {
+      success: true,
+      message: "Account linked with Credentials successfully",
+      data: {
+        _id: existingUser._id.toString(),
+        email: existingUser.email,
+        role: existingUser.role,
+      },
+    };
+  }
+
+  // 4.If it is a new user completely Create new user object
   const newUser = {
     ...data,
     provider: ["Credentials"],
-    email: data.email.toLowerCase().trim(),
+    email: email,
     password: encryptedPassword,
     role: "user",
     isVerified: false,
@@ -56,7 +84,6 @@ export const registerUser = async (payload) => {
     createdAt: new Date().toISOString(),
     lastLoginAt: new Date().toISOString(),
   };
-  console.log("Saving User Data:", newUser); 
 
   // 5. Save to database
   const createdUser = await createUser(newUser);
@@ -96,3 +123,40 @@ export const loginUser = async (email, password) => {
 // ==========================================
 // Save OAuth user (Google login)
 // ==========================================
+export const saveOAuthUser = async (user, account) => {
+  try {
+    //console.log( account);
+    if (!user || !user.email) return false;
+    const email = user.email.toLowerCase().trim();
+    // 1. Check if user exists
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      //if provider list doesn't include provider then add it
+      if (!existingUser.provider.includes(account.provider)) {
+        //add provider to user
+        await addProviderToUser(email, account.provider);
+      }
+        //update user last login information if user exists and then return true
+        await updateUserLastLogin(email);
+        return true;
+      
+    }
+    //2. if completely new user then create user
+    const newUser = { 
+      firstName: user.name?.split(" ")[0] || "",
+      lastName: user.name?.split(" ").slice(1).join(" ") || "",
+      email: email,
+      image: user.image,
+      provider: [account.provider],
+      role: "user",
+      isVerified: true,
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString()
+    };
+   const result =  await createUser(newUser);
+    return result ? true : false;
+  } catch (error) {
+    return false;
+  }
+};

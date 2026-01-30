@@ -12,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { Button } from "../ui/button";
 import {
   showErrorAlert,
@@ -56,23 +55,27 @@ const RegisterForm = () => {
       if (result.success) {
         // Auto login after successful registration
         Swal.update({
-          title: "Account created successfully. ",
+          title: "Success",
           text: "Signing you in...",
           allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
         });
+
+        // NextAuth signIn with credentials
         const signInResult = await signIn("credentials", {
           email: formData.email,
           password: formData.password,
           redirect: false, // Handle redirect manually
         });
+
         //Close sweet alert loading
         Swal.close();
-        console.log(signInResult);
         if (signInResult?.ok) {
           //Show success and redirect
           showSuccessAlert(
             "Welcome to Carevia!",
-            "Your account has been created successfully",
+            "Account created successfully.",
           );
           router.push("/bookings");
           router.refresh(); //refresh to update session

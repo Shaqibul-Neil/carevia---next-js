@@ -20,3 +20,20 @@ export const updateUserLastLogin = async (email) => {
     $set: { lastLoginAt: new Date().toISOString() },
   });
 };
+
+//Specific user update
+export const updateUser = async (email, updatedData) => {
+  const query = { email };
+  return await usersCollection().updateOne(query, {
+    $set: { ...updatedData, updatedAt: new Date().toISOString() },
+  });
+};
+
+//Adding new provider in the provider array
+export const addProviderToUser = async (email, provider) => {
+  const query = { email };
+  return await usersCollection().updateOne(query, {
+    $addToSet: { provider: provider },
+    $set: { updatedAt: new Date().toISOString() },
+  });
+};

@@ -1,8 +1,24 @@
+"use client";
+import { showErrorAlert } from "@/lib/utils";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 const GoogleLogin = () => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn("google", { redirect: false, callbackUrl });
+    } catch (error) {
+      showErrorAlert("Login Failed", "Something went wrong. Please try again.");
+    }
+  };
   return (
-    <button className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors group cursor-pointer">
+    <button
+      onClick={handleGoogleSignIn}
+      className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors group cursor-pointer"
+    >
       <svg
         className="w-5 h-5 group-hover:scale-110 transition-transform"
         viewBox="0 0 24 24"

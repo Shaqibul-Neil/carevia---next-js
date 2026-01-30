@@ -26,7 +26,7 @@ const LoginForm = () => {
   const router = useRouter();
   //to get the desired path before login
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl" || "/");
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   //defining the form with default values
   const form = useForm({

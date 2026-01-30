@@ -7,7 +7,7 @@ export function cn(...inputs) {
 }
 
 // Loading Alert
-export const showLoadingAlert = (title, text, duration = 1500) => {
+export const showLoadingAlert = (title, text) => {
   return Swal.fire({
     title,
     text,
@@ -15,7 +15,6 @@ export const showLoadingAlert = (title, text, duration = 1500) => {
     iconColor: "#16a34a",
     background: "#fff",
     color: "#1e293b",
-    timer: duration,
     allowOutsideClick: false,
     allowEscapeKey: false,
     didOpen: () => {
@@ -39,8 +38,6 @@ export const showSuccessAlert = (title, text) => {
     confirmButtonColor: "#16a34a",
     background: "#ffffff",
     color: "#1e293b",
-    timer: 2000,
-    timerProgressBar: true,
     customClass: {
       popup: "rounded-3xl shadow-2xl border border-green-100",
       title: "text-slate-800 font-bold",

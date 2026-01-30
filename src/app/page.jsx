@@ -1,4 +1,3 @@
-import SessionCard from "@/components/demos/SessionCard";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
