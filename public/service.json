@@ -1,0 +1,896 @@
+[
+  {
+    "slug": "baby-sitting",
+    "category": "Baby Care",
+    "serviceName": "Baby Sitting",
+    "shortTitle": "Safe Home Baby Care",
+    "image": "https://i.postimg.cc/W3SwdS2z/Baby-Sitting.webp",
+    "isFeatured": true,
+    "price": { "perHour": 350, "perDay": 2500, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily", "Weekly"],
+      "workingHours": "24/7 Available",
+      "emergencySupport": true
+    },
+    "ageGroupSupported": { "minAgeInMonths": 3, "maxAgeInYears": 8 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Child Care Training", "Basic First Aid"],
+      "languagesSpoken": ["Bangla", "English"]
+    },
+    "serviceHighlights": [
+      "Verified caregivers",
+      "Flexible booking",
+      "Child-safe environment",
+      "Emergency support"
+    ],
+    "detailedDescription": "This baby sitting service provides structured and attentive care for children at home ensuring safety emotional comfort and routine stability caregivers assist with feeding hygiene sleep monitoring and age appropriate play while maintaining consistent supervision allowing parents to manage work or personal responsibilities without concern",
+    "responsibilitiesIncluded": [
+      "Feeding assistance",
+      "Hygiene care",
+      "Sleep monitoring",
+      "Play activities"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.8, "totalReviews": 132 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram", "Sylhet"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Baby Sitting Service | Care.IO",
+      "metaDescription": "Book trusted baby sitters for safe home child care"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "newborn-care",
+    "category": "Baby Care",
+    "serviceName": "Newborn Care",
+    "shortTitle": "Gentle Newborn Support",
+    "image": "https://i.postimg.cc/76BSH6V6/Newborn-Care.webp",
+    "isFeatured": false,
+    "price": { "perHour": 420, "perDay": 3000, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day & Night",
+      "emergencySupport": true
+    },
+    "ageGroupSupported": { "minAgeInMonths": 0, "maxAgeInYears": 1 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Newborn Care Training", "Infant First Aid"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": [
+      "Specialized newborn handling",
+      "Night care available",
+      "Certified caregivers"
+    ],
+    "detailedDescription": "Newborn care service delivers specialized assistance during early life stages focusing on feeding schedules diaper hygiene safe sleeping positions and continuous observation caregivers are trained to respond calmly to newborn needs while supporting parents during physically and emotionally demanding periods",
+    "responsibilitiesIncluded": [
+      "Infant feeding",
+      "Diaper changing",
+      "Sleep care",
+      "Health observation"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.9, "totalReviews": 98 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 4,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Newborn Care Service | Care.IO",
+      "metaDescription": "Professional newborn care by trained caregivers"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "toddler-care",
+    "category": "Baby Care",
+    "serviceName": "Toddler Care",
+    "shortTitle": "Active Child Supervision",
+    "image": "https://i.postimg.cc/cH58qzxY/Toddler-Care.webp",
+    "isFeatured": false,
+    "price": { "perHour": 320, "perDay": 2300, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": false
+    },
+    "ageGroupSupported": { "minAgeInMonths": 12, "maxAgeInYears": 4 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Child Engagement Training"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Learning activities", "Safe play supervision"],
+    "detailedDescription": "Toddler care service supports active young children through close supervision guided play meal assistance and routine monitoring caregivers encourage early learning emotional expression and safe exploration while maintaining a secure and responsive home environment",
+    "responsibilitiesIncluded": [
+      "Play supervision",
+      "Meal assistance",
+      "Routine monitoring"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.7, "totalReviews": 76 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Toddler Care Service | Care.IO",
+      "metaDescription": "Reliable toddler supervision at home"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "baby-feeding-support",
+    "category": "Baby Care",
+    "serviceName": "Baby Feeding Support",
+    "shortTitle": "Feeding Assistance",
+    "image": "https://i.postimg.cc/sx6mNm8L/Baby-Feeding-Support.webp",
+    "isFeatured": true,
+    "price": { "perHour": 300, "perDay": 2100, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Scheduled",
+      "emergencySupport": false
+    },
+    "ageGroupSupported": { "minAgeInMonths": 4, "maxAgeInYears": 3 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Infant Nutrition Basics"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": [
+      "Feeding schedule management",
+      "Hygienic preparation"
+    ],
+    "detailedDescription": "Baby feeding support service assists families by managing age appropriate feeding routines caregivers prepare meals maintain feeding hygiene observe intake reactions and help establish consistent nutrition habits while coordinating closely with parental guidelines",
+    "responsibilitiesIncluded": [
+      "Meal preparation",
+      "Feeding assistance",
+      "Hygiene maintenance"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.6, "totalReviews": 64 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Baby Feeding Support | Care.IO",
+      "metaDescription": "Safe and scheduled feeding support for babies"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "baby-hygiene-care",
+    "category": "Baby Care",
+    "serviceName": "Baby Hygiene Care",
+    "shortTitle": "Clean Care Routine",
+    "image": "https://i.postimg.cc/P58ySm4d/Baby-Hygiene-Care.webp",
+    "isFeatured": false,
+    "price": { "perHour": 310, "perDay": 2200, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": false
+    },
+    "ageGroupSupported": { "minAgeInMonths": 3, "maxAgeInYears": 4 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Baby Hygiene Training"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Bathing assistance", "Skin care routines"],
+    "detailedDescription": "Baby hygiene care service focuses on cleanliness and comfort by assisting with bathing diaper area care clothing changes and sanitation of baby items caregivers follow gentle hygiene practices to reduce infection risk and maintain healthy daily routines",
+    "responsibilitiesIncluded": [
+      "Bathing assistance",
+      "Clothing changes",
+      "Hygiene supervision"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.5, "totalReviews": 52 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Baby Hygiene Care | Care.IO",
+      "metaDescription": "Professional baby hygiene and cleanliness support"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "baby-sleep-care",
+    "category": "Baby Care",
+    "serviceName": "Baby Sleep Care",
+    "shortTitle": "Sleep Supervision",
+    "image": "https://i.postimg.cc/VvpMtVpT/sleepcare.webp",
+    "isFeatured": false,
+    "price": { "perHour": 330, "perDay": 2400, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Night"],
+      "workingHours": "Night Care",
+      "emergencySupport": true
+    },
+    "ageGroupSupported": { "minAgeInMonths": 2, "maxAgeInYears": 3 },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Infant Sleep Safety"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Safe sleep supervision", "Night monitoring"],
+    "detailedDescription": "Baby sleep care service provides attentive night time supervision ensuring safe sleep positioning timely response to discomfort and calm environment management caregivers monitor sleep patterns reduce risk factors and help parents maintain uninterrupted rest",
+    "responsibilitiesIncluded": [
+      "Sleep monitoring",
+      "Comfort response",
+      "Night supervision"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.7, "totalReviews": 59 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 4,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Baby Sleep Care | Care.IO",
+      "metaDescription": "Night time baby sleep supervision service"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "daily-elder-support",
+    "category": "Elderly Care",
+    "serviceName": "Daily Elder Support",
+    "shortTitle": "Routine Elder Assistance",
+    "image": "https://i.postimg.cc/nVgQ0NwX/Daily-Elder-Support.webp",
+    "isFeatured": true,
+    "price": { "perHour": 300, "perDay": 2200, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily", "Weekly"],
+      "workingHours": "Day Time",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Elder Care Training", "Basic First Aid"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": [
+      "Daily routine assistance",
+      "Mobility and hygiene support",
+      "Emotional companionship"
+    ],
+    "detailedDescription": "Daily elder support service is designed to assist senior family members with routine activities including mobility support meal assistance hygiene supervision and basic health awareness caregivers maintain a respectful and patient approach ensuring elderly individuals remain comfortable independent and emotionally secure within their own home environment",
+    "responsibilitiesIncluded": [
+      "Mobility assistance",
+      "Meal support",
+      "Hygiene supervision"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.8, "totalReviews": 145 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Sylhet"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 3,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Daily Elder Support | Care.IO",
+      "metaDescription": "Compassionate daily care for elderly family members"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "elder-companionship",
+    "category": "Elderly Care",
+    "serviceName": "Elder Companionship",
+    "shortTitle": "Social Elder Care",
+    "image": "https://i.postimg.cc/rsrsBFZZ/Elder-Companionship.webp",
+    "isFeatured": false,
+    "price": { "perHour": 260, "perDay": 1900, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Flexible Day Time",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Elder Communication Training"],
+      "languagesSpoken": ["Bangla", "English"]
+    },
+    "serviceHighlights": [
+      "Conversation and engagement",
+      "Mental well-being support",
+      "Reduced loneliness"
+    ],
+    "detailedDescription": "Elder companionship service focuses on emotional connection and mental engagement by providing conversation shared activities reading assistance and light daily interaction caregivers help reduce isolation and promote psychological well being especially for seniors living alone",
+    "responsibilitiesIncluded": [
+      "Conversation support",
+      "Activity engagement",
+      "Emotional reassurance"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": false
+    },
+    "ratingSummary": { "averageRating": 4.6, "totalReviews": 88 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Elder Companionship Service | Care.IO",
+      "metaDescription": "Trusted companionship service for elderly individuals"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "mobility-assist-care",
+    "category": "Elderly Care",
+    "serviceName": "Mobility Assist Care",
+    "shortTitle": "Movement Support",
+    "image": "https://i.postimg.cc/3xC9v2Cs/Elder-Mobility-Assist-Care.webp",
+    "isFeatured": true,
+    "price": { "perHour": 320, "perDay": 2400, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 4,
+      "certifications": ["Mobility Assistance Training", "First Aid"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": [
+      "Walking and transfer support",
+      "Fall risk reduction"
+    ],
+    "detailedDescription": "Mobility assist care service supports elderly individuals with movement related challenges including walking assistance transfers from bed to chair and safe positioning caregivers follow proper handling techniques to minimize fall risk and promote confidence during daily movement",
+    "responsibilitiesIncluded": [
+      "Walking support",
+      "Transfer assistance",
+      "Positioning help"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.7, "totalReviews": 103 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 3,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Mobility Assist Care | Care.IO",
+      "metaDescription": "Professional mobility support for elderly care"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "elder-hygiene-care",
+    "category": "Elderly Care",
+    "serviceName": "Elder Hygiene Care",
+    "shortTitle": "Hygiene Assistance",
+    "image": "https://i.postimg.cc/Ss5GhdkK/Elder-Hygiene-Care.webp",
+    "isFeatured": true,
+    "price": { "perHour": 310, "perDay": 2300, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Personal Hygiene Care Training"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Bathing assistance", "Personal hygiene care"],
+    "detailedDescription": "Elder hygiene care service ensures dignity focused assistance with bathing grooming clothing changes and cleanliness caregivers maintain privacy respect and gentle care routines while helping seniors stay comfortable and healthy",
+    "responsibilitiesIncluded": [
+      "Bathing assistance",
+      "Grooming support",
+      "Clothing changes"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.6, "totalReviews": 79 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Elder Hygiene Care | Care.IO",
+      "metaDescription": "Professional hygiene support for elderly at home"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "medication-reminder",
+    "category": "Elderly Care",
+    "serviceName": "Medication Reminder",
+    "shortTitle": "Medication Assistance",
+    "image": "https://i.postimg.cc/5N8Sh8Gf/Elder-Medication-Assistance.webp",
+    "isFeatured": false,
+    "price": { "perHour": 280, "perDay": 2000, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Scheduled",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Medication Handling Awareness"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Timely reminders", "Routine tracking"],
+    "detailedDescription": "Medication reminder service assists elderly individuals by ensuring medicines are taken on schedule caregivers track dosage timing observe reactions and report irregularities to family members helping reduce missed or incorrect medication intake",
+    "responsibilitiesIncluded": ["Medication reminders", "Routine monitoring"],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": false
+    },
+    "ratingSummary": { "averageRating": 4.5, "totalReviews": 67 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Medication Reminder Service | Care.IO",
+      "metaDescription": "Reliable medication reminder support for seniors"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "night-elder-watch",
+    "category": "Elderly Care",
+    "serviceName": "Night Elder Watch",
+    "shortTitle": "Overnight Supervision",
+    "image": "https://i.postimg.cc/QtRcPMJC/Night-Elder-Watch.webp",
+    "isFeatured": false,
+    "price": { "perHour": 380, "perDay": 2800, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Night"],
+      "workingHours": "Night Care",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 4,
+      "certifications": ["Night Care Safety", "Emergency Response"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Overnight monitoring", "Emergency readiness"],
+    "detailedDescription": "Night elder watch service provides continuous overnight supervision for seniors requiring extra attention caregivers monitor sleep mobility needs night time medication and emergency situations ensuring safety and immediate response during high risk hours",
+    "responsibilitiesIncluded": [
+      "Night supervision",
+      "Emergency response",
+      "Sleep monitoring"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.9, "totalReviews": 91 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 6,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Night Elder Watch | Care.IO",
+      "metaDescription": "Safe overnight elder supervision service"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "post-surgery-care",
+    "category": "Sick Care",
+    "serviceName": "Post Surgery Care",
+    "shortTitle": "Recovery Support",
+    "image": "https://i.postimg.cc/4NRzQmdy/Post-Surgery-Care.webp",
+    "isFeatured": true,
+    "price": { "perHour": 420, "perDay": 3200, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day & Night",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 4,
+      "certifications": ["Post Operative Care Training", "Basic First Aid"],
+      "languagesSpoken": ["Bangla", "English"]
+    },
+    "serviceHighlights": [
+      "Post-operative monitoring",
+      "Mobility assistance",
+      "Wound-awareness support"
+    ],
+    "detailedDescription": "Post surgery care service supports patients during recovery periods by assisting with mobility daily routines medication reminders and general health observation caregivers follow recovery guidelines provided by doctors and family members helping reduce complications while promoting safe and comfortable healing at home",
+    "responsibilitiesIncluded": [
+      "Mobility assistance",
+      "Routine monitoring",
+      "Medication reminders"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.9, "totalReviews": 118 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 4,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Post Surgery Home Care | Care.IO",
+      "metaDescription": "Professional post surgery recovery care at home"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "chronic-illness-care",
+    "category": "Sick Care",
+    "serviceName": "Chronic Illness Care",
+    "shortTitle": "Long Term Support",
+    "image": "https://i.postimg.cc/hvW7s5K1/Chronic-Illness-Care.webp",
+    "isFeatured": true,
+    "price": { "perHour": 380, "perDay": 2900, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Daily", "Weekly"],
+      "workingHours": "Day Time",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Chronic Care Management", "Health Monitoring"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": [
+      "Long-term condition support",
+      "Routine health awareness"
+    ],
+    "detailedDescription": "Chronic illness care service assists individuals living with long term health conditions by supporting daily routines medication schedules basic symptom observation and lifestyle consistency caregivers help patients maintain stability comfort and quality of life within a familiar home setting",
+    "responsibilitiesIncluded": [
+      "Daily routine support",
+      "Medication reminders",
+      "Symptom observation"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.7, "totalReviews": 102 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Sylhet"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 5,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Chronic Illness Care | Care.IO",
+      "metaDescription": "Reliable home care for long term illness support"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "fever-infection-care",
+    "category": "Sick Care",
+    "serviceName": "Fever Infection Care",
+    "shortTitle": "Short Term Care",
+    "image": "https://i.postimg.cc/cL9g2HsH/Fever-Infection-Care.webp",
+    "isFeatured": true,
+    "price": { "perHour": 340, "perDay": 2500, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Basic Patient Care"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Short-term illness care", "Comfort-focused support"],
+    "detailedDescription": "Fever and infection care service provides short term support for patients recovering from common illnesses caregivers assist with rest hydration meal support and general observation ensuring comfort while family members focus on recovery timelines",
+    "responsibilitiesIncluded": [
+      "Comfort assistance",
+      "Meal and hydration support",
+      "Routine observation"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": false
+    },
+    "ratingSummary": { "averageRating": 4.6, "totalReviews": 74 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 3,
+      "cancellationPolicy": "Free cancellation up to 12 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Fever Care Service | Care.IO",
+      "metaDescription": "Short term fever and infection home care support"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "patient-hygiene-care",
+    "category": "Sick Care",
+    "serviceName": "Patient Hygiene Care",
+    "shortTitle": "Personal Care",
+    "image": "https://i.postimg.cc/05Y6xZ8F/Patient-Hygiene-Care.webp",
+    "isFeatured": false,
+    "price": { "perHour": 360, "perDay": 2600, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Day Time",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 3,
+      "certifications": ["Hygiene Care Training"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Dignified hygiene support", "Comfort-focused care"],
+    "detailedDescription": "Patient hygiene care service focuses on maintaining cleanliness dignity and comfort for sick individuals caregivers assist with bathing grooming clothing changes and cleanliness while respecting privacy and following gentle care routines suited to patient condition",
+    "responsibilitiesIncluded": [
+      "Bathing assistance",
+      "Grooming support",
+      "Clothing changes"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.7, "totalReviews": 69 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Patient Hygiene Care | Care.IO",
+      "metaDescription": "Personal hygiene assistance for sick patients at home"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "medication-supervision",
+    "category": "Sick Care",
+    "serviceName": "Medication Supervision",
+    "shortTitle": "Dose Monitoring",
+    "image": "https://i.postimg.cc/Pqvx7QVr/Medication-Supervision.webp",
+    "isFeatured": false,
+    "price": { "perHour": 300, "perDay": 2200, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Hourly", "Daily"],
+      "workingHours": "Scheduled",
+      "emergencySupport": false
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 2,
+      "certifications": ["Medication Handling Awareness"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Timely medication reminders", "Routine tracking"],
+    "detailedDescription": "Medication supervision service ensures patients follow prescribed medicine schedules caregivers monitor timing observe reactions and communicate updates to family members helping prevent missed or incorrect dosage during illness recovery",
+    "responsibilitiesIncluded": ["Medication reminders", "Routine tracking"],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": false,
+      "continuousMonitoring": false
+    },
+    "ratingSummary": { "averageRating": 4.5, "totalReviews": 61 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka", "Chattogram"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 2,
+      "cancellationPolicy": "Free cancellation up to 6 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Medication Supervision | Care.IO",
+      "metaDescription": "Reliable medication monitoring for patients at home"
+    },
+    "status": "active"
+  },
+  {
+    "slug": "night-patient-watch",
+    "category": "Sick Care",
+    "serviceName": "Night Patient Watch",
+    "shortTitle": "Overnight Care",
+    "image": "https://i.postimg.cc/qBx7WRwK/Night-Patient-Watch.webp",
+    "isFeatured": false,
+    "price": { "perHour": 450, "perDay": 3400, "currency": "BDT" },
+    "availability": {
+      "serviceType": ["Night"],
+      "workingHours": "Night Care",
+      "emergencySupport": true
+    },
+    "caregiverProfile": {
+      "verifiedCaregivers": true,
+      "backgroundChecked": true,
+      "minimumExperienceYears": 4,
+      "certifications": ["Night Patient Care", "Emergency Response"],
+      "languagesSpoken": ["Bangla"]
+    },
+    "serviceHighlights": ["Overnight supervision", "Emergency readiness"],
+    "detailedDescription": "Night patient watch service provides continuous overnight monitoring for sick individuals caregivers assist with night mobility medication needs and emergency response ensuring safety and quick action during high risk hours",
+    "responsibilitiesIncluded": [
+      "Night supervision",
+      "Emergency response",
+      "Sleep monitoring"
+    ],
+    "safetyMeasures": {
+      "idVerified": true,
+      "emergencyTraining": true,
+      "continuousMonitoring": true
+    },
+    "ratingSummary": { "averageRating": 4.9, "totalReviews": 86 },
+    "locationCoverage": {
+      "supportedDivisions": ["Dhaka"],
+      "serviceAtHome": true
+    },
+    "bookingRules": {
+      "minBookingDurationHours": 6,
+      "cancellationPolicy": "Free cancellation up to 24 hours before service time",
+      "instantBooking": true
+    },
+    "seo": {
+      "metaTitle": "Night Patient Watch | Care.IO",
+      "metaDescription": "Safe overnight care for sick patients"
+    },
+    "status": "active"
+  }
+]
