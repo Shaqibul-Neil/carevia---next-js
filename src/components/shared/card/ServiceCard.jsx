@@ -1,5 +1,6 @@
 import { Star, MapPin } from "lucide-react";
 import Image from "next/image";
+import SecondaryButton from "../button/SecondaryButton";
 
 const ServiceCard = ({ service }) => {
   const {
@@ -91,9 +92,7 @@ const ServiceCard = ({ service }) => {
                 </span>
               </div>
               {/* Details button */}
-              <button className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors duration-200">
-                View Details
-              </button>
+              <SecondaryButton label="View Details" />
             </div>
           </div>
         </div>
