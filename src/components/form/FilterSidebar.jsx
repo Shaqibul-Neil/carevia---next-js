@@ -1,8 +1,7 @@
 "use client";
 import { Filter, DollarSign, Tag, MapPin, Star } from "lucide-react";
 const FilterSidebar = () => {
-  
-  const categories = ["Baby Care", "Elderly Care", "Sick Care"];
+  const categories = ["Baby Care", "Elderly Care", "Sick Care", "Special Care"];
   const divisions = ["Dhaka", "Chattogram", "Sylhet", "Rajshahi", "Khulna"];
   const ratings = [5, 4, 3, 2, 1];
 

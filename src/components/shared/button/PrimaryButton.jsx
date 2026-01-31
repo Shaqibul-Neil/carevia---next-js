@@ -1,5 +1,4 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 
 export const PrimaryButton = ({ className, children, ...props }) => {
@@ -17,7 +16,7 @@ export const PrimaryButton = ({ className, children, ...props }) => {
         "hover:shadow-lg hover:shadow-slate-800/30 dark:hover:shadow-white/20 active:scale-95",
         // Disabled state
         "disabled:opacity-50 disabled:pointer-events-none",
-        className
+        className,
       )}
       {...props}
     >

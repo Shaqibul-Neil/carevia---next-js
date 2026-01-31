@@ -247,3 +247,16 @@
 .primary-animated-button:focus .inner svg {
   fill: white;
 }
+
+/* Shimmer Animation for Skeleton */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}

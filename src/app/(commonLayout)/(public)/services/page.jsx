@@ -2,11 +2,13 @@ import FilterSidebar from "@/components/form/FilterSidebar";
 import SearchBar from "@/components/form/SearchBar";
 import SectionHeading from "@/components/headings/SectionHeadings";
 import ServiceCard from "@/components/shared/card/ServiceCard";
+import ServiceCardSkeleton from "@/components/skeleton/ServiceCardSkeleton";
 import { getAllServices } from "@/modules/services/servicesService";
 import { Heart } from "lucide-react";
+import { Suspense } from "react";
 
 // ISR: Revalidate every 30 minutes
-export const revalidate = 1800
+export const revalidate = 1800;
 
 const ServicesPage = async () => {
   // Fetch all services
@@ -38,17 +40,19 @@ const ServicesPage = async () => {
             {/* Search Bar - Full Width */}
             <SearchBar />
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {services.length > 0 ? (
-                services.map((service) => (
-                  <ServiceCard key={service._id} service={service} />
-                ))
-              ) : (
-                <div className="col-span-full text-center py-12">
-                  <p className="text-muted-foreground text-lg">
-                    No services found. Please adjust your filters.
-                  </p>
-                </div>
-              )}
+              <Suspense fallback={<ServiceCardSkeleton />}>
+                {services.length > 0 ? (
+                  services.map((service) => (
+                    <ServiceCard key={service._id} service={service} />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-muted-foreground text-lg">
+                      No services found. Please adjust your filters.
+                    </p>
+                  </div>
+                )}
+              </Suspense>
             </div>
           </main>
         </div>
