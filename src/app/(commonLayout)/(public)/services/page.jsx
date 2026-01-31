@@ -2,13 +2,15 @@ import FilterSidebar from "@/components/form/FilterSidebar";
 import SearchBar from "@/components/form/SearchBar";
 import SectionHeading from "@/components/headings/SectionHeadings";
 import ServiceCard from "@/components/shared/card/ServiceCard";
+import { getAllServices } from "@/modules/services/servicesService";
 import { Heart } from "lucide-react";
+
+// ISR: Revalidate every 30 minutes
+export const revalidate = 1800
 
 const ServicesPage = async () => {
   // Fetch all services
-  const data = await fetch(`${process.env.NEXTAUTH_URL}/api/services`);
-  const json = await data.json();
-  const services = json.data || [];
+  const services = await getAllServices();
 
   return (
     <div className="min-h-screen py-16 sm:py-20 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -22,9 +24,6 @@ const ServicesPage = async () => {
           centered={true}
         />
 
-        {/* Search Bar - Full Width */}
-        <SearchBar />
-
         {/* Main Layout: Filter Sidebar + Service Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Left Sidebar - Filters (1 column) */}
@@ -35,7 +34,9 @@ const ServicesPage = async () => {
           </aside>
 
           {/* Right Content - Service Cards (3 columns) */}
-          <main className="lg:col-span-3">
+          <main className="lg:col-span-3 space-y-6">
+            {/* Search Bar - Full Width */}
+            <SearchBar />
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {services.length > 0 ? (
                 services.map((service) => (

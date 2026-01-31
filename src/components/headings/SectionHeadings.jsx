@@ -15,12 +15,15 @@ const SectionHeading = ({
     >
       {/* Badge with Icon */}
       <div
-        className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 dark:from-green-950/40 dark:via-emerald-950/40 dark:to-green-950/40 border border-green-200/70 dark:border-green-800/50 shadow-sm backdrop-blur-sm ${
+        className={`inline-flex items-center gap-2.5 px-3 py-2 rounded-lg bg-gradient-to-r from-green-100 via-emerald-100 to-green-100 dark:from-green-950/40 dark:via-emerald-950/40 dark:to-green-950/40 border border-green-200/70 dark:border-green-800/50 shadow-sm backdrop-blur-sm ${
           centered ? "" : "ml-0"
         }`}
       >
-        <Icon className="w-4 h-4 text-primary" strokeWidth={2.5} />
-        <span className="text-sm font-bold text-primary tracking-wide uppercase">
+        <Icon
+          className="w-4 h-4 text-foreground animate-pulse"
+          strokeWidth={2.5}
+        />
+        <span className="text-xs font-semibold text-foreground tracking-wide uppercase">
           {badge}
         </span>
       </div>
@@ -31,7 +34,11 @@ const SectionHeading = ({
       </h2>
 
       {/* Subheading with elegant color */}
-      <p className="text-base sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl mx-auto font-medium">
+      <p
+        className={`text-base sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium  ${
+          centered ? "text-center" : "text-left"
+        }`}
+      >
         {subheading}
       </p>
 

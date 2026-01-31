@@ -1,9 +1,9 @@
 import { ApiResponse } from "@/lib/apiResponse";
-import { findAllServices } from "@/modules/services/serviceRepository";
+import { getAllServices } from "@/modules/services/servicesService";
 
 export async function GET(params) {
   try {
-    const allServices = await findAllServices();
+    const allServices = await getAllServices();
     return ApiResponse.success(
       allServices,
       "All services fetched successfully",

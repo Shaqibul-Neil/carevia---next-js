@@ -1,9 +1,9 @@
 import { ApiResponse } from "@/lib/apiResponse";
-import { findFeaturedServices } from "@/modules/services/serviceRepository";
+import { getFeaturedServices } from "@/modules/services/servicesService";
 
 export async function GET(params) {
   try {
-    const featuredServices = await findFeaturedServices();
+    const featuredServices = await getFeaturedServices();
     return ApiResponse.success(
       featuredServices,
       "Featured services fetched successfully",
