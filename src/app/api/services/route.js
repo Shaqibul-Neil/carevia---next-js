@@ -1,1 +1,18 @@
-export async function GET(params) {}
+import { ApiResponse } from "@/lib/apiResponse";
+import { findAllServices } from "@/modules/services/serviceRepository";
+
+export async function GET(params) {
+  try {
+    const allServices = await findAllServices();
+    return ApiResponse.success(
+      allServices,
+      "All services fetched successfully",
+    );
+  } catch (error) {
+    return ApiResponse.error(
+      "Failed to fetch all services",
+      500,
+      error.message,
+    );
+  }
+}

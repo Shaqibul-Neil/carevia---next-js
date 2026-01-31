@@ -149,3 +149,101 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Service Card Animations */
+/* Animated Blob - Theme Aware */
+.card-blob {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #22c55e; /* slate-800 for light mode */
+  opacity: 0.85;
+  filter: blur(40px);
+  animation: blob-bounce 8s infinite ease-in-out;
+}
+
+@keyframes blob-bounce {
+  0%,
+  100% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate(-100%, -100%) translate3d(120%, 0, 0);
+  }
+  50% {
+    transform: translate(-100%, -100%) translate3d(120%, 120%, 0);
+  }
+  75% {
+    transform: translate(-100%, -100%) translate3d(0, 120%, 0);
+  }
+}
+
+/* Hover effect for image inside card */
+.service-card:hover .service-image {
+  transform: scale(1.05);
+}
+
+/* Button Animation */
+/* Primary Button Animations */
+
+/* Fold hover effect */
+.primary-animated-button:hover .fold {
+  margin-top: -1rem;
+  margin-right: -1rem;
+}
+
+/* Floating points animation */
+@keyframes floating-points {
+  0% {
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-55px);
+    opacity: 0;
+  }
+}
+
+.animate-floating-points {
+  animation: floating-points infinite ease-in-out;
+}
+
+/* Icon animation on hover */
+.primary-animated-button:hover .inner svg {
+  animation:
+    dasharray 1s linear forwards,
+    filled 0.1s linear forwards 0.95s;
+}
+
+@keyframes dasharray {
+  from {
+    stroke-dasharray: 0 0 0 0;
+  }
+  to {
+    stroke-dasharray: 68 68 0 0;
+  }
+}
+
+@keyframes filled {
+  to {
+    fill: white;
+  }
+}
+
+/* Icon default state */
+.primary-animated-button .inner svg {
+  width: 18px;
+  height: 18px;
+  transition: fill 0.1s linear;
+  fill: transparent;
+}
+
+.primary-animated-button:focus .inner svg {
+  fill: white;
+}
