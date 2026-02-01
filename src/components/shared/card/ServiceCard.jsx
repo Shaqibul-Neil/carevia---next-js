@@ -4,6 +4,7 @@ import SecondaryButton from "../button/SecondaryButton";
 
 const ServiceCard = ({ service }) => {
   const {
+    _id,
     category,
     serviceName,
     image,
@@ -13,20 +14,20 @@ const ServiceCard = ({ service }) => {
     locationCoverage,
   } = service;
   const badgeColor = (cat = "") => {
-  switch (cat.toLowerCase()) {
-    case "baby care":
-      return "bg-blue-100 text-blue-800";
-    case "elder care":
-    case "elderly care":
-      return "bg-yellow-100 text-yellow-800";
-    case "sick care":
-      return "bg-red-100 text-red-800";
-    case "special care":
-      return "bg-green-100 text-green-800";
-    default:
-      return "bg-gray-100 text-gray-800";
-  }
-};
+    switch (cat.toLowerCase()) {
+      case "baby care":
+        return "bg-blue-100 text-blue-800";
+      case "elder care":
+      case "elderly care":
+        return "bg-yellow-100 text-yellow-800";
+      case "sick care":
+        return "bg-red-100 text-red-800";
+      case "special care":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
   return (
     <div className="w-full">
       {/* Main Card Container */}
@@ -108,7 +109,7 @@ const ServiceCard = ({ service }) => {
                 </span>
               </div>
               {/* Details button */}
-              <SecondaryButton label="View Details" />
+              <SecondaryButton label="View Details" href={`/services/${_id}`} />
             </div>
           </div>
         </div>

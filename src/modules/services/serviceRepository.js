@@ -9,6 +9,7 @@ export const findFeaturedServices = () => {
       { isFeatured: true },
       {
         projection: {
+          _id: 1,
           slug: 1,
           category: 1,
           serviceName: 1,
@@ -31,6 +32,7 @@ export const findAllServices = () => {
       {},
       {
         projection: {
+          _id: 1,
           slug: 1,
           category: 1,
           serviceName: 1,
