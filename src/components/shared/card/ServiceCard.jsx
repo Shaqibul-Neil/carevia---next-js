@@ -5,6 +5,7 @@ import SecondaryButton from "../button/SecondaryButton";
 const ServiceCard = ({ service }) => {
   const {
     _id,
+    slug,
     category,
     serviceName,
     image,
@@ -109,7 +110,10 @@ const ServiceCard = ({ service }) => {
                 </span>
               </div>
               {/* Details button */}
-              <SecondaryButton label="View Details" href={`/services/${_id}`} />
+              <SecondaryButton
+                label="View Details"
+                href={`/services/${slug}`}
+              />
             </div>
           </div>
         </div>

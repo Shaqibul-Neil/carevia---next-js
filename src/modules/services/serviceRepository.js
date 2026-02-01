@@ -53,7 +53,30 @@ export const findSingleService = (id) => {
   return serviceCollection().findOne({ _id: id });
 };
 
-//Find Single Service Details by Id
+//Find Single Service Details by slug
+export const findSingleServiceDetails = (slug) => {
+  return serviceCollection().findOne({ slug: slug });
+};
+
+//Find services by category
+export const findServicesByCategory = (category) => {
+  return serviceCollection()
+    .find(
+      { category: category },
+      {
+        projection: {
+          _id: 1,
+          slug: 1,
+          serviceName: 1,
+          image: 1,
+          price: 1,
+          ratingSummary: 1,
+        },
+      }
+    )
+    .limit(5) // Limit to 5 related services
+    .toArray();
+};
 
 //------------------Admin Actions---------------------
 // Create new services
