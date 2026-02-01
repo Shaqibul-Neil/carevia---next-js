@@ -2,6 +2,7 @@ import {
   findAllServices,
   findFeaturedServices,
   findServicesByCategory,
+  findSingleService,
   findSingleServiceDetails,
 } from "./serviceRepository";
 
@@ -59,5 +60,16 @@ export const getServicesByCategory = async (category) => {
   } catch (error) {
     console.error("[getServicesByCategory] Error:", error.message);
     return [];
+  }
+};
+
+//get service for booking page by ID
+export const getServiceForBookingPage = async (id) => {
+  try {
+    const service = await findSingleService(id);
+    return { ...service, _id: service._id.toString() } || null;
+  } catch (error) {
+    console.error("[getServiceForBookingPage] Error:", error.message);
+    return null;
   }
 };

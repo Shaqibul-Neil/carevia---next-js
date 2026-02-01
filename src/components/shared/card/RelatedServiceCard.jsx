@@ -7,10 +7,10 @@ const RelatedServiceCard = ({ relatedService }) => {
   return (
     <Link
       href={`/services/${relatedService.slug}`}
-      className="flex gap-3 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer group"
+      className="flex gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-700 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md"
     >
       {/* Left - Image */}
-      <div className="relative w-15 h-15 rounded-lg overflow-hidden shrink-0">
+      <div className="relative w-18 h-18 rounded-lg overflow-hidden shrink-0 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20">
         <Image
           src={relatedService.image}
           alt={relatedService.serviceName}
@@ -18,32 +18,31 @@ const RelatedServiceCard = ({ relatedService }) => {
           className="object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>
+
       {/* Right - Content */}
-      <div className="flex flex-col gap-1 min-w-0">
+      <div className="flex flex-col gap-2 min-w-0 flex-1">
         {/* Service Name */}
-        <h4 className="text-sm font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+        <h4 className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {relatedService.serviceName}
         </h4>
 
         {/* Rating */}
-        <div className="flex items-center gap-1">
-          <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-          <span className="text-xs font-semibold text-foreground">
+        <div className="flex items-center gap-1.5">
+          <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+          <span className="text-xs font-semibold text-gray-900 dark:text-white">
             {relatedService.ratingSummary.averageRating}
           </span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">
+            ({relatedService.ratingSummary.totalReviews})
+          </span>
         </div>
+
         {/* Price */}
-        <div>
-          {/* Price */}
-          <div className="flex items-baseline gap-1">
-            <span className="text-sm font-bold text-primary">
-              <span className="text-[10px] text-muted-foreground">
-                Starts from
-              </span>{" "}
-              ${relatedService.price.perHour}
-            </span>
-            <span className="text-[10px] text-muted-foreground">/hr</span>
-          </div>
+        <div className="flex items-baseline gap-1">
+          <span className="text-base font-bold text-emerald-600 dark:text-emerald-400">
+            ${relatedService.price.perHour}
+          </span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">/hr</span>
         </div>
       </div>
     </Link>

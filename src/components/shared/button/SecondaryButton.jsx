@@ -29,7 +29,6 @@ const SecondaryButton = ({
       <Link
         className={cn(BaseStyles, className)}
         href={href}
-        target="_blank"
         rel="noopener noreferrer"
         {...props}
       >

@@ -1,97 +1,225 @@
+"use client";
+
 import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import PrimaryButton from "@/components/shared/button/PrimaryButton";
+
+// Zod validation schema
+const reviewFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  rating: z.string().min(1, "Please select a rating"),
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  review: z.string().min(50, "Review must be at least 50 characters"),
+  terms: z.boolean().refine((val) => val === true, {
+    message: "You must confirm that you have used this service",
+  }),
+});
 
 const ReviewsForm = () => {
+  // Initialize form with react-hook-form and zod
+  const form = useForm({
+    resolver: zodResolver(reviewFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      rating: "",
+      title: "",
+      review: "",
+      terms: false,
+    },
+  });
+
+  // Submit handler
+  const onSubmit = (values) => {
+    console.log("Review Form Values:", values);
+    // TODO: Add review submission logic here
+  };
+
+  const { isSubmitting } = form.formState;
+
   return (
-    <form className="space-y-5">
-      <div className="flex gap-4 items-center flex-col md:flex-row">
-        {/* Name Input */}
-        <div>
-          <label className="text-sm font-medium text-foreground mb-2 block">
-            Your Name <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your full name"
-            className="w-full md:w-84 lg:w-68 px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-5">
+        {/* Name and Email - Side by Side */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Name Input */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs md:text-sm font-medium text-gray-900 dark:text-white">
+                  Your Name <span className="text-red-500">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="Enter your full name"
+                    {...field}
+                    disabled={isSubmitting}
+                    className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                  />
+                </FormControl>
+                <FormMessage className="text-xs font-medium" />
+              </FormItem>
+            )}
+          />
+
+          {/* Email Input */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs md:text-sm font-medium text-gray-900 dark:text-white">
+                  Email Address <span className="text-red-500">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="your.email@example.com"
+                    {...field}
+                    disabled={isSubmitting}
+                    className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                  />
+                </FormControl>
+                <FormMessage className="text-xs font-medium" />
+              </FormItem>
+            )}
           />
         </div>
 
-        {/* Email Input */}
-        <div>
-          <label className="text-sm font-medium text-foreground mb-2 block">
-            Email Address <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="email"
-            placeholder="your.email@example.com"
-            className="w-full md:w-84 lg:w-68 px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-          />
-        </div>
-      </div>
-
-      {/* Rating Input */}
-      <div>
-        <label className="text-sm font-medium text-foreground mb-2 block">
-          Your Rating <span className="text-destructive">*</span>
-        </label>
-        <select className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
-          <option value="">Select your rating</option>
-          <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-          <option value="4">⭐⭐⭐⭐ Very Good</option>
-          <option value="3">⭐⭐⭐ Good</option>
-          <option value="2">⭐⭐ Fair</option>
-          <option value="1">⭐ Poor</option>
-        </select>
-      </div>
-
-      {/* Review Title */}
-      <div>
-        <label className="text-sm font-medium text-foreground mb-2 block">
-          Review Title <span className="text-destructive">*</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Summarize your experience"
-          className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+        {/* Rating Input */}
+        <FormField
+          control={form.control}
+          name="rating"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-xs md:text-sm font-medium text-gray-900 dark:text-white">
+                Your Rating <span className="text-red-500">*</span>
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                    <SelectValue placeholder="Select your rating" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="5">⭐⭐⭐⭐⭐ Excellent</SelectItem>
+                  <SelectItem value="4">⭐⭐⭐⭐ Very Good</SelectItem>
+                  <SelectItem value="3">⭐⭐⭐ Good</SelectItem>
+                  <SelectItem value="2">⭐⭐ Fair</SelectItem>
+                  <SelectItem value="1">⭐ Poor</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage className="text-xs font-medium" />
+            </FormItem>
+          )}
         />
-      </div>
 
-      {/* Review Textarea */}
-      <div>
-        <label className="text-sm font-medium text-foreground mb-2 block">
-          Your Review <span className="text-destructive">*</span>
-        </label>
-        <textarea
-          rows={3}
-          placeholder="Share details about your experience with this service. What did you like? What could be improved?"
-          className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+        {/* Review Title */}
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-xs md:text-sm font-medium text-gray-900 dark:text-white">
+                Review Title <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Summarize your experience"
+                  {...field}
+                  disabled={isSubmitting}
+                  className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                />
+              </FormControl>
+              <FormMessage className="text-xs font-medium" />
+            </FormItem>
+          )}
         />
-        <p className="text-xs text-muted-foreground mt-1.5">
-          Minimum 50 characters
-        </p>
-      </div>
 
-      {/* Checkbox */}
-      <div className="flex items-start gap-2">
-        <input
-          type="checkbox"
-          id="terms"
-          className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/50"
+        {/* Review Textarea */}
+        <FormField
+          control={form.control}
+          name="review"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-xs md:text-sm font-medium text-gray-900 dark:text-white">
+                Your Review <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  rows={3}
+                  placeholder="Share details about your experience with this service. What did you like? What could be improved?"
+                  {...field}
+                  disabled={isSubmitting}
+                  className="text-sm rounded-lg border-gray-300 dark:border-gray-600 resize-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                />
+              </FormControl>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
+                Minimum 50 characters
+              </p>
+              <FormMessage className="text-xs font-medium" />
+            </FormItem>
+          )}
         />
-        <label htmlFor="terms" className="text-xs text-muted-foreground">
-          I confirm that I have used this service and this review is based on my
-          own experience
-        </label>
-      </div>
 
-      {/* Submit Button - Purely Visual */}
-      <button
-        type="button"
-        className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
-      >
-        Submit Review
-      </button>
-    </form>
+        {/* Checkbox */}
+        <FormField
+          control={form.control}
+          name="terms"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-2 space-y-0">
+              <FormControl>
+                <input
+                  type="checkbox"
+                  checked={field.value}
+                  onChange={field.onChange}
+                  disabled={isSubmitting}
+                  className="mt-0.5 w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-emerald-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel className="text-xs text-gray-600 dark:text-gray-400 font-normal">
+                  I confirm that I have used this service and this review is based on my
+                  own experience
+                </FormLabel>
+                <FormMessage className="text-xs font-medium" />
+              </div>
+            </FormItem>
+          )}
+        />
+
+        {/* Submit Button */}
+        <PrimaryButton
+          label="Submit Review"
+          type="submit"
+          className="w-full"
+        />
+      </form>
+    </Form>
   );
 };
 

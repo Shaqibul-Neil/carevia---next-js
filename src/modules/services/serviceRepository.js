@@ -1,4 +1,5 @@
 const { dbConnect } = require("@/lib/dbConnect");
+const { ObjectId } = require("mongodb");
 
 const serviceCollection = () => dbConnect("services");
 
@@ -48,9 +49,21 @@ export const findAllServices = () => {
     .toArray();
 };
 
-//Find Single Service by ID
+//Find Single Service by ID for booking page
 export const findSingleService = (id) => {
-  return serviceCollection().findOne({ _id: id });
+  return serviceCollection().findOne(
+    { _id: new ObjectId(id) },
+    {
+      projection: {
+        _id: 1,
+        category: 1,
+        serviceName: 1,
+        image: 1,
+        price: 1,
+        locationCoverage: 1,
+      },
+    },
+  );
 };
 
 //Find Single Service Details by slug
@@ -72,7 +85,7 @@ export const findServicesByCategory = (category) => {
           price: 1,
           ratingSummary: 1,
         },
-      }
+      },
     )
     .limit(5) // Limit to 5 related services
     .toArray();

@@ -2,52 +2,49 @@ import { Sparkles } from "lucide-react";
 
 const SectionHeading = ({
   badge = "Featured Services",
-  heading = "Expert Care Solutions for Your Loved Ones",
+  heading = "Expert Care Solutions",
+  highlight = "for Your Loved Ones",
   subheading = "Compassionate, professional care services tailored to meet the unique needs of your family",
   icon: Icon = Sparkles,
   centered = true,
 }) => {
   return (
     <div
-      className={`w-full mx-auto space-y-5 mb-12 ${
-        centered ? "text-center" : "text-left"
-      }`}
+      className={`max-w-3xl ${centered ? "mx-auto text-center" : ""} space-y-4`}
     >
-      {/* Badge with Icon */}
-      <div
-        className={`inline-flex items-center gap-2.5 px-3 py-2 rounded-lg bg-gradient-to-r from-green-100 via-emerald-100 to-green-100 dark:from-green-950/40 dark:via-emerald-950/40 dark:to-green-950/40 border border-green-200/70 dark:border-green-800/50 shadow-sm backdrop-blur-sm ${
-          centered ? "" : "ml-0"
-        }`}
-      >
-        <Icon
-          className="w-4 h-4 text-foreground animate-pulse"
-          strokeWidth={2.5}
-        />
-        <span className="text-xs font-semibold text-foreground tracking-wide uppercase">
-          {badge}
-        </span>
-      </div>
+      {/* Badge */}
+      {badge && (
+        <div
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 ${centered ? "" : ""}`}
+        >
+          <Icon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+            {badge}
+          </span>
+        </div>
+      )}
 
-      {/* Main Heading with Gradient */}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-slate-50 dark:via-white dark:to-slate-50 bg-clip-text text-transparent">
-        {heading}
+      {/* Main Heading */}
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+        <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent">
+          {heading}
+        </span>
+        {highlight && (
+          <>
+            <br />
+            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-400 dark:to-cyan-400 bg-clip-text text-transparent">
+              {highlight}
+            </span>
+          </>
+        )}
       </h2>
 
-      {/* Subheading with elegant color */}
-      <p
-        className={`text-base sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium  ${
-          centered ? "text-center" : "text-left"
-        }`}
-      >
-        {subheading}
-      </p>
-
-      {/* Decorative underline */}
-      <div
-        className={`h-1 w-24 bg-gradient-to-r from-primary via-green-400 to-primary rounded-full ${
-          centered ? "mx-auto" : ""
-        }`}
-      />
+      {/* Supporting Subtitle */}
+      {subheading && (
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          {subheading}
+        </p>
+      )}
     </div>
   );
 };

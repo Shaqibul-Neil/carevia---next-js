@@ -5,7 +5,7 @@
     "serviceName": "Baby Sitting",
     "shortTitle": "Safe Home Baby Care",
     "image": "https://i.postimg.cc/W3SwdS2z/Baby-Sitting.webp",
-    "isFeatured": true,
+    "isFeatured": false,
     "price": { "perHour": 350, "perDay": 2500, "currency": "BDT" },
     "availability": {
       "serviceType": ["Hourly", "Daily", "Weekly"],
@@ -52,7 +52,8 @@
       "metaTitle": "Baby Sitting Service | Care.IO",
       "metaDescription": "Book trusted baby sitters for safe home child care"
     },
-    "status": "active"
+    "status": "active",
+    "createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "newborn-care",
@@ -106,7 +107,8 @@
       "metaTitle": "Newborn Care Service | Care.IO",
       "metaDescription": "Professional newborn care by trained caregivers"
     },
-    "status": "active"
+    "status": "active",
+    "createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "toddler-care",
@@ -155,7 +157,8 @@
       "metaTitle": "Toddler Care Service | Care.IO",
       "metaDescription": "Reliable toddler supervision at home"
     },
-    "status": "active"
+    "status": "active",
+    "createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "baby-feeding-support",
@@ -207,7 +210,8 @@
       "metaTitle": "Baby Feeding Support | Care.IO",
       "metaDescription": "Safe and scheduled feeding support for babies"
     },
-    "status": "active"
+    "status": "active",
+    "createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "baby-hygiene-care",
@@ -256,7 +260,8 @@
       "metaTitle": "Baby Hygiene Care | Care.IO",
       "metaDescription": "Professional baby hygiene and cleanliness support"
     },
-    "status": "active"
+    "status": "active",
+    "createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "baby-sleep-care",
@@ -305,7 +310,7 @@
       "metaTitle": "Baby Sleep Care | Care.IO",
       "metaDescription": "Night time baby sleep supervision service"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "daily-elder-support",
@@ -313,7 +318,7 @@
     "serviceName": "Daily Elder Support",
     "shortTitle": "Routine Elder Assistance",
     "image": "https://i.postimg.cc/nVgQ0NwX/Daily-Elder-Support.webp",
-    "isFeatured": true,
+    "isFeatured": false,
     "price": { "perHour": 300, "perDay": 2200, "currency": "BDT" },
     "availability": {
       "serviceType": ["Hourly", "Daily", "Weekly"],
@@ -357,7 +362,7 @@
       "metaTitle": "Daily Elder Support | Care.IO",
       "metaDescription": "Compassionate daily care for elderly family members"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "elder-companionship",
@@ -409,11 +414,11 @@
       "metaTitle": "Elder Companionship Service | Care.IO",
       "metaDescription": "Trusted companionship service for elderly individuals"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "mobility-assist-care",
-    "category": "Elderly Care",
+    "category": "Special Care",
     "serviceName": "Mobility Assist Care",
     "shortTitle": "Movement Support",
     "image": "https://i.postimg.cc/3xC9v2Cs/Elder-Mobility-Assist-Care.webp",
@@ -460,7 +465,7 @@
       "metaTitle": "Mobility Assist Care | Care.IO",
       "metaDescription": "Professional mobility support for elderly care"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "elder-hygiene-care",
@@ -468,7 +473,7 @@
     "serviceName": "Elder Hygiene Care",
     "shortTitle": "Hygiene Assistance",
     "image": "https://i.postimg.cc/Ss5GhdkK/Elder-Hygiene-Care.webp",
-    "isFeatured": true,
+    "isFeatured": false,
     "price": { "perHour": 310, "perDay": 2300, "currency": "BDT" },
     "availability": {
       "serviceType": ["Hourly", "Daily"],
@@ -508,7 +513,7 @@
       "metaTitle": "Elder Hygiene Care | Care.IO",
       "metaDescription": "Professional hygiene support for elderly at home"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "medication-reminder",
@@ -552,7 +557,7 @@
       "metaTitle": "Medication Reminder Service | Care.IO",
       "metaDescription": "Reliable medication reminder support for seniors"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "night-elder-watch",
@@ -600,7 +605,7 @@
       "metaTitle": "Night Elder Watch | Care.IO",
       "metaDescription": "Safe overnight elder supervision service"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "post-surgery-care",
@@ -652,7 +657,7 @@
       "metaTitle": "Post Surgery Home Care | Care.IO",
       "metaDescription": "Professional post surgery recovery care at home"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "chronic-illness-care",
@@ -703,7 +708,7 @@
       "metaTitle": "Chronic Illness Care | Care.IO",
       "metaDescription": "Reliable home care for long term illness support"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "fever-infection-care",
@@ -751,7 +756,7 @@
       "metaTitle": "Fever Care Service | Care.IO",
       "metaDescription": "Short term fever and infection home care support"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "patient-hygiene-care",
@@ -799,7 +804,7 @@
       "metaTitle": "Patient Hygiene Care | Care.IO",
       "metaDescription": "Personal hygiene assistance for sick patients at home"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   },
   {
     "slug": "medication-supervision",
@@ -891,6 +896,6 @@
       "metaTitle": "Night Patient Watch | Care.IO",
       "metaDescription": "Safe overnight care for sick patients"
     },
-    "status": "active"
+    "status": "active","createdAt": "2026-01-15T10:00:00Z"
   }
 ]

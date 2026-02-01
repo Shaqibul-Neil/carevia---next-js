@@ -63,3 +63,29 @@ export const showErrorAlert = (title, text) => {
     },
   });
 };
+
+//Calculating total price
+export const calculateTotalPrice = ({
+  durationType,
+  quantity,
+  division,
+  bookingDuration,
+  service,
+}) => {
+  if (!durationType || !quantity) return 0;
+
+  let basePrice = 0;
+
+  if (durationType === "days") {
+    basePrice = bookingDuration.days * service.price.perDay;
+  }
+
+  if (durationType === "hours") {
+    basePrice = bookingDuration.hours * service.price.perHour;
+  }
+
+  const isOutsideCoverage =
+    division && !service.locationCoverage.supportedDivisions.includes(division);
+
+  return isOutsideCoverage ? basePrice + 300 : basePrice;
+};
