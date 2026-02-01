@@ -3,22 +3,24 @@ import {
   getSingleServiceDetails,
 } from "@/modules/services/servicesService";
 import Image from "next/image";
-
 import {
   Star,
   MapPin,
   Clock,
-  Shield,
   CheckCircle2,
-  Calendar,
   Users,
   Award,
   Heart,
   Phone,
   BadgeCheck,
+  ShieldCheck,
 } from "lucide-react";
 import SecondaryButton from "@/components/shared/button/SecondaryButton";
 import RelatedServiceCard from "@/components/shared/card/RelatedServiceCard";
+import ServiceDetailsTabs from "@/components/shared/button/ServiceDetailsTabs";
+import AdditionalInfo from "@/components/service details/AdditionalInfo";
+import BookingPolicy from "@/components/service details/BookingPolicy";
+import Reviews from "@/components/service details/Reviews";
 
 const ServiceDetailsPage = async ({ params }) => {
   const { slug } = await params;
@@ -48,13 +50,9 @@ const ServiceDetailsPage = async ({ params }) => {
     availability,
     ageGroupSupported,
     caregiverProfile,
-    serviceHighlights,
-    detailedDescription,
-    responsibilitiesIncluded,
     safetyMeasures,
     ratingSummary,
     locationCoverage,
-    bookingRules,
     status,
     isFeatured,
   } = service;
@@ -64,7 +62,6 @@ const ServiceDetailsPage = async ({ params }) => {
   const relatedServicesFiltered = relatedServices.filter(
     (s) => s._id !== service._id,
   );
-  console.log(relatedServices);
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,18 +148,18 @@ const ServiceDetailsPage = async ({ params }) => {
                 {/* Price Card */}
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border border-primary/20 rounded-lg p-5">
                   <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mb-3">
-                    Pricing
+                    Pricing Starts From
                   </p>
                   <div className="flex items-baseline gap-3 mb-2">
                     <span className="text-4xl font-bold text-primary">
-                      ৳{price.perHour}
+                      ${price.perHour}
                     </span>
                     <span className="text-lg text-muted-foreground font-medium">
                       / hour
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>or ৳{price.perDay} / day</span>
+                    <span>or ${price.perDay} / day</span>
                   </div>
                 </div>
 
@@ -170,7 +167,7 @@ const ServiceDetailsPage = async ({ params }) => {
                 <div className="grid grid-cols-2 gap-3">
                   {caregiverProfile?.verifiedCaregivers && (
                     <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg px-3 py-2.5">
-                      <BadgeCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                      <BadgeCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
                       <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
                         Verified
                       </span>
@@ -178,7 +175,7 @@ const ServiceDetailsPage = async ({ params }) => {
                   )}
                   {caregiverProfile?.backgroundChecked && (
                     <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg px-3 py-2.5">
-                      <Shield className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0" />
+                      <ShieldCheck className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
                       <span className="text-xs font-semibold text-green-700 dark:text-green-300">
                         Background Checked
                       </span>
@@ -222,9 +219,16 @@ const ServiceDetailsPage = async ({ params }) => {
                       <p className="text-sm font-semibold text-foreground">
                         {locationCoverage.supportedDivisions.join(", ")}
                       </p>
-                      <p className="text-xs text-muted-foreground">
-                        Service coverage areas
-                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <p className="text-xs text-muted-foreground">
+                          Service coverage areas
+                        </p>
+                        {locationCoverage.serviceAtHome && (
+                          <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">
+                            At Home
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -248,7 +252,7 @@ const ServiceDetailsPage = async ({ params }) => {
                 <div className="mt-auto">
                   <SecondaryButton
                     label="Book Now"
-                    className="w-full py-3 text-base font-semibold"
+                    className="w-48 py-3 text-base font-semibold"
                   />
                 </div>
               </div>
@@ -276,119 +280,11 @@ const ServiceDetailsPage = async ({ params }) => {
       </div>
 
       {/* Bottom Section - Tabs */}
-      <div className="bg-muted/30 border-t border-border">
-        <div className="container mx-auto px-4 py-12">
-          {/* Tab Navigation */}
-          <div className="flex gap-2 mb-8 border-b border-border overflow-x-auto">
-            <button className="px-6 py-3 text-sm font-semibold text-primary border-b-2 border-primary whitespace-nowrap">
-              Additional Information
-            </button>
-            <button className="px-6 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
-              Booking Policy
-            </button>
-            <button className="px-6 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
-              Reviews
-            </button>
-          </div>
-
-          {/* Tab Content - Additional Information */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Description */}
-            <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="text-xl font-bold text-foreground mb-4">
-                Service Description
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {detailedDescription}
-              </p>
-            </div>
-
-            {/* Service Highlights */}
-            <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="text-xl font-bold text-foreground mb-4">
-                Service Highlights
-              </h3>
-              <div className="grid grid-cols-1 gap-3">
-                {serviceHighlights?.map((highlight, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-sm text-foreground">{highlight}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Responsibilities */}
-            {responsibilitiesIncluded && (
-              <div className="bg-card border border-border rounded-lg p-6">
-                <h3 className="text-xl font-bold text-foreground mb-4">
-                  Responsibilities Included
-                </h3>
-                <div className="grid grid-cols-1 gap-3">
-                  {responsibilitiesIncluded.map((responsibility, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-400" />
-                      </div>
-                      <span className="text-sm text-foreground">
-                        {responsibility}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Caregiver Profile */}
-            {caregiverProfile && (
-              <div className="bg-card border border-border rounded-lg p-6">
-                <h3 className="text-xl font-bold text-foreground mb-4">
-                  Caregiver Profile
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mb-1">
-                      Experience
-                    </p>
-                    <p className="text-sm font-semibold text-foreground">
-                      {caregiverProfile.minimumExperienceYears}+ years minimum
-                    </p>
-                  </div>
-                  {caregiverProfile.certifications && (
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mb-2">
-                        Certifications
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {caregiverProfile.certifications.map((cert, index) => (
-                          <span
-                            key={index}
-                            className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium"
-                          >
-                            {cert}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {caregiverProfile.languagesSpoken && (
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mb-1">
-                        Languages
-                      </p>
-                      <p className="text-sm text-foreground">
-                        {caregiverProfile.languagesSpoken.join(", ")}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      <ServiceDetailsTabs>
+        <AdditionalInfo service={service} />
+        <BookingPolicy service={service} />
+        <Reviews service={service} />
+      </ServiceDetailsTabs>
     </div>
   );
 };

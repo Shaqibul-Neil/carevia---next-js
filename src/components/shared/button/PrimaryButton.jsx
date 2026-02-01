@@ -1,10 +1,15 @@
 "use client";
 import { cn } from "@/lib/utils";
 
-export const PrimaryButton = ({ className, children, ...props }) => {
+export const PrimaryButton = ({
+  className,
+  type = "button",
+  children,
+  ...props
+}) => {
   return (
     <button
-      type="button"
+      type={type}
       className={cn(
         "primary-animated-button relative inline-flex items-center justify-center overflow-hidden transition-all duration-300 ease-in-out",
         "rounded-md border-none outline-none cursor-pointer",

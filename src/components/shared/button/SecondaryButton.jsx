@@ -10,7 +10,7 @@ const SecondaryButton = ({
   ...props
 }) => {
   const BaseStyles =
-    "relative cursor-pointer px-3 py-2 text-center font-barlow inline-flex justify-center text-foreground rounded-lg border-solid transition-transform duration-300 ease-in-out group outline-offset-4 focus:outline  focus:outline-white focus:outline-offset-4 overflow-hidden text-sm";
+    "relative cursor-pointer px-3 py-2 text-center font-barlow inline-flex justify-center text-foreground rounded-lg border-solid transition-transform duration-300 ease-in-out group outline-offset-4 focus:outline  focus:outline-white focus:outline-offset-4 overflow-hidden text-sm hover:bg-green-400 dark:hover:bg-green-600 transition-all duration-500 ";
   const innerSpanStyles = (
     <>
       <span className="relative z-20">{label}</span>
