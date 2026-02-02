@@ -2,7 +2,6 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { userRegistrationSchema } from "@/lib/formSchema/userSchema";
 import {
   Form,
   FormControl,
@@ -21,6 +20,7 @@ import {
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { userRegistrationSchema } from "@/lib/formSchema";
 
 const RegisterForm = () => {
   const router = useRouter();

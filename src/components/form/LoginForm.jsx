@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { loginFormSchema } from "@/lib/formSchema/userSchema";
+
 import {
   showErrorAlert,
   showLoadingAlert,
@@ -21,6 +21,7 @@ import {
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
 import { useRouter, useSearchParams } from "next/navigation";
+import { loginFormSchema } from "@/lib/formSchema";
 
 const LoginForm = () => {
   const router = useRouter();

@@ -36,3 +36,28 @@ export const loginFormSchema = z.object({
   email: z.email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
+
+/* ---------------- Booking Form  Schema ---------------- */
+export const bookingFormSchema = z.object({
+  date: z.date({
+    required_error: "Please select a booking date",
+  }),
+  durationType: z.string().min(1, "Please select a duration type"),
+  quantity: z.coerce.number().min(1, "Please enter quantity"),
+  division: z.string().min(1, "Please select your division"),
+  district: z.string().min(1, "Please select your district"),
+  address: z.string().optional(),
+  paymentOption: z.enum(["half", "full"]),
+});
+
+/* ---------------- Booking Form  Schema ---------------- */
+export const reviewFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  rating: z.string().min(1, "Please select a rating"),
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  review: z.string().min(50, "Review must be at least 50 characters"),
+  terms: z.boolean().refine((val) => val === true, {
+    message: "You must confirm that you have used this service",
+  }),
+});

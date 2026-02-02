@@ -22,18 +22,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import PrimaryButton from "@/components/shared/button/PrimaryButton";
-
-// Zod validation schema
-const reviewFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  rating: z.string().min(1, "Please select a rating"),
-  title: z.string().min(5, "Title must be at least 5 characters"),
-  review: z.string().min(50, "Review must be at least 50 characters"),
-  terms: z.boolean().refine((val) => val === true, {
-    message: "You must confirm that you have used this service",
-  }),
-});
+import { reviewFormSchema } from "@/lib/formSchema";
 
 const ReviewsForm = () => {
   // Initialize form with react-hook-form and zod
@@ -59,7 +48,10 @@ const ReviewsForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 md:space-y-5"
+      >
         {/* Name and Email - Side by Side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Name Input */}
@@ -203,8 +195,8 @@ const ReviewsForm = () => {
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel className="text-xs text-gray-600 dark:text-gray-400 font-normal">
-                  I confirm that I have used this service and this review is based on my
-                  own experience
+                  I confirm that I have used this service and this review is
+                  based on my own experience
                 </FormLabel>
                 <FormMessage className="text-xs font-medium" />
               </div>
@@ -213,11 +205,7 @@ const ReviewsForm = () => {
         />
 
         {/* Submit Button */}
-        <PrimaryButton
-          label="Submit Review"
-          type="submit"
-          className="w-full"
-        />
+        <PrimaryButton label="Submit Review" type="submit" className="w-full" />
       </form>
     </Form>
   );

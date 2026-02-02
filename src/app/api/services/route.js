@@ -1,6 +1,7 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import { getAllServices } from "@/modules/services/servicesService";
 
+//get all services
 export async function GET(params) {
   try {
     const allServices = await getAllServices();

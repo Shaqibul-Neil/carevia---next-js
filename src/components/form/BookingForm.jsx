@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Calendar, MapPin, CreditCard, CreditCardIcon } from "lucide-react";
+import { MapPin, CreditCard, CreditCardIcon, CalendarIcon } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -22,20 +21,19 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import PrimaryButton from "@/components/shared/button/PrimaryButton";
-import { calculateTotalPrice } from "@/lib/utils";
-
-// Zod validation schema
-const bookingFormSchema = z.object({
-  durationType: z.string().min(1, "Please select a duration type"),
-  quantity: z.coerce.number().min(1, "Please enter quantity"),
-  division: z.string().min(1, "Please select your division"),
-  district: z.string().min(1, "Please select your district"),
-  address: z.string().optional(),
-  paymentOption: z.enum(["half", "full"]),
-});
+import { calculateTotalPrice, cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { bookingFormSchema } from "@/lib/formSchema";
 
 const BookingForm = ({ service }) => {
   const [coverageAreas, setCoverageAreas] = useState([]);
@@ -55,6 +53,7 @@ const BookingForm = ({ service }) => {
   const form = useForm({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
+      date: undefined,
       durationType: "",
       quantity: "1",
       division: "",
@@ -98,7 +97,13 @@ const BookingForm = ({ service }) => {
 
   // Submit handler
   const onSubmit = (values) => {
-    console.log("Booking Form Values:", values);
+    const { _id } = service;
+    const bookingItem = {
+      serviceId: _id,
+      ...values,
+      totalPrice,
+    };
+    console.log("Booking Form Values:", bookingItem);
 
     // TODO: Add booking submission logic here
   };
@@ -149,15 +154,59 @@ const BookingForm = ({ service }) => {
         {/* Divider */}
         <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
-        {/* Duration Selection Block */}
+        {/* Date & Duration Selection Block */}
         <div className="space-y-3 md:space-y-4">
           <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
+            <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
             <h4 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
-              Choose Your Duration
+              Choose Your Date & Duration
             </h4>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            {/* Date Selection */}
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Date<span className="text-red-500">*</span>
+                  </FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 justify-start text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage className="text-xs font-medium" />
+                </FormItem>
+              )}
+            />
             {/* Duration Type Dropdown */}
             <FormField
               control={form.control}

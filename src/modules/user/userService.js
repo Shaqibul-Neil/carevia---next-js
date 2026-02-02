@@ -6,7 +6,7 @@ import {
   updateUser,
   updateUserLastLogin,
 } from "./userRepository";
-import { userRegistrationSchema } from "@/lib/formSchema/userSchema";
+import { userRegistrationSchema } from "@/lib/formSchema";
 
 // ==========================================
 // Validate user data
@@ -136,13 +136,12 @@ export const saveOAuthUser = async (user, account) => {
         //add provider to user
         await addProviderToUser(email, account.provider);
       }
-        //update user last login information if user exists and then return true
-        await updateUserLastLogin(email);
-        return true;
-      
+      //update user last login information if user exists and then return true
+      await updateUserLastLogin(email);
+      return true;
     }
     //2. if completely new user then create user
-    const newUser = { 
+    const newUser = {
       firstName: user.name?.split(" ")[0] || "",
       lastName: user.name?.split(" ").slice(1).join(" ") || "",
       email: email,
@@ -152,9 +151,9 @@ export const saveOAuthUser = async (user, account) => {
       isVerified: true,
       isActive: true,
       createdAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString()
+      lastLoginAt: new Date().toISOString(),
     };
-   const result =  await createUser(newUser);
+    const result = await createUser(newUser);
     return result ? true : false;
   } catch (error) {
     return false;
