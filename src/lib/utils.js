@@ -69,7 +69,6 @@ export const calculateTotalPrice = ({
   durationType,
   quantity,
   division,
-  bookingDuration,
   service,
 }) => {
   if (!durationType || !quantity) return 0;
@@ -77,11 +76,11 @@ export const calculateTotalPrice = ({
   let basePrice = 0;
 
   if (durationType === "days") {
-    basePrice = bookingDuration.days * service.price.perDay;
+    basePrice = parseInt(quantity) * service.price.perDay;
   }
 
   if (durationType === "hours") {
-    basePrice = bookingDuration.hours * service.price.perHour;
+    basePrice = parseInt(quantity) * service.price.perHour;
   }
 
   const isOutsideCoverage =

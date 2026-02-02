@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Calendar, MapPin, CreditCard } from "lucide-react";
+import { Calendar, MapPin, CreditCard, CreditCardIcon } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import PrimaryButton from "@/components/shared/button/PrimaryButton";
@@ -32,15 +34,11 @@ const bookingFormSchema = z.object({
   division: z.string().min(1, "Please select your division"),
   district: z.string().min(1, "Please select your district"),
   address: z.string().optional(),
+  paymentOption: z.enum(["half", "full"]),
 });
 
 const BookingForm = ({ service }) => {
   const [coverageAreas, setCoverageAreas] = useState([]);
-  const [bookingDuration, setBookingDuration] = useState({
-    hours: 0,
-    days: 0,
-  });
-  console.log(service);
 
   //Fetching coverage area data
   useEffect(() => {
@@ -62,6 +60,7 @@ const BookingForm = ({ service }) => {
       division: "",
       district: "",
       address: "",
+      paymentOption: "full",
     },
   });
 
@@ -88,20 +87,12 @@ const BookingForm = ({ service }) => {
     control: form.control,
     name: "division",
   });
-  // Update bookingDuration whenever durationType or quantity changes
-  useEffect(() => {
-    setBookingDuration({
-      hours: durationType === "hours" ? parseInt(quantity) || 0 : 0,
-      days: durationType === "days" ? parseInt(quantity) || 0 : 0,
-    });
-  }, [durationType, quantity]);
 
   //Price Calculation Logic
   const totalPrice = calculateTotalPrice({
     durationType,
     quantity,
     division,
-    bookingDuration,
     service,
   });
 
@@ -111,7 +102,6 @@ const BookingForm = ({ service }) => {
 
     // TODO: Add booking submission logic here
   };
-  console.log(bookingDuration);
   const { isSubmitting } = form.formState;
 
   return (
@@ -120,7 +110,7 @@ const BookingForm = ({ service }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 md:space-y-8"
       >
-        {/* 1️⃣ Pricing Block */}
+        {/* Pricing Block */}
         <div className="space-y-3 md:space-y-4">
           <div className="flex items-center gap-2">
             <CreditCard className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
@@ -159,7 +149,7 @@ const BookingForm = ({ service }) => {
         {/* Divider */}
         <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
-        {/* 2️⃣ Duration Selection Block */}
+        {/* Duration Selection Block */}
         <div className="space-y-3 md:space-y-4">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
@@ -225,7 +215,7 @@ const BookingForm = ({ service }) => {
         {/* Divider */}
         <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
-        {/* 3️⃣ Location Selection Block */}
+        {/* Location Selection Block */}
         <div className="space-y-3 md:space-y-4">
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
@@ -324,7 +314,7 @@ const BookingForm = ({ service }) => {
         {/* Divider */}
         <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
-        {/* 4️⃣ Total Cost Summary */}
+        {/* Total Cost Summary */}
         <div className="p-5 md:p-6 rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800">
           <div className="flex items-center justify-between mb-3 md:mb-4">
             <h4 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
@@ -343,15 +333,58 @@ const BookingForm = ({ service }) => {
             </span>
           </div>
           <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">
-            Based on 1 hour of service
+            Based on {quantity} {durationType} of service
           </p>
           <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">
-            For services outside coverage areas, additional travel fees may
-            apply.
+            For services outside coverage areas, additional $500 as travel fee
+            may apply.
           </p>
         </div>
 
-        {/* 5️⃣ Submit Button */}
+        {/* Divider */}
+        <div className="border-t border-gray-200 dark:border-gray-700"></div>
+
+        {/* Payment Options */}
+        <div className="space-y-3 md:space-y-4">
+          <div className="flex items-center gap-2">
+            <CreditCardIcon className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
+            <h4 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+              Choose Your Payment Options
+            </h4>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+            {/* Duration Type Dropdown */}
+            <FormField
+              control={form.control}
+              name="paymentOption"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      value={field.value}
+                    >
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="half" id="half" />
+                        <Label htmlFor="half">
+                          Pay 50% in Advance ({(totalPrice / 2).toFixed(2)} $)
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="full" id="full" />
+                        <Label htmlFor="full">
+                          Full Payment ({totalPrice.toFixed(2)} $)
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        {/*  Submit Button */}
         <PrimaryButton
           label="Pay Now to Confirm Booking"
           type="submit"
