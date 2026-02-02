@@ -125,6 +125,7 @@ const BookingForm = ({ service }) => {
         throw new Error("No checkout URL received");
       }
     } catch (error) {
+      console.log(error);
       showErrorAlert(error.message || "Failed to proceed to payment");
     }
   };
@@ -444,13 +445,13 @@ const BookingForm = ({ service }) => {
                       <div className="flex items-center gap-3">
                         <RadioGroupItem value="half" id="half" />
                         <Label htmlFor="half">
-                          Pay 50% in Advance ({(totalPrice / 2).toFixed(2)} $)
+                          Pay 50% in Advance (${(totalPrice / 2).toFixed(2)})
                         </Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <RadioGroupItem value="full" id="full" />
                         <Label htmlFor="full">
-                          Full Payment ({totalPrice.toFixed(2)} $)
+                          Full Payment (${totalPrice.toFixed(2)})
                         </Label>
                       </div>
                     </RadioGroup>

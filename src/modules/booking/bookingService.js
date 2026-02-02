@@ -1,13 +1,17 @@
 import { bookingFormSchema } from "@/lib/formSchema";
-import { createPendingBooking } from "./bookingRepository";
+import {
+  createPendingBooking,
+  updateBookingWithStripeSession,
+} from "./bookingRepository";
+import { success } from "zod";
 
 // ==========================================
 // Validate booking data
 // ==========================================
 export const validateBookingData = async (payload) => {
-  console.log("validateBookingData", payload);
+  //console.log("validateBookingData", payload);
   const parsed = bookingFormSchema.safeParse(payload);
-  console.log("parsed", parsed);
+  //console.log("parsed", parsed);
   if (!parsed.success) {
     // Format errors for frontend
     const errors = parsed.error.issues.map((issue) => ({
@@ -28,7 +32,7 @@ export const validateBookingData = async (payload) => {
 // ==========================================
 export const createBooking = async (bookingData) => {
   try {
-    console.log("createBooking", bookingData);
+    //console.log("createBooking", bookingData);
     //validate data
     const validation = await validateBookingData(bookingData);
     if (!validation.success) {
@@ -49,6 +53,18 @@ export const createBooking = async (bookingData) => {
 // ==========================================
 // Update booking with Stripe session
 // ==========================================
+export const updateBookingSession = async (bookingId, sessionId) => {
+  try {
+    await updateBookingWithStripeSession(bookingId, sessionId);
+    return { success: true };
+  } catch (error) {
+    console.error("[updateBookingSession] Error:", error.message);
+    return {
+      success: false,
+      message: "Failed to update booking session",
+    };
+  }
+};
 
 // ==========================================
 // Confirm booking (after payment)

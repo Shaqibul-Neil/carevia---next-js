@@ -83,7 +83,7 @@ const BookingPage = async ({ params }) => {
                           {service.price.perHour}
                         </span>
                         <span className="text-lg text-gray-500 dark:text-gray-400">
-                          {service.currency}/hour
+                          ${service.currency}/hour
                         </span>
                       </div>
                     </div>

@@ -91,7 +91,7 @@ export async function POST(request) {
               images: bookingData.serviceImage
                 ? [bookingData.serviceImage]
                 : [],
-              description: `${bookingData.durationType === "hour" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType}`,
+              description: `${bookingData.durationType === "hour" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType} - Due: $${bookingData.paymentOption === "half" && bookingData.dueAmount}`,
             },
             unit_amount: Math.round(bookingData.amountToPay * 100),
           },
@@ -111,8 +111,9 @@ export async function POST(request) {
         dueAmount: dueAmount.toString(),
       },
       success_url: `${process.env.NEXTAUTH_URL}/payment-success`,
+      cancel_url: `${process.env.NEXTAUTH_URL}/booking/${bookingData.serviceId}`,
     });
-    console.log(checkoutSession);
+    console.log("checkoutSession", checkoutSession);
     // 8. Update booking with Stripe session ID
     // 9. Return checkout URL
     return ApiResponse.success(

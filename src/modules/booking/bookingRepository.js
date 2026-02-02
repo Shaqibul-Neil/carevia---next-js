@@ -11,7 +11,7 @@ export const createPendingBooking = async (bookingData) => {
     ...bookingData,
     serviceId: new ObjectId(bookingData._id),
     createdAt: new Date(),
-    status: "pending",
+    bookingStatus: "pending",
     updatedAt: new Date(),
   };
   return await bookingCollection().insertOne(booking);
@@ -20,15 +20,29 @@ export const createPendingBooking = async (bookingData) => {
 // ==========================================
 // Update Booking with Stripe Session ID
 // ==========================================
+export const updateBookingWithStripeSession = (bookingId, sessionId) => {
+  return bookingCollection().updateOne(
+    { _id: new ObjectId(bookingId) },
+    { $set: { stripeSessionId: sessionId, updatedAt: new Date() } },
+  );
+};
 
 // ==========================================
-// Update Booking Status to Confirmed
+// Confirm booking (update booking status to confirmed)
 // ==========================================
 
 // ==========================================
-// Get Booking by ID
+// Update booking with payment info
 // ==========================================
 
 // ==========================================
-// Get Booking by Stripe Session ID
+// Find Booking by ID
+// ==========================================
+
+// ==========================================
+// Find Booking by Stripe Session ID
+// ==========================================
+
+// ==========================================
+// Find bookings by user ID
 // ==========================================
