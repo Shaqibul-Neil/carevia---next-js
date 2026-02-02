@@ -39,7 +39,7 @@ export const loginFormSchema = z.object({
 
 /* ---------------- Booking Form  Schema ---------------- */
 export const bookingFormSchema = z.object({
-  bookingDate: z.date({
+  bookingDate: z.coerce.date({
     required_error: "Please select a booking date",
   }),
   durationType: z.string().min(1, "Please select a duration type"),

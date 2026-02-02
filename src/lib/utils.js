@@ -86,5 +86,5 @@ export const calculateTotalPrice = ({
   const isOutsideCoverage =
     division && !service.locationCoverage.supportedDivisions.includes(division);
 
-  return isOutsideCoverage ? basePrice + 300 : basePrice;
+  return isOutsideCoverage ? basePrice + 500 : basePrice;
 };

@@ -1,7 +1,8 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import { authOptions } from "@/lib/authOptions";
+import { bookingFormSchema } from "@/lib/formSchema";
 import { stripe } from "@/lib/stripe";
-import { createBooking } from "@/modules/booking/bookingService";
+import { validateWithSchema } from "@/lib/validation";
 import { findSingleService } from "@/modules/services/serviceRepository";
 import { getServerSession } from "next-auth";
 
@@ -15,8 +16,24 @@ export async function POST(request) {
 
     //2.Get booking data
     const payload = await request.json();
+    //Extract serviceId and totalPrice BEFORE validation
+    const { serviceId, totalPrice, ...formData } = payload;
+    // Validate serviceId and totalPrice manually
+    if (!serviceId || typeof serviceId !== "string") {
+      return ApiResponse.badRequest("Service ID is required");
+    }
+    if (!totalPrice || typeof totalPrice !== "number" || totalPrice <= 0) {
+      return ApiResponse.badRequest("Invalid total price");
+    }
+
+    //3. validate required data
+    const validation = validateWithSchema(bookingFormSchema, payload);
+    console.log("validation", validation);
+    if (!validation.success) {
+      return ApiResponse.validationError(validation.errors);
+    }
+    // Use Validated data
     const {
-      serviceId,
       bookingDate,
       durationType,
       quantity,
@@ -24,61 +41,83 @@ export async function POST(request) {
       district,
       address,
       paymentOption,
-      totalPrice,
-    } = payload;
+    } = validation.data;
 
-    //3. validate required data
-    if (
-      !serviceId ||
-      !bookingDate ||
-      !durationType ||
-      !quantity ||
-      !division ||
-      !district ||
-      !paymentOption ||
-      !totalPrice ||
-      !address
-    ) {
-      return ApiResponse.badRequest("Missing required field");
+    //4. Verify service exists & get REAL price from database
+    const service = await findSingleService(serviceId);
+    if (!service) return ApiResponse.notFound("Service not found");
+
+    // 5. CRITICAL: Calculate price from DATABASE, not from frontend!
+    const pricePerUnit =
+      durationType === "hours" ? service.price.perHour : service.price.perDay;
+    if (!pricePerUnit || pricePerUnit <= 0) {
+      return ApiResponse.error("Invalid service pricing");
+    }
+    // Calculate base price
+    let actualTotalPrice = pricePerUnit * quantity;
+
+    // Add extra charge if outside coverage (same as frontend)
+    const isOutsideCoverage =
+      division &&
+      !service.locationCoverage.supportedDivisions.includes(division);
+
+    if (isOutsideCoverage) {
+      actualTotalPrice += 500; // Travel fee for outside coverage areas
     }
 
-    //4. Verify service exists
-    const service = await findSingleService(serviceId);
-    if (!service) return ApiResponse.error("Service not found", 404);
+    // 6. Verify frontend price matches backend calculation
+    if (Math.abs(actualTotalPrice - totalPrice) > 0.01) {
+      console.error("[Security] Price mismatch detected!", {
+        frontend: totalPrice,
+        backend: actualTotalPrice,
+        user: session.user.email,
+      });
+      return ApiResponse.badRequest(
+        "Price mismatch. Please refresh and try again",
+      );
+    }
 
-    //5. Calculate amount based on payment option
-    let amountToPay = totalPrice;
+    // 7. Validate duration type matches service
+    if (!["hours", "days"].includes(durationType)) {
+      return ApiResponse.badRequest("Invalid duration type");
+    }
+
+    //8. Validate quantity
+    if (quantity < 1 || quantity > 1000) {
+      return ApiResponse.badRequest("Invalid quantity");
+    }
+
+    //9. Validate payment option
+    if (!["half", "full"].includes(paymentOption)) {
+      return ApiResponse.badRequest("Invalid payment option");
+    }
+
+    //10. Calculate amount (use verified price)
+    let amountToPay = actualTotalPrice;
     let dueAmount = 0;
     if (paymentOption === "half") {
-      amountToPay = totalPrice / 2;
-      dueAmount = totalPrice / 2;
+      amountToPay = actualTotalPrice / 2;
+      dueAmount = actualTotalPrice / 2;
     }
 
-    //6.Create pending booking
+    //6.Create booking data
     const bookingData = {
       userId: session.user.id,
+      userEmail: session.user.email,
       serviceId,
       serviceName: service.serviceName,
-      serviceImage: service.image,
-      bookingDate: new Date(bookingDate),
+      serviceImage: service.image || "",
+      bookingDate: new Date(bookingDate).toISOString(),
       durationType,
-      quantity: Number(quantity),
-      paymentOption,
+      quantity: quantity.toString(), //metadata requirement
       division,
       district,
       address: address || "",
-      totalPrice,
-      amountToPay,
-      dueAmount: paymentOption === "half" ? dueAmount : 0,
+      paymentOption,
+      totalPrice: actualTotalPrice.toString(), //backend calculated price
+      amountToPay: amountToPay.toString(),
+      dueAmount: dueAmount.toString(),
     };
-    const bookingResult = await createBooking(bookingData);
-    if (!bookingResult.success) {
-      return ApiResponse.badRequest(
-        bookingResult.message || "Failed to create booking",
-        bookingResult.errors,
-      );
-    }
-    const bookingId = bookingResult.bookingId;
 
     // 7. Create Stripe Checkout Session
     const checkoutSession = await stripe.checkout.sessions.create({
@@ -91,33 +130,23 @@ export async function POST(request) {
               images: bookingData.serviceImage
                 ? [bookingData.serviceImage]
                 : [],
-              description: `${bookingData.durationType === "hour" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType} - Due: $${bookingData.paymentOption === "half" && bookingData.dueAmount}`,
+              description: `${bookingData.durationType === "hours" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType} ${bookingData.paymentOption === "half" ? `- Due Amount: $${bookingData.dueAmount}` : ""}`,
             },
-            unit_amount: Math.round(bookingData.amountToPay * 100),
+            unit_amount: Math.round(amountToPay * 100),
           },
-
           quantity: 1,
         },
       ],
-      client_reference_id: bookingId,
       customer_email: session.user.email,
       mode: "payment",
-      metadata: {
-        bookingId: bookingId,
-        userId: session.user.id,
-        serviceId: serviceId,
-        paymentOption: paymentOption,
-        totalPrice: totalPrice.toString(),
-        dueAmount: dueAmount.toString(),
-      },
+      metadata: bookingData,
       success_url: `${process.env.NEXTAUTH_URL}/payment-success`,
       cancel_url: `${process.env.NEXTAUTH_URL}/booking/${bookingData.serviceId}`,
     });
-    console.log("checkoutSession", checkoutSession);
-    // 8. Update booking with Stripe session ID
+
     // 9. Return checkout URL
     return ApiResponse.success(
-      { url: checkoutSession.url },
+      { sessionId: checkoutSession.id, url: checkoutSession.url },
       "Checkout session created successfully",
     );
   } catch (error) {

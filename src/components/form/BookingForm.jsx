@@ -95,6 +95,20 @@ const BookingForm = ({ service }) => {
     service,
   });
 
+  //Base Price
+  const basePrice =
+    durationType === "days"
+      ? parseInt(quantity) * service.price.perDay
+      : durationType === "hours"
+        ? parseInt(quantity) * service.price.perHour
+        : 0;
+
+  //Additional Cost (for outside coverage areas)
+  const additionalCost =
+    division && !service.locationCoverage.supportedDivisions.includes(division)
+      ? 500
+      : 0;
+
   // Submit handler
   const onSubmit = async (values) => {
     try {
@@ -104,7 +118,7 @@ const BookingForm = ({ service }) => {
         ...values,
         totalPrice,
       };
-      console.log(bookingItem);
+
       //Call api to create checkout session
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
@@ -114,10 +128,13 @@ const BookingForm = ({ service }) => {
         body: JSON.stringify(bookingItem),
       });
       const data = await response.json();
+      console.log(data);
+
       // Check if response is successful
       if (!response.ok) {
         throw new Error(data.message || "Failed to create checkout session");
       }
+
       //Redirect to stripe checkout
       if (data.success && data.data?.url) {
         window.location.assign(data.data.url);
@@ -394,29 +411,65 @@ const BookingForm = ({ service }) => {
 
         {/* Total Cost Summary */}
         <div className="p-5 md:p-6 rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800">
-          <div className="flex items-center justify-between mb-3 md:mb-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
             <h4 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
-              Total Booking Cost
+              Cost Breakdown
             </h4>
             <div className="px-2.5 md:px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-xs font-medium text-emerald-700 dark:text-emerald-300">
               Estimated
             </div>
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl md:text-4xl font-bold text-emerald-600 dark:text-emerald-400">
-              {totalPrice.toFixed(2)}
-            </span>
-            <span className="text-lg md:text-xl font-medium text-gray-600 dark:text-gray-400">
-              $
-            </span>
+
+          {/* Cost Items */}
+          <div className="space-y-3">
+            <div>
+              {/* Base Price */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                  Base Service Cost
+                </span>
+                <span className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+                  ${basePrice.toFixed(2)}
+                </span>
+              </div>
+
+              {/* Additional Cost */}
+              <div className="flex items-center justify-between pb-3 border-b border-emerald-200 dark:border-emerald-800">
+                <span className="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                  Travel Fee {additionalCost > 0 && "(Outside Coverage)"}
+                </span>
+                <span className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+                  ${additionalCost.toFixed(2)}
+                </span>
+              </div>
+            </div>
+            {/* Total Cost */}
+            <div className="flex items-center justify-between">
+              <span className="text-base md:text-lg font-bold text-emerald-700 dark:text-emerald-400">
+                Total Cost
+              </span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+                  {totalPrice.toFixed(2)}
+                </span>
+                <span className="text-lg md:text-xl font-medium text-gray-600 dark:text-gray-400">
+                  $
+                </span>
+              </div>
+            </div>
           </div>
-          <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">
-            Based on {quantity} {durationType} of service
-          </p>
-          <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">
-            For services outside coverage areas, additional $500 as travel fee
-            may apply.
-          </p>
+
+          {/* Info Text */}
+          <div className="mt-4 pt-4">
+            <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
+              Based on {quantity} {durationType} of service
+            </p>
+            <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">
+              For services outside coverage areas, additional $500 as travel fee
+              applies.
+            </p>
+          </div>
         </div>
 
         {/* Divider */}

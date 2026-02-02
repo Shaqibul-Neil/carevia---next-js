@@ -7,27 +7,13 @@ import {
   updateUserLastLogin,
 } from "./userRepository";
 import { userRegistrationSchema } from "@/lib/formSchema";
+import { validateWithSchema } from "@/lib/validation";
 
 // ==========================================
 // Validate user data
 // ==========================================
 export const validateUserData = async (payload) => {
-  const parsed = userRegistrationSchema.safeParse(payload);
-
-  if (!parsed.success) {
-    // Format errors for frontend
-    const errors = parsed.error.issues.map((issue) => ({
-      field: issue.path.join("."),
-      message: issue.message,
-    }));
-
-    return {
-      success: false,
-      message: "Validation failed",
-      errors,
-    };
-  }
-  return { success: true, data: parsed.data };
+  return validateWithSchema(userRegistrationSchema, payload);
 };
 
 // ==========================================
