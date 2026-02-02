@@ -39,14 +39,14 @@ export const loginFormSchema = z.object({
 
 /* ---------------- Booking Form  Schema ---------------- */
 export const bookingFormSchema = z.object({
-  date: z.date({
+  bookingDate: z.date({
     required_error: "Please select a booking date",
   }),
   durationType: z.string().min(1, "Please select a duration type"),
   quantity: z.coerce.number().min(1, "Please enter quantity"),
   division: z.string().min(1, "Please select your division"),
   district: z.string().min(1, "Please select your district"),
-  address: z.string().optional(),
+  address: z.string(),
   paymentOption: z.enum(["half", "full"]),
 });
 

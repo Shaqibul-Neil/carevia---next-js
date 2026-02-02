@@ -31,7 +31,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import PrimaryButton from "@/components/shared/button/PrimaryButton";
-import { calculateTotalPrice, cn } from "@/lib/utils";
+import { calculateTotalPrice, cn, showErrorAlert } from "@/lib/utils";
 import { format } from "date-fns";
 import { bookingFormSchema } from "@/lib/formSchema";
 
@@ -53,7 +53,7 @@ const BookingForm = ({ service }) => {
   const form = useForm({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
-      date: undefined,
+      bookingDate: undefined,
       durationType: "",
       quantity: "1",
       division: "",
@@ -96,16 +96,37 @@ const BookingForm = ({ service }) => {
   });
 
   // Submit handler
-  const onSubmit = (values) => {
-    const { _id } = service;
-    const bookingItem = {
-      serviceId: _id,
-      ...values,
-      totalPrice,
-    };
-    console.log("Booking Form Values:", bookingItem);
-
-    // TODO: Add booking submission logic here
+  const onSubmit = async (values) => {
+    try {
+      const { _id } = service;
+      const bookingItem = {
+        serviceId: _id,
+        ...values,
+        totalPrice,
+      };
+      console.log(bookingItem);
+      //Call api to create checkout session
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingItem),
+      });
+      const data = await response.json();
+      // Check if response is successful
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to create checkout session");
+      }
+      //Redirect to stripe checkout
+      if (data.success && data.data?.url) {
+        window.location.assign(data.data.url);
+      } else {
+        throw new Error("No checkout URL received");
+      }
+    } catch (error) {
+      showErrorAlert(error.message || "Failed to proceed to payment");
+    }
   };
   const { isSubmitting } = form.formState;
 
@@ -166,11 +187,11 @@ const BookingForm = ({ service }) => {
             {/* Date Selection */}
             <FormField
               control={form.control}
-              name="date"
+              name="bookingDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Date<span className="text-red-500">*</span>
+                    Booking Date<span className="text-red-500">*</span>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -218,7 +239,8 @@ const BookingForm = ({ service }) => {
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
@@ -283,8 +305,13 @@ const BookingForm = ({ service }) => {
                     Division <span className="text-red-500">*</span>
                   </FormLabel>
                   <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      //reset district when division changes
+                      form.setValue("district", "");
+                    }}
+                    value={field.value}
+                    disabled={isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
@@ -315,7 +342,8 @@ const BookingForm = ({ service }) => {
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={!selectedDivision || isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
@@ -342,7 +370,7 @@ const BookingForm = ({ service }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Detailed Address (Optional)
+                    Detailed Address <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -435,7 +463,7 @@ const BookingForm = ({ service }) => {
 
         {/*  Submit Button */}
         <PrimaryButton
-          label="Pay Now to Confirm Booking"
+          label="Pay Now to Confirm"
           type="submit"
           className="w-full"
         />

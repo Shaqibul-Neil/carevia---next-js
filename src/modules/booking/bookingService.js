@@ -1,15 +1,16 @@
 import { bookingFormSchema } from "@/lib/formSchema";
 import { createPendingBooking } from "./bookingRepository";
-import { success } from "zod";
 
 // ==========================================
 // Validate booking data
 // ==========================================
 export const validateBookingData = async (payload) => {
+  console.log("validateBookingData", payload);
   const parsed = bookingFormSchema.safeParse(payload);
+  console.log("parsed", parsed);
   if (!parsed.success) {
     // Format errors for frontend
-    const errors = parsed.errors.issues.map((issue) => ({
+    const errors = parsed.error.issues.map((issue) => ({
       field: issue.path.join("."),
       message: issue.message,
     }));
@@ -27,6 +28,7 @@ export const validateBookingData = async (payload) => {
 // ==========================================
 export const createBooking = async (bookingData) => {
   try {
+    console.log("createBooking", bookingData);
     //validate data
     const validation = await validateBookingData(bookingData);
     if (!validation.success) {

@@ -1,5 +1,6 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import { authOptions } from "@/lib/authOptions";
+import { stripe } from "@/lib/stripe";
 import { createBooking } from "@/modules/booking/bookingService";
 import { findSingleService } from "@/modules/services/serviceRepository";
 import { getServerSession } from "next-auth";
@@ -16,7 +17,7 @@ export async function POST(request) {
     const payload = await request.json();
     const {
       serviceId,
-      date,
+      bookingDate,
       durationType,
       quantity,
       division,
@@ -29,13 +30,14 @@ export async function POST(request) {
     //3. validate required data
     if (
       !serviceId ||
-      !date ||
+      !bookingDate ||
       !durationType ||
       !quantity ||
       !division ||
       !district ||
       !paymentOption ||
-      !totalPrice
+      !totalPrice ||
+      !address
     ) {
       return ApiResponse.badRequest("Missing required field");
     }
@@ -58,10 +60,11 @@ export async function POST(request) {
       serviceId,
       serviceName: service.serviceName,
       serviceImage: service.image,
-      date: new Date(date),
+      bookingDate: new Date(bookingDate),
       durationType,
       quantity: Number(quantity),
       paymentOption,
+      division,
       district,
       address: address || "",
       totalPrice,
@@ -78,5 +81,49 @@ export async function POST(request) {
     const bookingId = bookingResult.bookingId;
 
     // 7. Create Stripe Checkout Session
-  } catch (error) {}
+    const checkoutSession = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: bookingData.serviceName,
+              images: bookingData.serviceImage
+                ? [bookingData.serviceImage]
+                : [],
+              description: `${bookingData.durationType === "hour" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType}`,
+            },
+            unit_amount: Math.round(bookingData.amountToPay * 100),
+          },
+
+          quantity: 1,
+        },
+      ],
+      client_reference_id: bookingId,
+      customer_email: session.user.email,
+      mode: "payment",
+      metadata: {
+        bookingId: bookingId,
+        userId: session.user.id,
+        serviceId: serviceId,
+        paymentOption: paymentOption,
+        totalPrice: totalPrice.toString(),
+        dueAmount: dueAmount.toString(),
+      },
+      success_url: `${process.env.NEXTAUTH_URL}/payment-success`,
+    });
+    console.log(checkoutSession);
+    // 8. Update booking with Stripe session ID
+    // 9. Return checkout URL
+    return ApiResponse.success(
+      { url: checkoutSession.url },
+      "Checkout session created successfully",
+    );
+  } catch (error) {
+    console.error("[create-checkout-session] Error:", error.message);
+    return ApiResponse.error(
+      error.message || "Failed to create checkout session",
+      500,
+    );
+  }
 }
