@@ -125,6 +125,7 @@ export async function POST(request) {
         {
           price_data: {
             currency: "usd",
+            unit_amount: Math.round(amountToPay * 100),
             product_data: {
               name: bookingData.serviceName,
               images: bookingData.serviceImage
@@ -132,7 +133,6 @@ export async function POST(request) {
                 : [],
               description: `${bookingData.durationType === "hours" ? "Hourly" : "Daily"} Services - ${bookingData.quantity} ${bookingData.durationType} ${bookingData.paymentOption === "half" ? `- Due Amount: $${bookingData.dueAmount}` : ""}`,
             },
-            unit_amount: Math.round(amountToPay * 100),
           },
           quantity: 1,
         },
@@ -140,7 +140,11 @@ export async function POST(request) {
       customer_email: session.user.email,
       mode: "payment",
       metadata: bookingData,
-      success_url: `${process.env.NEXTAUTH_URL}/payment-success`,
+      branding_settings: {
+        display_name: "Carevia",
+        button_color: "#059669",
+      },
+      success_url: `${process.env.NEXTAUTH_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/booking/${bookingData.serviceId}`,
     });
 
