@@ -1,5 +1,5 @@
-import { collections, dbConnect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
+import { collections, dbConnect } from "@/lib/dbConnect";
 
 const bookingCollection = () => dbConnect(collections.BOOKINGS);
 

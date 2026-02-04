@@ -1,57 +1,121 @@
-Step 1: User fills booking form
-        ↓
-Step 2: POST /api/create-checkout-session
-        - Validates all data
-        - Calculates price server-side
-        - Creates Stripe Checkout Session
-        - Returns checkout URL
-        ↓
-Step 3: User redirected to Stripe Checkout
-        ↓
-Step 4: User completes payment on Stripe
-        ↓
-Step 5: Stripe redirects to: /payment/success?session_id=xxx
-        ↓
-Step 6: Payment Success Page loads
-        ↓
-Step 7: useEffect automatically calls POST /api/payment/confirm
-        - Retrieves session from Stripe
-        - Verifies payment_status === "paid"
-        - Checks for duplicate (prevents double booking)
-        - Verifies user authorization
-        - Creates booking in database
-        - Creates payment record in database
-        ↓
-Step 8: Success page displays booking details
+🔴 Method 1: WITHOUT Webhook
+Flow Diagram:
+┌─────────────┐
+│ 1. User     │
+│    Pays     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│ 2. create-checkout-session API     │
+│    - Creates Stripe session         │
+│    - Stores metadata                │
+│    - Returns checkout URL           │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────┐
+│ 3. Stripe   │
+│    Payment  │
+│    Page     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│ 4. Stripe Redirects to              │
+│    payment-success page             │
+│    URL: /payment-success?session_id=xxx │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│ 5. payment-success page             │
+│    useEffect runs                   │
+│    Calls: /api/payment/confirm      │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│ 6. /api/payment/confirm             │
+│    ✅ Retrieves Stripe session      │
+│    ✅ Calls confirmPaymentWithoutWebhook │
+│    ✅ Creates booking in DB         │
+│    ✅ Creates payment record        │
+│    ✅ Returns data to frontend      │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────┐
+│ 7. Success  │
+│    Page     │
+│    Shows    │
+│    Data     │
+└─────────────┘
 
-Complete Webhook Flow
+🟢 Method 2: WITH Webhook 
 
-
-Step 1: User completes payment on Stripe
-        ↓
-Step 2: Stripe sends webhook to /api/payment/webhook
-        ↓
-Step 3: Webhook endpoint verifies signature
-        ├─ Invalid → Return 400 (reject)
-        └─ Valid → Continue
-        ↓
-Step 4: Extract event type
-        ├─ checkout.session.completed → Process
-        ├─ payment_intent.succeeded → Log
-        └─ payment_intent.payment_failed → Log
-        ↓
-Step 5: Idempotency check
-        ├─ Already processed → Return 200 (success)
-        └─ Not processed → Continue
-        ↓
-Step 6: Create booking in database
-        ↓
-Step 7: Create payment record
-        ↓
-Step 8: Return 200 OK to Stripe
-        ↓
-Step 9: User redirected to success page
-        ↓
-Step 10: Success page polls /api/payment/verify
-        ├─ Not processed yet → Keep polling
-        └─ Processed → Display booking details
+┌─────────────┐
+│ 1. User     │
+│    Pays     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│ 2. create-checkout-session API     │
+│    - Creates Stripe session         │
+│    - Stores metadata                │
+│    - Returns checkout URL           │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────┐
+│ 3. Stripe   │
+│    Payment  │
+│    Page     │
+└──────┬──────┘
+       │
+       ├──────────────────────────────┐
+       │                              │
+       ▼                              ▼
+┌──────────────┐            ┌─────────────────┐
+│ 4a. Stripe   │            │ 4b. Stripe      │
+│     Webhook  │            │     Redirects   │
+│     Event*    │            │     User        │
+└──────┬───────┘            └────────┬────────┘
+       │                             │
+       ▼                             │
+┌─────────────────────────────────┐  │
+│ 5. /api/payment/webhook         │  │
+│    ✅ Receives event            │  │
+│    ✅ Verifies signature        │  │
+│    ✅ Creates booking in DB     │  │
+│    ✅ Creates payment record    │  │
+└─────────────────────────────────┘  │
+                                     │
+                                     ▼
+                          ┌─────────────────────┐
+                          │ 6. payment-success  │
+                          │    page loads       │
+                          │    Calls: /api/     │
+                          │    payment/confirm  │
+                          └──────┬──────────────┘
+                                 │
+                                 ▼
+                          ┌─────────────────────┐
+                          │ 7. /api/payment/    │
+                          │    confirm          │
+                          │    ✅ Retrieves     │
+                          │       Stripe session│
+                          │    ✅ Checks if     │
+                          │       booking exists│
+                          │    ✅ Returns data  │
+                          │       (NO creation) │
+                          └──────┬──────────────┘
+                                 │
+                                 ▼
+                          ┌─────────────┐
+                          │ 8. Success  │
+                          │    Page     │
+                          │    Shows    │
+                          │    Data     │
+                          └─────────────┘

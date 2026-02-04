@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-const { collections, dbConnect } = require("@/lib/dbConnect");
+import { collections, dbConnect } from "@/lib/dbConnect";
 
 const paymentCollection = () => dbConnect(collections.PAYMENTS);
 
