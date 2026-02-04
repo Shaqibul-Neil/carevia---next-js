@@ -19,7 +19,6 @@ export async function POST(request) {
 
     // 3. Retrieve Stripe session (just to get data)
     const stripeSession = await stripe.checkout.sessions.retrieve(sessionId);
-    console.log(stripeSession);
 
     // 4. Verify payment was successful
     if (stripeSession.payment_status !== "paid") {
