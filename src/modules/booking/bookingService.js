@@ -9,7 +9,7 @@ export const createBookingFromWebhook = async (metadata, stripeSessionId) => {
     const result = await createConfirmedBooking(bookingData);
     return { success: true, bookingId: result.insertedId.toString() };
   } catch (error) {
-    console.error("[createBookingFromWebhook] Error:", error.message);
+    //console.error("[createBookingFromWebhook] Error:", error.message);
     return {
       success: false,
       message: error.message || "Failed to create booking",

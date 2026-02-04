@@ -20,7 +20,7 @@ export async function POST(request) {
     //success response
     return ApiResponse.created(result.data, result.message);
   } catch (error) {
-    console.error("POST /api/users error:", error);
+    //console.error("POST /api/users error:", error);
     return ApiResponse.error("Internal server error", 500);
   }
 }

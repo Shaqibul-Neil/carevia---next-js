@@ -3,9 +3,7 @@ import { getSingleServiceDetails } from "@/modules/services/servicesService";
 
 export async function GET(params) {
   try {
-    console.log(params);
     const serviceDetails = await getSingleServiceDetails(params.slug);
-    console.log(serviceDetails);
     return ApiResponse.success(
       serviceDetails,
       "Service details fetched successfully",

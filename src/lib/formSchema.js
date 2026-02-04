@@ -43,10 +43,12 @@ export const bookingFormSchema = z.object({
     required_error: "Please select a booking date",
   }),
   durationType: z.string().min(1, "Please select a duration type"),
-  quantity: z.coerce.number().min(1, "Please enter quantity"),
+  quantity: z.coerce
+    .number({ required_error: "Please enter quantity" })
+    .min(1, "Quantity must be at least 1"),
   division: z.string().min(1, "Please select your division"),
   district: z.string().min(1, "Please select your district"),
-  address: z.string(),
+  address: z.string().min(8, "Please enter detailed address"),
   paymentOption: z.enum(["half", "full"]),
 });
 

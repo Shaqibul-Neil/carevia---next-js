@@ -15,7 +15,7 @@ export const getAllServices = async () => {
       _id: service._id.toString(),
     }));
   } catch (error) {
-    console.error("[getAllServices] Error:", error.message);
+    //console.error("[getAllServices] Error:", error.message);
     return [];
   }
 };
@@ -29,7 +29,7 @@ export const getFeaturedServices = async () => {
       _id: service._id.toString(),
     }));
   } catch (error) {
-    console.error("[getFeaturedServices] Error:", error.message);
+    //console.error("[getFeaturedServices] Error:", error.message);
     return [];
   }
 };
@@ -40,7 +40,7 @@ export const getSingleServiceDetails = async (slug) => {
     const service = await findSingleServiceDetails(slug);
     return { ...service, _id: service._id.toString() } || null;
   } catch (error) {
-    console.error("[getSingleServiceDetails] Error:", error.message);
+    //console.error("[getSingleServiceDetails] Error:", error.message);
     return null;
   }
 };
@@ -50,7 +50,7 @@ export const getServicesByCategory = async (category) => {
   try {
     const services = await findServicesByCategory(category);
 
-    console.log(services);
+    //console.log(services);
     return (
       services.map((service) => ({
         ...service,
@@ -58,7 +58,7 @@ export const getServicesByCategory = async (category) => {
       })) || []
     );
   } catch (error) {
-    console.error("[getServicesByCategory] Error:", error.message);
+    //console.error("[getServicesByCategory] Error:", error.message);
     return [];
   }
 };
@@ -69,7 +69,7 @@ export const getServiceForBookingPage = async (id) => {
     const service = await findSingleService(id);
     return { ...service, _id: service._id.toString() } || null;
   } catch (error) {
-    console.error("[getServiceForBookingPage] Error:", error.message);
+    //console.error("[getServiceForBookingPage] Error:", error.message);
     return null;
   }
 };

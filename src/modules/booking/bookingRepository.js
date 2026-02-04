@@ -7,9 +7,14 @@ const bookingCollection = () => dbConnect(collections.BOOKINGS);
 // Create Confirmed Booking (after payment)
 // ==========================================
 export const createConfirmedBooking = async (bookingData) => {
+  // Generate booking tracking ID
+  const bookingId = new ObjectId();
+  const trackingId = `CV${bookingId.toString().slice(-6).toUpperCase()}`;
   const booking = {
+    _id: bookingId,
     userId: new ObjectId(bookingData.userId),
     serviceId: new ObjectId(bookingData.serviceId),
+    trackingId: trackingId,
     serviceName: bookingData.serviceName,
     serviceImage: bookingData.serviceImage,
     date: new Date(bookingData.bookingDate),
@@ -20,15 +25,21 @@ export const createConfirmedBooking = async (bookingData) => {
     address: bookingData.address,
     paymentOption: bookingData.paymentOption,
     totalPrice: parseFloat(bookingData.totalPrice),
-    amountPaid: parseFloat(bookingData.amountToPay),
+    amountPaid: parseFloat(bookingData.amountPaid),
     dueAmount: parseFloat(bookingData.dueAmount),
     status: "confirmed",
-    stripeSessionId: bookingData.stripeSessionId,
+    stripePaymentIntentId: bookingData.stripePaymentIntentId,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
 
-  return await bookingCollection().insertOne(booking);
+  const result = await bookingCollection().insertOne(booking);
+
+  // Return both insertedId and trackingId
+  return {
+    insertedId: result.insertedId,
+    trackingId: trackingId,
+  };
 };
 
 // ==========================================

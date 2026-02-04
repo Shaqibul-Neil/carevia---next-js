@@ -52,7 +52,7 @@ export const authOptions = {
           };
           return userData;
         } catch (error) {
-          console.error("Authorize error:", error.message);
+          //console.error("Authorize error:", error.message);
           // Throw error so NextAuth returns it in result.error
           throw new Error(error.message || "Authentication failed");
         }

@@ -46,16 +46,18 @@ const BookingForm = ({ service }) => {
       .then((data) => {
         setCoverageAreas(data);
       })
-      .catch((error) => console.error("Error fetching coverage data:", error));
+      .catch((error) => showErrorAlert("Error fetching coverage data:", error));
   }, []);
 
   // Initialize form with react-hook-form and zod
   const form = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
       bookingDate: undefined,
       durationType: "",
-      quantity: "1",
+      quantity: "",
       division: "",
       district: "",
       address: "",
@@ -128,7 +130,7 @@ const BookingForm = ({ service }) => {
         body: JSON.stringify(bookingItem),
       });
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
 
       // Check if response is successful
       if (!response.ok) {
@@ -142,7 +144,7 @@ const BookingForm = ({ service }) => {
         throw new Error("No checkout URL received");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       showErrorAlert(error.message || "Failed to proceed to payment");
     }
   };
@@ -282,18 +284,54 @@ const BookingForm = ({ service }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Number of Hours/Days<span className="text-red-500">*</span>
+                    Number of{" "}
+                    {durationType === "hours"
+                      ? "Hours"
+                      : durationType === "days"
+                        ? "Days"
+                        : "Hours/Days"}
+                    <span className="text-red-500">*</span>
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      min="1"
-                      placeholder="Enter quantity"
-                      {...field}
-                      disabled={isSubmitting}
-                      className="h-9 text-sm rounded-xl border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    disabled={!durationType || isSubmitting}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                        <SelectValue
+                          placeholder={
+                            durationType
+                              ? "Select quantity"
+                              : "Select duration type first"
+                          }
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {durationType === "hours" &&
+                        Array.from({ length: 23 }, (_, i) => i + 1).map(
+                          (num) => (
+                            <SelectItem key={num} value={num.toString()}>
+                              {num} {num === 1 ? "Hour" : "Hours"}
+                            </SelectItem>
+                          ),
+                        )}
+                      {durationType === "days" &&
+                        Array.from({ length: 30 }, (_, i) => i + 1).map(
+                          (num) => (
+                            <SelectItem key={num} value={num.toString()}>
+                              {num} {num === 1 ? "Day" : "Days"}
+                            </SelectItem>
+                          ),
+                        )}
+                      {!durationType && (
+                        <SelectItem value="0">
+                          Please select a duration type first
+                        </SelectItem>
+                      )}
+                    </SelectContent>
+                  </Select>
                   <FormMessage className="text-xs font-medium" />
                 </FormItem>
               )}

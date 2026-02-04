@@ -28,7 +28,6 @@ export async function POST(request) {
 
     //3. validate required data
     const validation = validateWithSchema(bookingFormSchema, payload);
-    console.log("validation", validation);
     if (!validation.success) {
       return ApiResponse.validationError(validation.errors);
     }
@@ -67,11 +66,6 @@ export async function POST(request) {
 
     // 6. Verify frontend price matches backend calculation
     if (Math.abs(actualTotalPrice - totalPrice) > 0.01) {
-      console.error("[Security] Price mismatch detected!", {
-        frontend: totalPrice,
-        backend: actualTotalPrice,
-        user: session.user.email,
-      });
       return ApiResponse.badRequest(
         "Price mismatch. Please refresh and try again",
       );
@@ -115,7 +109,7 @@ export async function POST(request) {
       address: address || "",
       paymentOption,
       totalPrice: actualTotalPrice.toString(), //backend calculated price
-      amountToPay: amountToPay.toString(),
+      amountPaid: amountToPay.toString(),
       dueAmount: dueAmount.toString(),
     };
 
@@ -154,7 +148,6 @@ export async function POST(request) {
       "Checkout session created successfully",
     );
   } catch (error) {
-    console.error("[create-checkout-session] Error:", error.message);
     return ApiResponse.error(
       error.message || "Failed to create checkout session",
       500,
