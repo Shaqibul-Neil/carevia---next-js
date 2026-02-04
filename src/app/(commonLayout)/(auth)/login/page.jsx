@@ -5,6 +5,11 @@ import Image from "next/image";
 import { GiHeartInside } from "react-icons/gi";
 import GoogleLogin from "@/components/shared/Social Login/GoogleLogin";
 
+export const metadata = {
+  title: "Login",
+  description: "Care That Comes Home",
+};
+
 const LoginPage = () => {
   return (
     <div className="min-h-screen w-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center px-2 py-4 md:px-4 font-sans overflow-y-auto relative">

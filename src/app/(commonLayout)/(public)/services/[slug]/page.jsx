@@ -24,6 +24,38 @@ import AdditionalInfo from "@/components/service details/AdditionalInfo";
 import BookingPolicy from "@/components/service details/BookingPolicy";
 import Reviews from "@/components/service details/Reviews";
 
+/* ===========================
+    Dynamic SEO Metadata
+=========================== */
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  // fetch data
+  const service = await getSingleServiceDetails(slug);
+  if (!service) {
+    return {
+      title: "Service Not Found - Carevia",
+      description: "Care That Comes Home",
+    };
+  }
+  return {
+    title: `${service.serviceName} - Carevia`,
+    description:
+      service.detailedDescription ||
+      `Book trusted ${service.category} services with verified caregivers at Carevia.`,
+    openGraph: {
+      title: `${service.serviceName} - Carevia`,
+      description:
+        service.detailedDescription ||
+        `Reliable ${service.category} services delivered to your home.`,
+      images: [service.image],
+    },
+  };
+}
+
+/* ===========================
+   Page Component
+=========================== */
+
 const ServiceDetailsPage = async ({ params }) => {
   const { slug } = await params;
   const service = await getSingleServiceDetails(slug);

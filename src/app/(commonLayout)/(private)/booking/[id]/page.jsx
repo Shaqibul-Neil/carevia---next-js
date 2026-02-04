@@ -5,6 +5,11 @@ import { Clock, MapPin, ShieldCheck } from "lucide-react";
 import PageHeading from "@/components/headings/PageHeading";
 import BookingForm from "@/components/form/BookingForm";
 
+export const metadata = {
+  title: "Service Booking",
+  description: "Care That Comes Home",
+};
+
 const BookingPage = async ({ params }) => {
   const { id } = await params;
   const service = await getServiceForBookingPage(id);

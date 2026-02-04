@@ -10,6 +10,11 @@ import { Suspense } from "react";
 // ISR: Revalidate every 30 minutes
 export const revalidate = 1800;
 
+export const metadata = {
+  title: "All Services",
+  description: "Care That Comes Home",
+};
+
 const ServicesPage = async () => {
   // Fetch all services
   const services = await getAllServices();
