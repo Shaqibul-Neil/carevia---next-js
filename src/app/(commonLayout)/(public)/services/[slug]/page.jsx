@@ -90,7 +90,7 @@ const ServiceDetailsPage = async ({ params }) => {
     locationCoverage,
     status,
     isFeatured,
-  } = service;
+  } = service || {};
 
   // Related services (same category)
   const relatedServices = await getServicesByCategory(category);
