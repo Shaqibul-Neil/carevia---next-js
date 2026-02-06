@@ -27,25 +27,25 @@ export const findFeaturedServices = () => {
 };
 
 // Find all services
-export const findAllServices = () => {
+export const findAllServices = (searchQuery) => {
+  const filter = searchQuery
+    ? { serviceName: { $regex: searchQuery, $options: "i" } }
+    : {};
   return serviceCollection()
-    .find(
-      {},
-      {
-        projection: {
-          _id: 1,
-          slug: 1,
-          category: 1,
-          serviceName: 1,
-          image: 1,
-          detailedDescription: 1,
-          price: 1,
-          availability: 1,
-          ratingSummary: 1,
-          locationCoverage: 1,
-        },
+    .find(filter, {
+      projection: {
+        _id: 1,
+        slug: 1,
+        category: 1,
+        serviceName: 1,
+        image: 1,
+        detailedDescription: 1,
+        price: 1,
+        availability: 1,
+        ratingSummary: 1,
+        locationCoverage: 1,
       },
-    )
+    })
     .toArray();
 };
 

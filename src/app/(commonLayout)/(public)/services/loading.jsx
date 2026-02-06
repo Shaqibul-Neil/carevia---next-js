@@ -3,9 +3,9 @@ import React from "react";
 const ServicesLoading = () => {
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={index} className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className="w-full">
             {/* Main Card Container */}
             <div className="relative w-full min-h-120 rounded-2xl overflow-hidden flex flex-col shadow-[0_8px_24px_rgba(34,197,94,0.08),0_2px_8px_rgba(34,197,94,0.04)]">
               {/* Background Layer */}

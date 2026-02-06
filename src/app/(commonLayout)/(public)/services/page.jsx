@@ -13,9 +13,14 @@ export const metadata = {
   description: "Care That Comes Home",
 };
 
-const ServicesPage = async () => {
+const ServicesPage = async ({ searchParams }) => {
+  const resolvedParams = await searchParams;
+
+  const searchTerm = resolvedParams.searchTerm || "";
+  // const searchParams = new URLSearchParams().toString();
+
   // Fetch all services
-  const services = await getAllServices();
+  const services = await getAllServices(searchTerm);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -37,7 +42,6 @@ const ServicesPage = async () => {
       />
       <section className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto">
-          {/* Main Layout: Filter Sidebar + Service Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Left Sidebar - Filters (1 column) */}
             <aside className="lg:col-span-1">
