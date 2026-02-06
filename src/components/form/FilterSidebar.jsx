@@ -11,7 +11,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import AccordionFilter from "../shared/accordion/AccordionFilter";
-const FilterSidebar = ({ priceArray }) => {
+const FilterSidebar = () => {
   const [open, setOpen] = useState(null);
   const searchParams = useSearchParams();
   const router = useRouter();

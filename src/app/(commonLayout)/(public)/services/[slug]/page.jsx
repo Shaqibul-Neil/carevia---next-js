@@ -25,6 +25,18 @@ import BookingPolicy from "@/components/service details/BookingPolicy";
 import Reviews from "@/components/service details/Reviews";
 
 /* ===========================
+    Static Site Generation
+=========================== */
+
+export function generateStaticParams() {
+  return [
+    { slug: "elder-hygiene-care" },
+    { slug: "chronic-illness-care" },
+    { slug: "baby-hygiene-care" },
+  ];
+}
+
+/* ===========================
     Dynamic SEO Metadata
 =========================== */
 export async function generateMetadata({ params }) {

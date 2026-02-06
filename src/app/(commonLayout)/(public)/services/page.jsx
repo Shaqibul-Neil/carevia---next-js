@@ -31,9 +31,6 @@ const ServicesPage = async ({ searchParams }) => {
     priceSort,
   });
 
-  const priceArray = services
-    .map((service) => service.price.perHour)
-    .sort((a, b) => a - b);
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
       {/* Page Heading */}
@@ -58,7 +55,7 @@ const ServicesPage = async ({ searchParams }) => {
             {/* Left Sidebar - Filters (1 column) */}
             <aside className="lg:col-span-1">
               <div className="sticky top-24  rounded-lg border border-border bg-card shadow-sm">
-                <FilterSidebar priceArray={priceArray} />
+                <FilterSidebar />
               </div>
             </aside>
 
