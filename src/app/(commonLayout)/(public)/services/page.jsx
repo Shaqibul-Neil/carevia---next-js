@@ -20,6 +20,7 @@ const ServicesPage = async ({ searchParams }) => {
   const category = resolvedParams.category || "";
   const division = resolvedParams.division || "";
   const rating = resolvedParams.rating || "";
+  const priceSort = resolvedParams.priceSort || "";
 
   // Fetch all services
   const services = await getAllServices({
@@ -27,8 +28,12 @@ const ServicesPage = async ({ searchParams }) => {
     category,
     division,
     rating,
+    priceSort,
   });
-  console.log(services);
+
+  const priceArray = services
+    .map((service) => service.price.perHour)
+    .sort((a, b) => a - b);
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
       {/* Page Heading */}
@@ -53,7 +58,7 @@ const ServicesPage = async ({ searchParams }) => {
             {/* Left Sidebar - Filters (1 column) */}
             <aside className="lg:col-span-1">
               <div className="sticky top-24  rounded-lg border border-border bg-card shadow-sm">
-                <FilterSidebar />
+                <FilterSidebar priceArray={priceArray} />
               </div>
             </aside>
 

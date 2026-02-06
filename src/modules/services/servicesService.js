@@ -12,6 +12,7 @@ export const getAllServices = async ({
   category,
   division,
   rating,
+  priceSort,
 }) => {
   try {
     const services = await findAllServices({
@@ -19,6 +20,7 @@ export const getAllServices = async ({
       category,
       division,
       rating,
+      priceSort,
     });
     return services.map((service) => ({
       ...service,

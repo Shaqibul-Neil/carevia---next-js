@@ -27,8 +27,21 @@ export const findFeaturedServices = () => {
 };
 
 // Find all services
-export const findAllServices = ({ searchTerm, category, division, rating }) => {
-  console.log(rating);
+export const findAllServices = ({
+  searchTerm,
+  category,
+  division,
+  rating,
+  priceSort,
+}) => {
+  //price sorting
+  const sortQuery = {};
+  if (priceSort === "Low to High") {
+    sortQuery["price.perHour"] = 1;
+  } else if (priceSort === "High to Low") {
+    sortQuery["price.perHour"] = -1;
+  }
+  //other filteration eg. rating, division , category
   const filter = {};
   if (category) {
     filter.category = category;
@@ -74,6 +87,7 @@ export const findAllServices = ({ searchTerm, category, division, rating }) => {
         locationCoverage: 1,
       },
     })
+    .sort(sortQuery)
     .toArray();
 };
 

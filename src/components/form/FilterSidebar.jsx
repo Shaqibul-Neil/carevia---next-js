@@ -11,7 +11,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import AccordionFilter from "../shared/accordion/AccordionFilter";
-const FilterSidebar = () => {
+const FilterSidebar = ({ priceArray }) => {
   const [open, setOpen] = useState(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -19,7 +19,7 @@ const FilterSidebar = () => {
   const currentCategory = searchParams.get("category");
   const currentDivision = searchParams.getAll("division");
   const currentRating = searchParams.get("rating");
-  console.log(currentRating);
+  const currentPrice = searchParams.get("priceSort");
 
   const categories = ["Baby Care", "Elderly Care", "Sick Care", "Special Care"];
   const divisions = ["Dhaka", "Chattogram", "Sylhet", "Rajshahi", "Khulna"];
@@ -96,18 +96,25 @@ const FilterSidebar = () => {
               title={"Price"}
               icon={DollarSign}
               content={
-                <div className="space-y-2 ml-4">
-                  <input
-                    type="range"
-                    min="0"
-                    max="5000"
-                    step="100"
-                    className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
-                  <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>$0</span>
-                    <span className="font-semibold text-primary">$5000</span>
-                  </div>
+                <div className="space-y-2 pt-2 ml-4">
+                  {["Low to High", "High to Low"].map((priceSort) => (
+                    <label
+                      key={priceSort}
+                      className="flex items-center gap-2 cursor-pointer group"
+                    >
+                      <input
+                        type="radio"
+                        name="priceSort"
+                        value={priceSort}
+                        checked={currentPrice === priceSort}
+                        onChange={handleFilter}
+                        className="w-3 h-3 text-primary border-border focus:ring-primary/20 cursor-pointer"
+                      />
+                      <span className="text-xs text-foreground group-hover:text-primary transition-colors">
+                        {priceSort}
+                      </span>
+                    </label>
+                  ))}
                 </div>
               }
             />
