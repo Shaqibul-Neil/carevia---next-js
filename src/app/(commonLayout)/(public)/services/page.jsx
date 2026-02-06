@@ -15,12 +15,14 @@ export const metadata = {
 
 const ServicesPage = async ({ searchParams }) => {
   const resolvedParams = await searchParams;
-
+  console.log(resolvedParams);
   const searchTerm = resolvedParams.searchTerm || "";
+  const category = resolvedParams.category || "";
+  const division = resolvedParams.division || "";
   // const searchParams = new URLSearchParams().toString();
 
   // Fetch all services
-  const services = await getAllServices(searchTerm);
+  const services = await getAllServices({ searchTerm, category, division });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -45,7 +47,7 @@ const ServicesPage = async ({ searchParams }) => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Left Sidebar - Filters (1 column) */}
             <aside className="lg:col-span-1">
-              <div className="sticky top-24 p-6 rounded-lg border border-border bg-card shadow-sm">
+              <div className="sticky top-24  rounded-lg border border-border bg-card shadow-sm">
                 <FilterSidebar />
               </div>
             </aside>

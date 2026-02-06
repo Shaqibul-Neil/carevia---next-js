@@ -27,10 +27,19 @@ export const findFeaturedServices = () => {
 };
 
 // Find all services
-export const findAllServices = (searchQuery) => {
-  const filter = searchQuery
-    ? { serviceName: { $regex: searchQuery, $options: "i" } }
-    : {};
+export const findAllServices = ({ searchTerm, category, division }) => {
+  const filter = {};
+  if (category) {
+    filter.category = category;
+  }
+  if (division) {
+    const activeDivision = Array.isArray(division) ? division : [division];
+    filter["locationCoverage.supportedDivisions"] = {
+      $in: [...activeDivision],
+    };
+  }
+  if (searchTerm) filter.serviceName = { $regex: searchTerm, $options: "i" };
+
   return serviceCollection()
     .find(filter, {
       projection: {

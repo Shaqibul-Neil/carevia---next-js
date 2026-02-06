@@ -16,7 +16,7 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const searchTerm = e.target.search?.value;
-    //creating query string using browser URLSearchParams
+    //creating query string using browser/web api URLSearchParams
     const params = new URLSearchParams(searchParams);
     if (searchTerm)
       params.set("searchTerm", searchTerm); //searchTerm is key
@@ -35,10 +35,7 @@ const SearchBar = () => {
           <SearchIcon className="size-5 text-muted-foreground" />
         </InputGroupAddon>
         {/* input field */}
-        <InputGroupInput
-          name="search"
-          placeholder="Search for care services..."
-        />
+        <InputGroupInput name="search" placeholder="Search for services..." />
         {/* search button */}
         <InputGroupAddon align="inline-end" className="pr-3.5">
           <InputGroupButton

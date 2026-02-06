@@ -7,9 +7,9 @@ import {
 } from "./serviceRepository";
 
 //Get all services
-export const getAllServices = async (searchQuery) => {
+export const getAllServices = async ({ searchTerm, category, division }) => {
   try {
-    const services = await findAllServices(searchQuery);
+    const services = await findAllServices({ searchTerm, category, division });
     return services.map((service) => ({
       ...service,
       _id: service._id.toString(),
