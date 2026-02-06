@@ -18,10 +18,12 @@ const FilterSidebar = () => {
   const pathName = usePathname();
   const currentCategory = searchParams.get("category");
   const currentDivision = searchParams.getAll("division");
+  const currentRating = searchParams.get("rating");
+  console.log(currentRating);
 
   const categories = ["Baby Care", "Elderly Care", "Sick Care", "Special Care"];
   const divisions = ["Dhaka", "Chattogram", "Sylhet", "Rajshahi", "Khulna"];
-  const ratings = [5, 4, 3, 2, 1];
+  const ratings = ["5", "4.5", "4", "3", "2", "1"];
 
   //filteration logic
   const handleFilter = (e) => {
@@ -85,7 +87,7 @@ const FilterSidebar = () => {
         </button>
       </div>
       <div
-        className={`grid transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 pointer-events-none lg:pointer-events-auto"}`}
+        className={`grid transition-all duration-700 ease-in-out ${open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 pointer-events-none lg:pointer-events-auto"}`}
       >
         <div className="overflow-hidden space-y-6 px-1">
           {/* Price Range Filter */}
@@ -188,6 +190,9 @@ const FilterSidebar = () => {
                       <input
                         type="radio"
                         name="rating"
+                        value={rating}
+                        checked={currentRating === rating}
+                        onChange={handleFilter}
                         className="w-4 h-4 text-primary border-border focus:ring-primary/20 cursor-pointer"
                       />
                       <div className="flex items-center gap-1">
@@ -205,7 +210,7 @@ const FilterSidebar = () => {
 
           {/* Clear Filters Button */}
           <button
-            className="w-full py-2.5 px-4 rounded-lg border border-border bg-background hover:bg-muted text-foreground font-medium text-sm transition-all duration-200 cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-lg border border-border bg-background hover:bg-muted text-foreground font-medium text-sm transition-all duration-200 cursor-pointer mb-3"
             type="button"
             onClick={() => router.push("/services")}
           >

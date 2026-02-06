@@ -19,11 +19,16 @@ const ServicesPage = async ({ searchParams }) => {
   const searchTerm = resolvedParams.searchTerm || "";
   const category = resolvedParams.category || "";
   const division = resolvedParams.division || "";
-  // const searchParams = new URLSearchParams().toString();
+  const rating = resolvedParams.rating || "";
 
   // Fetch all services
-  const services = await getAllServices({ searchTerm, category, division });
-
+  const services = await getAllServices({
+    searchTerm,
+    category,
+    division,
+    rating,
+  });
+  console.log(services);
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
       {/* Page Heading */}

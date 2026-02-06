@@ -27,7 +27,8 @@ export const findFeaturedServices = () => {
 };
 
 // Find all services
-export const findAllServices = ({ searchTerm, category, division }) => {
+export const findAllServices = ({ searchTerm, category, division, rating }) => {
+  console.log(rating);
   const filter = {};
   if (category) {
     filter.category = category;
@@ -39,6 +40,24 @@ export const findAllServices = ({ searchTerm, category, division }) => {
     };
   }
   if (searchTerm) filter.serviceName = { $regex: searchTerm, $options: "i" };
+  if (rating) {
+    const r = Number(rating);
+    let maxRating;
+    if (r === 4) {
+      maxRating = 4.5;
+    } else if (r === 4.5) {
+      maxRating = 4.9;
+    } else if (r === 5) {
+      maxRating = 5.1;
+    } else {
+      maxRating = r + 1;
+    }
+
+    filter["ratingSummary.averageRating"] = {
+      $gte: r,
+      $lt: maxRating,
+    };
+  }
 
   return serviceCollection()
     .find(filter, {
