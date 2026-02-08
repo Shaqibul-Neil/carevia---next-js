@@ -81,8 +81,12 @@ export const findAllServices = async ({
 
   //get total service count
   const totalCount = await serviceCollection().countDocuments(filter);
+  //will always be dynamic if filter is applied
   const totalPage = Math.ceil(totalCount / Number(limit));
   const currentPage = Number(page) || 1;
+  // If current page exceeds total pages after filtering,
+  // reset page to 1 to avoid empty results
+  const safePage = currentPage > totalPage ? 1 : currentPage;
   const services = await serviceCollection()
     .find(filter, {
       projection: {
@@ -98,7 +102,7 @@ export const findAllServices = async ({
         locationCoverage: 1,
       },
     })
-    .skip((currentPage - 1) * Number(limit))
+    .skip((safePage - 1) * Number(limit))
     .limit(Number(limit))
     .sort(sortQuery)
     .toArray();
