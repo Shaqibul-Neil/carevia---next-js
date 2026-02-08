@@ -11,7 +11,7 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-const NavbarDropdown = ({ session }) => {
+const NavbarDropdown = ({ session, dashboardUrl }) => {
   const handleSignOut = async () => {
     await signOut();
   };
@@ -45,20 +45,23 @@ const NavbarDropdown = ({ session }) => {
           </div>
 
           <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent">
-            <Link
-              href={"/dashboard/profile"}
+            <a
+              href={`${dashboardUrl}/my-profile`}
+              target="_blank"
               className="font-semibold dark:text-gray-200 text-slate-600 hover:text-green-600 transition-colors duration-500"
             >
               My Profile
-            </Link>
+            </a>
           </DropdownMenuItem>
+
           <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent ">
-            <Link
-              href={"/dashboard"}
+            <a
+              href={`${dashboardUrl}`}
+              target="_blank"
               className="font-semibold dark:text-gray-200 text-slate-600 hover:text-green-600 transition-colors duration-500"
             >
               Dashboard
-            </Link>
+            </a>
           </DropdownMenuItem>
 
           <DropdownMenuItem className="rounded-xl px-4 overflow-hidden bg-transparent focus:bg-transparent hover:bg-transparent">

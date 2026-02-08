@@ -34,7 +34,10 @@ const Header = async () => {
         <div className="flex gap-6 items-center">
           <ToggleButton />
           {session ? (
-            <NavbarDropdown session={session} />
+            <NavbarDropdown
+              session={session}
+              dashboardUrl={process.env.DASHBOARD_URL}
+            />
           ) : (
             <Link
               href="/login"

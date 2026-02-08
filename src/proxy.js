@@ -1,38 +1,63 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
+// ==========================================
+// Origin--CORS
+// ==========================================
+const allowedOrigins = [process.env.DASHBOARD_URL];
+const corsOptions = {
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Credentials": "true",
+};
+
+// ==========================================
+// Access Control List(ACL)-- Route config
+// ==========================================
 // Routes that require any authenticated user
-const privateRoutes = ["/dashboard", "/booking", "/demo"];
-
+const privateRoutes = ["/booking", "/demo"];
 // Routes that require admin role only
-const adminRoutes = ["/dashboard/users", "/dashboard/services"];
-
+const adminRoutes = [];
 // Auth routes (login, register) - logged in users shouldn't access
 const authRoutes = ["/login", "/register"];
 
 export async function proxy(req) {
-  console.log("proxy req ", req);
-  const token = await getToken({ req });
-
   //get the user's desired path
   const { pathname } = req.nextUrl;
+  const origin = req.headers.get("origin") ?? "";
 
-  //checking if the user is authenticated by converting token into a boolean value
-  const isAuthenticated = Boolean(token);
-  const userRole = token?.role; // "admin" | "user"
+  //now check if this origin is from our allowed domain
+  const isAllowedOrigin = allowedOrigins.includes(origin);
 
-  // ==========================================
-  // 1. Auth Routes - redirect logged in users
-  // ==========================================
+  // CORS Preflight(OPTIONS) request handling
+  const isPreflight = req.method === "OPTIONS";
 
-  const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
-  if (isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  if (isPreflight) {
+    const preflightHeaders = {
+      ...(isAllowedOrigin && { "Access-Control-Allow-Origin": origin }),
+      ...corsOptions,
+    };
+    return NextResponse.json({}, { headers: preflightHeaders });
   }
 
   // ==========================================
-  // 2. Private Routes - must be logged in
+  //  Get token and Identity Check
   // ==========================================
+
+  const token = await getToken({ req });
+  //checking if the user is authenticated by converting token into a boolean value
+  const isAuthenticated = Boolean(token);
+  const userRole = token?.role; // "admin" | "user"
+  //To use it in the Header, take response in the variable
+  let response = NextResponse.next();
+
+  // 1. Auth Routes - redirect logged in users
+  const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
+  if (isAuthenticated && isAuthRoute) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // 2. Private Routes - must be logged in
   const isPrivateRoute = privateRoutes.some((route) =>
     pathname.startsWith(route),
   );
@@ -42,9 +67,8 @@ export async function proxy(req) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // ==========================================
   // 3. Admin Routes - must be admin
-  // ==========================================
+
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
   if (isAdminRoute) {
     if (!isAuthenticated) {
@@ -58,7 +82,16 @@ export async function proxy(req) {
     }
   }
 
-  return NextResponse.next();
+  //Setting up CORS header for all responses so that react app can receive the data
+  if (isAllowedOrigin) {
+    response.headers.set("Access-Control-Allow-Origin", origin);
+  }
+  //Setting up headers in all object
+  Object.entries(corsOptions).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+
+  return response;
 }
 
 // ==========================================
@@ -71,5 +104,6 @@ export const config = {
     "/booking/:path",
     "/login",
     "/register",
+    "/api/:path*",
   ],
 };

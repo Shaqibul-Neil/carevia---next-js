@@ -98,7 +98,7 @@ const FilterSidebar = () => {
               title={"Price"}
               icon={DollarSign}
               content={
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2 pt-2 ml-4">
                   {["Low to High", "High to Low"].map((priceSort) => (
                     <label
                       key={priceSort}
@@ -129,7 +129,7 @@ const FilterSidebar = () => {
               icon={Tag}
               content={
                 <div>
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-2 pt-2 ml-4">
                     {categories.map((category) => (
                       <label
                         key={category}
@@ -160,7 +160,7 @@ const FilterSidebar = () => {
               title={"Division"}
               icon={MapPin}
               content={
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2 pt-2 ml-4">
                   {divisions.map((division) => (
                     <label
                       key={division}
@@ -190,7 +190,7 @@ const FilterSidebar = () => {
               title={"Rating"}
               icon={Star}
               content={
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2 pt-2 ml-4">
                   {ratings.map((rating) => (
                     <label
                       key={rating}
@@ -202,7 +202,7 @@ const FilterSidebar = () => {
                         value={rating}
                         checked={currentRating === rating}
                         onChange={handleFilter}
-                        className="w-4 h-4 text-primary border-border focus:ring-primary/20 cursor-pointer"
+                        className="w-3 h-3 text-primary border-border focus:ring-primary/20 cursor-pointer"
                       />
                       <div className="flex items-center gap-1">
                         <Star className="w-3 h-3 text-amber-500 fill-amber-500" />

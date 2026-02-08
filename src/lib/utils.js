@@ -94,6 +94,7 @@ export const generatePagination = (currentPage, totalPage) => {
   let pages = [];
   // Always show page 1
   pages.push(1);
+
   if (currentPage >= 1) {
     // If we are on any valid page
     // Loop starts from page 2
