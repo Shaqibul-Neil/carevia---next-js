@@ -88,3 +88,36 @@ export const calculateTotalPrice = ({
 
   return isOutsideCoverage ? basePrice + 500 : basePrice;
 };
+
+//pagination logic
+export const generatePagination = (currentPage, totalPage) => {
+  let pages = [];
+  // Always show page 1
+  pages.push(1);
+  if (currentPage >= 1) {
+    // If we are on any valid page
+    // Loop starts from page 2
+    // It goes until (currentPage + 1)
+    for (let i = 2; i <= currentPage + 1; i++) {
+      // If total pages are more than 2
+      // And current loop page does not exceed total pages
+      if (i <= totalPage) {
+        pages.push(i);
+      }
+    }
+  }
+  // Get the last page number we added so far
+  const lastNumber = pages[pages.length - 1];
+
+  // If there is a gap between current pages and last page
+  // Show ellipsis to indicate skipped pages
+  if (lastNumber < totalPage - 1) {
+    pages.push("....");
+  }
+  // Always show the last page
+  // But only if it's not already added
+  if (!pages.includes(totalPage) && currentPage < totalPage) {
+    pages.push(totalPage);
+  }
+  return pages;
+};
