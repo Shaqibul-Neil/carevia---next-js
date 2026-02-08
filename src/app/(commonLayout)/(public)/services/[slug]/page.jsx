@@ -45,12 +45,12 @@ export async function generateMetadata({ params }) {
   const service = await getSingleServiceDetails(slug);
   if (!service) {
     return {
-      title: "Service Not Found - Carevia",
+      title: "Service Not Found",
       description: "Care That Comes Home",
     };
   }
   return {
-    title: `${service.serviceName} - Carevia`,
+    title: `${service.serviceName}`,
     description:
       service.detailedDescription ||
       `Book trusted ${service.category} services with verified caregivers at Carevia.`,

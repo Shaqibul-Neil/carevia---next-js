@@ -13,22 +13,40 @@ export const getAllServices = async ({
   division,
   rating,
   priceSort,
+  page,
 }) => {
   try {
-    const services = await findAllServices({
+    const {
+      services: fetchedServices,
+      totalPage,
+      totalCount,
+    } = await findAllServices({
       searchTerm,
       category,
       division,
       rating,
       priceSort,
+      page,
     });
-    return services.map((service) => ({
-      ...service,
-      _id: service._id.toString(),
-    }));
+
+    return {
+      services: fetchedServices.map((service) => ({
+        ...service,
+        _id: service._id.toString(),
+      })),
+      totalPage: totalPage,
+      totalCount: totalCount,
+      currentPage: Number(page) || 1,
+    };
   } catch (error) {
-    //console.error("[getAllServices] Error:", error.message);
-    return [];
+    console.error("[getAllServices] Error:", error.message);
+
+    return {
+      services: [],
+      totalPages: 0,
+      totalCount: 0,
+      currentPage: 1,
+    };
   }
 };
 

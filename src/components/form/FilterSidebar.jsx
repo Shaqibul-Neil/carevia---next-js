@@ -67,12 +67,14 @@ const FilterSidebar = () => {
 
   return (
     <div
-      className={`w-full space-y-6 lg:px-6  px-4 ${open ? "lg:py-6" : "lg:py-0.5"}`}
+      className={`w-full space-y-6 lg:px-6  px-4 ${open ? "lg:pb-6 lg:pt-2" : "lg:py-0 lg:pb-0.5"}`}
     >
       {/* Filter Header */}
-      <div className="flex justify-between items-center w-full h-11 mb-0">
+      <div className="flex justify-between items-center w-full h-11 mb-0 border-b">
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-primary" />
+          <div className="w-8 h-8 bg-green-100 flex items-center justify-center rounded-md">
+            <Filter className="w-4 h-4 text-primary" />
+          </div>
 
           <h3 className="text-base font-bold text-foreground">Filters</h3>
         </div>
@@ -89,14 +91,14 @@ const FilterSidebar = () => {
       <div
         className={`grid transition-all duration-700 ease-in-out ${open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 pointer-events-none lg:pointer-events-auto"}`}
       >
-        <div className="overflow-hidden space-y-6 px-1">
+        <div className="overflow-hidden space-y-4 px-1">
           {/* Price Range Filter */}
           <div>
             <AccordionFilter
               title={"Price"}
               icon={DollarSign}
               content={
-                <div className="space-y-2 pt-2 ml-4">
+                <div className="space-y-2 pt-2">
                   {["Low to High", "High to Low"].map((priceSort) => (
                     <label
                       key={priceSort}
@@ -127,7 +129,7 @@ const FilterSidebar = () => {
               icon={Tag}
               content={
                 <div>
-                  <div className="space-y-2 pt-2 ml-4">
+                  <div className="space-y-2 pt-2">
                     {categories.map((category) => (
                       <label
                         key={category}
@@ -158,7 +160,7 @@ const FilterSidebar = () => {
               title={"Division"}
               icon={MapPin}
               content={
-                <div className="space-y-2 ml-4 pt-2">
+                <div className="space-y-2 pt-2">
                   {divisions.map((division) => (
                     <label
                       key={division}
@@ -188,7 +190,7 @@ const FilterSidebar = () => {
               title={"Rating"}
               icon={Star}
               content={
-                <div className="space-y-2 pt-2 ml-4">
+                <div className="space-y-2 pt-2">
                   {ratings.map((rating) => (
                     <label
                       key={rating}

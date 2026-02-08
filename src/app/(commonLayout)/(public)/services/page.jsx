@@ -1,6 +1,7 @@
 import FilterSidebar from "@/components/form/FilterSidebar";
 import SearchBar from "@/components/form/SearchBar";
 import PageHeading from "@/components/headings/PageHeading";
+import PaginationButton from "@/components/shared/button/PaginationButton";
 import ServiceCard from "@/components/shared/card/ServiceCard";
 import { getAllServices } from "@/modules/services/servicesService";
 import { Heart } from "lucide-react";
@@ -15,21 +16,25 @@ export const metadata = {
 
 const ServicesPage = async ({ searchParams }) => {
   const resolvedParams = await searchParams;
-  console.log(resolvedParams);
   const searchTerm = resolvedParams.searchTerm || "";
   const category = resolvedParams.category || "";
   const division = resolvedParams.division || "";
   const rating = resolvedParams.rating || "";
   const priceSort = resolvedParams.priceSort || "";
+  const page = resolvedParams.page || "";
+  console.log(resolvedParams);
 
   // Fetch all services
-  const services = await getAllServices({
-    searchTerm,
-    category,
-    division,
-    rating,
-    priceSort,
-  });
+  const { services, totalPage, totalCount, currentPage } = await getAllServices(
+    {
+      searchTerm,
+      category,
+      division,
+      rating,
+      priceSort,
+      page,
+    },
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -63,6 +68,7 @@ const ServicesPage = async ({ searchParams }) => {
             <main className="lg:col-span-3 space-y-6">
               {/* Search Bar - Full Width */}
               <SearchBar />
+              {/* Services Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {services.length > 0 ? (
                   services.map((service) => (
@@ -76,6 +82,11 @@ const ServicesPage = async ({ searchParams }) => {
                   </div>
                 )}
               </div>
+              {/* Pagination */}
+              <PaginationButton
+                totalPage={totalPage}
+                currentPage={currentPage}
+              />
             </main>
           </div>
         </div>

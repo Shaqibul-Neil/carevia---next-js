@@ -27,12 +27,14 @@ export const findFeaturedServices = () => {
 };
 
 // Find all services
-export const findAllServices = ({
+export const findAllServices = async ({
   searchTerm,
   category,
   division,
   rating,
   priceSort,
+  page,
+  limit = 6,
 }) => {
   //price sorting
   const sortQuery = {};
@@ -41,18 +43,21 @@ export const findAllServices = ({
   } else if (priceSort === "High to Low") {
     sortQuery["price.perHour"] = -1;
   }
-  //other filteration eg. rating, division , category
+
   const filter = {};
+
+  //category filter
   if (category) {
     filter.category = category;
   }
+  //division filter
   if (division) {
     const activeDivision = Array.isArray(division) ? division : [division];
     filter["locationCoverage.supportedDivisions"] = {
       $in: [...activeDivision],
     };
   }
-  if (searchTerm) filter.serviceName = { $regex: searchTerm, $options: "i" };
+  //rating filter
   if (rating) {
     const r = Number(rating);
     let maxRating;
@@ -71,8 +76,14 @@ export const findAllServices = ({
       $lt: maxRating,
     };
   }
+  //search
+  if (searchTerm) filter.serviceName = { $regex: searchTerm, $options: "i" };
 
-  return serviceCollection()
+  //get total service count
+  const totalCount = await serviceCollection().countDocuments(filter);
+  const totalPage = Math.ceil(totalCount / Number(limit));
+  const currentPage = Number(page) || 1;
+  const services = await serviceCollection()
     .find(filter, {
       projection: {
         _id: 1,
@@ -87,8 +98,12 @@ export const findAllServices = ({
         locationCoverage: 1,
       },
     })
+    .skip((currentPage - 1) * Number(limit))
+    .limit(Number(limit))
     .sort(sortQuery)
     .toArray();
+
+  return { services, totalPage, totalCount };
 };
 
 //Find Single Service by ID for booking page
