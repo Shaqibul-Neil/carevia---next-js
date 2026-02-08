@@ -7,7 +7,7 @@ export async function POST(req) {
   try {
     const { email, password } = await req.json();
     //1.find the user by email
-    const user = await findUserByEmail(email.toLowerCase());
+    const user = await findUserByEmail(email);
     if (!user) {
       return ApiResponse.notFound("User not found. Please create an account");
     }
