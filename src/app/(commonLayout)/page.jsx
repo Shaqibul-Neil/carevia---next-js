@@ -1,6 +1,7 @@
 import AboutUs from "@/components/home/AboutUs";
 import FeaturedServicesSection from "@/components/home/FeaturedServiceSection";
 import Newsletter from "@/components/home/Newsletter";
+import Testimonials from "@/components/home/Testimonials";
 import Footer from "@/components/shared/Footer/Footer";
 
 // Home page revalidation every 30 minutes
@@ -20,6 +21,8 @@ export default async function Home() {
       <FeaturedServicesSection />
       {/* Newsletter section */}
       <Newsletter />
+      {/* Testimonials */}
+      <Testimonials />
       {/* Footer */}
       <Footer />{" "}
     </div>
