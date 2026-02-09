@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Logo from "../logo/Logo";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 
 /**
  * Footer Component
@@ -9,11 +15,11 @@ import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
  */
 const Footer = () => {
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Youtube, href: "#", label: "YouTube" },
+    { icon: FaFacebookF, href: "#", label: "Facebook" },
+    { icon: FaTwitter, href: "#", label: "Twitter" },
+    { icon: FaInstagram, href: "#", label: "Instagram" },
+    { icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
+    { icon: FaYoutube, href: "#", label: "YouTube" },
   ];
 
   const footerLinks = {
@@ -33,7 +39,7 @@ const Footer = () => {
       { title: "Privacy Policy", href: "/privacy" },
       { title: "Terms of Service", href: "/terms" },
       { title: "Refund Policy", href: "/refund" },
-      { title: "Compliance", href: "/payments" },
+      { title: "Compliance", href: "/compliance" },
     ],
   };
 
@@ -44,12 +50,13 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-16 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-          
           {/* Column 1: Brand (Span 2) */}
           <div className="lg:col-span-2 space-y-8">
             <Logo />
             <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-sm">
-              Carevia brings professional, compassionate healthcare directly to your home. We&apos;re committed to excellence, dignity, and independence for every family in Bangladesh.
+              Carevia brings professional, compassionate healthcare directly to
+              your home. We&apos;re committed to excellence, dignity, and
+              independence for every family in Bangladesh.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -126,15 +133,24 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} <span className="font-bold text-slate-900 dark:text-white">Carevia</span> – All rights reserved – <span className="bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded text-xs">shaqibul_neil</span>
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="font-bold text-slate-900 dark:text-white">
+              Carevia
+            </span>{" "}
+            – All rights reserved –{" "}
+            <span className="bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded text-xs">
+              shaqibul_neil
+            </span>
           </p>
           <div className="flex items-center gap-6">
-             <div className="flex items-center gap-2 group cursor-help">
-               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-               <span className="text-xs text-slate-500 dark:text-slate-500 group-hover:text-emerald-500 transition-colors">Server Status: Online</span>
-             </div>
-             <div className="h-4 w-px bg-slate-200 dark:bg-slate-800" />
-             <div className="text-xs text-slate-400">Crafted with Precision</div>
+            <div className="flex items-center gap-2 group cursor-help">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs text-slate-500 dark:text-slate-500 group-hover:text-emerald-500 transition-colors">
+                Server Status: Online
+              </span>
+            </div>
+            <div className="h-4 w-px bg-slate-200 dark:bg-slate-800" />
+            <div className="text-xs text-slate-400">Crafted with Precision</div>
           </div>
         </div>
       </div>
