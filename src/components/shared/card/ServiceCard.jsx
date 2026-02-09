@@ -1,10 +1,10 @@
 import { Star, MapPin } from "lucide-react";
 import Image from "next/image";
 import SecondaryButton from "../button/SecondaryButton";
+import { cn } from "@/lib/utils";
 
 const ServiceCard = ({ service }) => {
   const {
-    _id,
     slug,
     category,
     serviceName,
@@ -14,112 +14,96 @@ const ServiceCard = ({ service }) => {
     ratingSummary,
     locationCoverage,
   } = service;
-  const badgeColor = (cat = "") => {
+  // Refined badge colors for a cleaner, more premium look
+  const getBadgeStyle = (cat = "") => {
     switch (cat.toLowerCase()) {
       case "baby care":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800";
       case "elder care":
       case "elderly care":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-800";
       case "sick care":
-        return "bg-red-100 text-red-800";
+        return "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/20 dark:text-rose-300 dark:border-rose-800";
       case "special care":
-        return "bg-green-100 text-green-800";
+        return "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/20 dark:text-purple-300 dark:border-purple-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-300 dark:border-slate-800";
     }
   };
   return (
-    <div className="w-full">
-      {/* Main Card Container */}
-      <div className="service-card relative w-full min-h-120 rounded-2xl overflow-hidden flex flex-col shadow-[0_8px_24px_rgba(34,197,94,0.08),0_2px_8px_rgba(34,197,94,0.04)] transition-all duration-400 ease-in-out hover:shadow-[0_12px_32px_rgba(34,197,94,0.12),0_4px_12px_rgba(34,197,94,0.08)] hover:-translate-y-1">
-        {/* Background Layer */}
-        <div className="card-bg absolute inset-0.5 z-2 bg-white/98 dark:bg-slate-800/95 backdrop-blur-2xl rounded-xl border-[1.5px] border-slate-200/60 dark:border-slate-700/60 transition-all duration-300"></div>
+    <div className="group relative w-full h-full flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/5 hover:border-emerald-200 dark:hover:border-emerald-800/50 hover:-translate-y-1">
+      {/* IMAGE SECTION */}
+      <div className="relative w-full h-56 overflow-hidden">
+        <Image
+          src={image}
+          alt={serviceName}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
 
-        {/* Animated Blob */}
-        <div className="card-blob"></div>
-
-        {/* Card Content */}
-        <div className="relative z-3 flex flex-col h-full p-5">
-          {/* Service Image */}
-          <div className="w-full h-50 rounded-xl overflow-hidden mb-4 bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 relative">
-            <Image
-              src={image}
-              alt={serviceName}
-              width={280}
-              height={180}
-              className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-            />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/35 pointer-events-none"></div>
-            {/* Location Badge - Bottom Right */}
-            <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1 bg-muted px-2.5 py-1.5 rounded-lg transition-all duration-300">
-              <MapPin className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[0.8125rem] font-medium text-slate-600 dark:text-slate-300">
-                {locationCoverage.supportedDivisions.join(", ")}
+        {/* Gradient Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+        {/* Top Left: Category Badge */}
+        <div className="absolute top-4 left-4 z-10">
+          <span
+            className={cn(
+              "px-3 py-1 text-xs font-bold tracking-wide uppercase rounded-full border backdrop-blur-md shadow-sm",
+              getBadgeStyle(category),
+            )}
+          >
+            {category}
+          </span>
+        </div>
+        {/* Bottom Right: Review Badge */}
+        <div className="absolute bottom-4 right-4 z-10">
+          <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/20 shadow-lg">
+            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+            <div className="flex items-baseline gap-1 text-xs font-bold text-slate-800 dark:text-slate-100">
+              {ratingSummary.averageRating}
+              <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                ({ratingSummary.totalReviews})
               </span>
             </div>
           </div>
+        </div>
+      </div>
+      {/* CONTENT SECTION */}
+      <div className="flex flex-col flex-1 p-6 gap-4">
+        {/* Header: Name & Location */}
+        <div className="space-y-2">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            {serviceName}
+          </h3>
 
-          {/* Service Info Section */}
-          <div className="flex flex-col gap-3 flex-1">
-            <div className="flex justify-between items-center">
-              {/* Service Name */}
-              <h3 className="text-xl font-semibold text-foreground leading-[1.4] m-0">
-                {serviceName}
-              </h3>
-            </div>
-            <div className="flex justify-between items-center">
-              {/* Rating Container */}
-              <div className="flex items-center gap-1.5">
-                <Star className="w-4 h-4 text-amber-500 fill-current" />
-                <span className="text-sm font-semibold text-foreground">
-                  {ratingSummary.averageRating}
-                </span>
-                <span className="text-[0.8125rem] text-muted-foreground font-normal">
-                  ({ratingSummary.totalReviews} reviews)
-                </span>
-              </div>
-              {/* Category Badge - Top Left */}
-              <div>
-                <p
-                  className={`text-xs font-bold tracking-wide px-2 py-1 rounded-lg ${badgeColor(category)}`}
-                >
-                  {category}
-                </p>
-              </div>
-            </div>
-
-            {/* Description - Line Clamp 2 */}
-            <p className="text-[0.9375rem] leading-[1.65] text-slate-600 dark:text-slate-300 m-0 line-clamp-2">
-              {detailedDescription}
+          <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+            <MapPin className="w-4 h-4 shrink-0" />
+            <span className="text-sm font-medium line-clamp-1">
+              {locationCoverage.supportedDivisions.join(", ")}
+            </span>
+          </div>
+        </div>
+        {/* Description */}
+        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
+          {detailedDescription}
+        </p>
+        {/* Footer: Price & CTA */}
+        <div className="mt-auto pt-5 flex items-end justify-between border-t border-slate-100 dark:border-slate-800">
+          <div>
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+              Starting from
             </p>
-
-            {/* Bottom Row - Price & Location */}
-            <div className="flex items-end justify-between mt-auto pt-4 border-t border-border">
-              {/* Price Container */}
-              <div className="flex flex-col gap-0.5">
-                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
-                  Starting from
-                </span>
-                <span className="text-2xl font-bold text-primary leading-none">
-                  ${price.perHour}
-                  <span className="text-sm font-medium text-muted-foreground ml-0.5">
-                    /hr
-                  </span>
-                </span>
-              </div>
-              {/* Details button */}
-              <SecondaryButton
-                label="View Details"
-                href={`/services/${slug}`}
-              />
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">
+                ${price.perHour}
+              </span>
+              <span className="text-sm font-medium text-slate-500">/hr</span>
             </div>
           </div>
+          <SecondaryButton label="View Details" href={`/services/${slug}`} />
         </div>
       </div>
     </div>
   );
 };
-
 export default ServiceCard;
