@@ -1,4 +1,7 @@
+import AboutUs from "@/components/home/AboutUs";
 import FeaturedServicesSection from "@/components/home/FeaturedServiceSection";
+import Newsletter from "@/components/home/Newsletter";
+import Footer from "@/components/shared/Footer/Footer";
 
 // Home page revalidation every 30 minutes
 export const revalidate = 1800;
@@ -11,9 +14,14 @@ export const metadata = {
 export default async function Home() {
   return (
     <div>
-      Home
+      {/* About us */}
+      <AboutUs />
       {/* Featured Service */}
       <FeaturedServicesSection />
+      {/* Newsletter section */}
+      <Newsletter />
+      {/* Footer */}
+      <Footer />{" "}
     </div>
   );
 }
