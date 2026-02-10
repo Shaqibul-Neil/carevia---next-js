@@ -16,6 +16,7 @@ export const metadata = {
 export default async function Home() {
   const session = await getServerSession(authOptions);
   console.log(session);
+
   return (
     <div>
       {/* About us */}

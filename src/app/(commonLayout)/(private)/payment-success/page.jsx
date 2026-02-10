@@ -242,7 +242,8 @@ export default function PaymentSuccessPage() {
             transition={{ delay: 0.5 }}
             className="text-base md:text-lg text-gray-600 dark:text-gray-400"
           >
-            Your booking has been confirmed
+            Your booking has been confirmed. We've sent you an email with
+            further details.
           </motion.p>
         </motion.div>
 

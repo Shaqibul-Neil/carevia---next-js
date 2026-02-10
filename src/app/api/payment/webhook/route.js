@@ -1,6 +1,8 @@
 // ==========================================
 // Stripe Webhook Handler
 
+import { sendEmail } from "@/lib/emailSender";
+import { generatePaymentReceiptEmail } from "@/lib/emailTemplate";
 import { stripe } from "@/lib/stripe";
 import { createConfirmedBooking } from "@/modules/booking/bookingRepository";
 import {
@@ -79,6 +81,30 @@ export async function POST(request) {
         // ==========================================
         // SEND EMAIL NOTIFICATION
         // ==========================================
+        try {
+          //Prepare email data
+          const emailData = {
+            userName: metadata.userName,
+            serviceName: metadata.serviceName,
+            bookingDate: metadata.bookingDate,
+            slot: metadata.slot || metadata.time || "N/A", // Handle time if available
+            trackingId: result.trackingId, // From booking creation result
+            totalPrice: metadata.totalPrice,
+            amountPaid: metadata.amountPaid,
+            dueAmount: metadata.dueAmount,
+            transactionId: session.payment_intent,
+          };
+          const emailHTML = generatePaymentReceiptEmail(emailData);
+          await sendEmail(
+            metadata.userEmail,
+            `Booking Confirmed! - ${metadata.serviceName} Receipt`,
+            emailHTML,
+          );
+          console.log(`📧 Receipt sent to ${metadata.userEmail}`);
+        } catch (error) {
+          // Log error but DO NOT fail the webhook. Payment is already successful.
+          console.error("⚠️ Email sending failed:", emailError);
+        }
       } catch (error) {
         console.error("❌ Booking creation failed:", error.message);
         //Don't throw error here - Webhook should still return 200

@@ -56,6 +56,7 @@ const BookingForm = ({ service }) => {
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
       bookingDate: undefined,
+      slot: "",
       durationType: "",
       quantity: "",
       division: "",
@@ -110,6 +111,20 @@ const BookingForm = ({ service }) => {
     division && !service.locationCoverage.supportedDivisions.includes(division)
       ? 500
       : 0;
+
+  //Generate Time slots(8AM to 8PM)
+  const generateTimeSlots = () => {
+    const slots = [];
+    const startHour = 8;
+    const endHour = 20;
+    for (let i = startHour; i <= endHour; i++) {
+      const hour = i > 12 ? i - 12 : i;
+      const ampm = i >= 12 ? "PM" : "AM";
+      slots.push(`${hour}:00 ${ampm}`);
+    }
+    return slots;
+  };
+  const timeSlots = generateTimeSlots();
 
   // Submit handler
   const onSubmit = async (values) => {
@@ -203,7 +218,7 @@ const BookingForm = ({ service }) => {
               Choose Your Date & Duration
             </h4>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             {/* Date Selection */}
             <FormField
               control={form.control}
@@ -219,7 +234,7 @@ const BookingForm = ({ service }) => {
                         <Button
                           variant="outline"
                           className={cn(
-                            "w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 justify-start text-left font-normal",
+                            "w-full h-9 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 justify-start text-left font-normal",
                             !field.value && "text-muted-foreground",
                           )}
                         >
@@ -248,6 +263,38 @@ const BookingForm = ({ service }) => {
                 </FormItem>
               )}
             />
+
+            {/* Time Slot Selection */}
+            <FormField
+              control={form.control}
+              name="slot"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Start Time <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    disabled={isSubmitting}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                        <SelectValue placeholder="Start time" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="max-h-60">
+                      {timeSlots.map((slot, idx) => (
+                        <SelectItem key={idx} value={slot}>
+                          {slot}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs font-medium" />
+                </FormItem>
+              )}
+            />
             {/* Duration Type Dropdown */}
             <FormField
               control={form.control}
@@ -264,7 +311,7 @@ const BookingForm = ({ service }) => {
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
-                        <SelectValue placeholder="Select duration type" />
+                        <SelectValue placeholder="Duration type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -276,7 +323,6 @@ const BookingForm = ({ service }) => {
                 </FormItem>
               )}
             />
-
             {/* Quantity Input */}
             <FormField
               control={form.control}

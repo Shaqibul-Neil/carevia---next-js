@@ -117,3 +117,16 @@ Cross-Domain SSO Flow (Token Handoff)
 token টি ভ্যালিড কিনা চেক করে (ঐচ্ছিক) সেটিকে নিজের localStorage বা cookie-তে সেভ করবে।
 এরপর ইউজারকে মেইন /dashboard পেজে রিডাইরেক্ট করে দিবে।
 পুরো প্রসেসটি ১ সেকেন্ডেরও কম সময় নিবে এবং ইউজারের কাছে মনে হবে সে অটোমেটিক লগইন হয়ে গেছে।
+
+Your Task (Assessment)
+Task Name: Newsletter Subscription Email Context: আপনার হোমপেজে একটি "Subscribe" সেকশন আছে।
+
+Requirement:
+
+একটি নতুন API Route তৈরি করুন: src/app/api/subscribe/route.js
+ফ্রন্টএন্ড থেকে ইউজার যখন ইমেইল দিয়ে সাবমিট করবে, সেই ইমেইলটি রিসিভ করুন।
+আমাদের তৈরি করা sendEmail.js ইউটিলিটি ব্যবহার করে ইউজারকে একটি "Welcome Newsletter" ইমেইল পাঠান।
+emailTemplates.js-এ একটি নতুন ফাংশন generateWelcomeEmail অ্যাড করুন।
+Challenge: এই টাস্কটি করার সময় খেয়াল রাখবেন যেন একই ইমেইলে বারবার সাবস্ক্রাইব করলে এরর হ্যান্ডেল করা হয় (Database check - যদি ডিবি কানেকশন থাকে, না থাকলে দরকার নেই)।
+
+এটা কমপ্লিট করে আমাকে জানাবেন! কোন হেল্প লাগলে বলবেন।

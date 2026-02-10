@@ -42,6 +42,7 @@ export async function POST(request) {
       district,
       address,
       paymentOption,
+      slot,
     } = validation.data;
 
     //4. Verify service exists & get REAL price from database
@@ -105,6 +106,7 @@ export async function POST(request) {
       serviceName: service.serviceName,
       serviceImage: service.image || "",
       bookingDate: new Date(bookingDate).toISOString(),
+      slot: slot || "N/A",
       durationType,
       quantity: quantity.toString(), //metadata requirement
       division,

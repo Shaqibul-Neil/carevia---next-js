@@ -1,9 +1,8 @@
 import nodemailer from "nodemailer";
 
-// Create a transporter using Ethereal test credentials.
-// For production, replace with your actual SMTP server details.
+// Create a transporter (The Postman)
 const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
+  service: "gmail",
   port: 587,
   secure: false, // Use true for port 465, false for port 587
   auth: {
@@ -16,7 +15,7 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async (to, subject, htmlContent) => {
   try {
     const info = await transporter.sendMail({
-      from: '"Carevia Support" <support@carevia.com>', // Sender address
+      from: `"Carevia Support" <${process.env.EMAIL_USER}>`, // Sender address
       to: to, // Receiver
       subject: subject, // Subject line
       html: htmlContent, // HTML body

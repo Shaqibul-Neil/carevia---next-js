@@ -42,6 +42,9 @@ export const bookingFormSchema = z.object({
   bookingDate: z.coerce.date({
     required_error: "Please select a booking date",
   }),
+  slot: z
+    .string({ required_error: "Please select a start time" })
+    .min(1, "Time slot is required"),
   durationType: z.string().min(1, "Please select a duration type"),
   quantity: z.coerce
     .number({ required_error: "Please enter quantity" })
