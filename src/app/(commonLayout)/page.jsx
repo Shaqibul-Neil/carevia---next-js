@@ -2,6 +2,8 @@ import AboutUs from "@/components/home/AboutUs";
 import FeaturedServicesSection from "@/components/home/FeaturedServiceSection";
 import Newsletter from "@/components/home/Newsletter";
 import Testimonials from "@/components/home/Testimonials";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 
 // Home page revalidation every 30 minutes
 export const revalidate = 1800;
@@ -12,6 +14,8 @@ export const metadata = {
 };
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+  console.log(session);
   return (
     <div>
       {/* About us */}

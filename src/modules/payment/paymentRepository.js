@@ -13,6 +13,7 @@ export const createPaymentRecord = async (paymentData) => {
     userId: new ObjectId(paymentData.userId),
     serviceId: new ObjectId(paymentData.serviceId),
     userEmail: paymentData.userEmail,
+    userName: paymentData.userName,
     trackingId: paymentData.trackingId,
     serviceName: paymentData.serviceName,
     stripePaymentIntentId: paymentData.stripePaymentIntentId,

@@ -62,6 +62,7 @@ export async function POST(request) {
           bookingId: result.insertedId.toString(),
           userId: metadata.userId,
           userEmail: metadata.userEmail,
+          userName: metadata.userName,
           serviceName: metadata.serviceName,
           serviceId: metadata.serviceId,
           trackingId: result.trackingId,
@@ -74,9 +75,13 @@ export async function POST(request) {
         };
         await createPaymentRecord(paymentData);
         console.log("Payment record created");
+
+        // ==========================================
+        // SEND EMAIL NOTIFICATION
+        // ==========================================
       } catch (error) {
         console.error("❌ Booking creation failed:", error.message);
-        //DOnt throw error here - Webhook should still return 200
+        //Don't throw error here - Webhook should still return 200
         //Return 400 fr signature errors only
         if (error.message.includes("signature")) {
           return NextResponse.json(

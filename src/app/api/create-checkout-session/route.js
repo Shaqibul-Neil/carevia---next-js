@@ -10,6 +10,8 @@ export async function POST(request) {
   try {
     //1. Check authentication
     const session = await getServerSession(authOptions);
+    console.log(session);
+
     if (!session) {
       return ApiResponse.unauthorized();
     }
@@ -98,6 +100,7 @@ export async function POST(request) {
     const bookingData = {
       userId: session.user.id,
       userEmail: session.user.email,
+      userName: session.user.name,
       serviceId,
       serviceName: service.serviceName,
       serviceImage: service.image || "",
