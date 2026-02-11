@@ -119,3 +119,49 @@ Flow Diagram:
                           │    Shows    │
                           │    Data     │
                           └─────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 1: Checkout Session Creation (Your Server)          │
+└─────────────────────────────────────────────────────────────┘
+   User clicks "Book Now"
+        ↓
+   Frontend calls: POST /api/create-checkout-session
+        ↓
+   [Your Server] Validation + Stripe Session তৈরি
+        ↓
+   Returns checkout URL to frontend
+        ↓
+   User redirected to Stripe checkout page
+
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 2: Payment on Stripe (Stripe's Server)              │
+└─────────────────────────────────────────────────────────────┘
+   User enters card info on Stripe
+        ↓
+   Stripe processes payment
+        ↓
+   Payment successful
+        ↓
+   [TWO THINGS HAPPEN SIMULTANEOUSLY]
+
+┌──────────────────────────┐    ┌─────────────────────────────┐
+│ PATH A: Browser Redirect │    │ PATH B: Webhook (Priority)  │
+│ (User sees success page) │    │ (Server-to-server)          │
+└──────────────────────────┘    └─────────────────────────────┘
+         ↓                                  ↓
+    Stripe redirects user        Stripe sends webhook event
+    to success_url:              to your webhook endpoint:
+    /payment-success?            POST /api/payment/webhook
+    session_id=cs_xxx                     ↓
+         ↓                       [WEBHOOK RUNS FIRST - 99%]
+    Success page loads                    ↓
+         ↓                       Creates booking + payment
+    Calls: POST                           ↓
+    /api/payment/confirm         Returns success to Stripe
+    with session_id                       ↓
+         ↓                       [Webhook completes]
+    [CONFIRM ROUTE CHECKS]
+         ↓
+    "আরে! Payment already exists"
+         ↓
+    Returns existing data
