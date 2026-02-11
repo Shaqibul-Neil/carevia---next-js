@@ -130,7 +130,7 @@ export const getAllPayments = async (email = null) => {
       })),
     };
   } catch (error) {
-    console.error("[getAllPayments] Error:", error.message);
+    //console.error("[getAllPayments] Error:", error.message);
     return {
       success: false,
       error: error.message || "Failed to fetch payments",

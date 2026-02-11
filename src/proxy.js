@@ -12,6 +12,11 @@ const corsOptions = {
 };
 
 // ==========================================
+// Public API Routes (no auth required)
+// ==========================================
+const publicRoutes = ["/api/login", "/api/register"];
+
+// ==========================================
 // Access Control List(ACL)-- Route config
 // ==========================================
 // Routes that require any authenticated user
@@ -39,9 +44,28 @@ export async function proxy(req) {
     };
     return NextResponse.json({}, { headers: preflightHeaders });
   }
-
   // ==========================================
-  //  Get token and Identity Check
+  //  Allow public API routes without authentication
+  // ==========================================
+  const isPublicRoute = publicRoutes.some((route) =>
+    pathname.startsWith(route),
+  );
+  if (isPublicRoute) {
+    //Skip authentication, just set CORS Headers
+    let response = NextResponse.next();
+    //Setting up CORS header for all responses so that react app can receive the data
+    if (isAllowedOrigin) {
+      response.headers.set("Access-Control-Allow-Origin", origin);
+    }
+    //Setting up headers in all object
+    Object.entries(corsOptions).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
+    console.log(`✅ Public API access: ${pathname}`);
+    return response;
+  }
+  // ==========================================
+  //  Get token and Identity Check (Protected Route)
   // ==========================================
 
   const token = await getToken({ req });
@@ -68,7 +92,6 @@ export async function proxy(req) {
   }
 
   // 3. Admin Routes - must be admin
-
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
   if (isAdminRoute) {
     if (!isAuthenticated) {
