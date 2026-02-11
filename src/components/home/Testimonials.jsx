@@ -70,7 +70,7 @@ const Testimonials = () => {
     <section className="py-20 lg:py-32 bg-white dark:bg-slate-950 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-end mb-12 gap-8">
+        <div className="flex flex-col lg:flex-row justify-between lg:items-end items-start mb-12 gap-8">
           <SectionHeading
             badge="Client Stories"
             heading="Trusted by Over"

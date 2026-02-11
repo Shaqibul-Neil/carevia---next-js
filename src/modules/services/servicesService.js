@@ -1,3 +1,4 @@
+import { success } from "zod";
 import {
   findAllServices,
   findFeaturedServices,
@@ -30,6 +31,7 @@ export const getAllServices = async ({
     });
 
     return {
+      success: true,
       services: fetchedServices.map((service) => ({
         ...service,
         _id: service._id.toString(),
@@ -40,8 +42,9 @@ export const getAllServices = async ({
     };
   } catch (error) {
     console.error("[getAllServices] Error:", error.message);
-
     return {
+      success: false,
+      error: error.message || "Failed to fetch services",
       services: [],
       totalPages: 0,
       totalCount: 0,

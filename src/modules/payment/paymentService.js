@@ -15,6 +15,11 @@
 //
 // ALWAYS use webhook approach for production!
 
+import { ApiResponse } from "@/lib/apiResponse";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
+import { findPaymentByEmail } from "./paymentRepository";
+
 //Notes: Always return response as a general object because it is not an api route. do not use apiResponse here Otherwise it will become Response object
 // import { stripe } from "@/lib/stripe";
 // import {
@@ -112,3 +117,24 @@
 //     };
 //   }
 // };
+
+//Get all payments
+export const getAllPayments = async (email = null) => {
+  try {
+    const allPayments = await findPaymentByEmail(email);
+    return {
+      success: true,
+      payments: allPayments.map((payment) => ({
+        ...payment,
+        _id: payment._id.toString(),
+      })),
+    };
+  } catch (error) {
+    console.error("[getAllPayments] Error:", error.message);
+    return {
+      success: false,
+      error: error.message || "Failed to fetch payments",
+      payments: [],
+    };
+  }
+};

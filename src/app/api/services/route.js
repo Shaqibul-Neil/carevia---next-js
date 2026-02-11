@@ -12,7 +12,7 @@ export async function GET(req) {
     const priceSort = searchParams.get("priceSort") || "";
     const page = searchParams.get("page") || 1;
 
-    const allServices = await getAllServices({
+    const result = await getAllServices({
       searchTerm,
       category,
       division,
@@ -20,10 +20,8 @@ export async function GET(req) {
       priceSort,
       page,
     });
-    return ApiResponse.success(
-      allServices,
-      "All services fetched successfully",
-    );
+    const { success, ...rest } = result;
+    return ApiResponse.success(rest, "All services fetched successfully");
   } catch (error) {
     return ApiResponse.error(
       "Failed to fetch all services",

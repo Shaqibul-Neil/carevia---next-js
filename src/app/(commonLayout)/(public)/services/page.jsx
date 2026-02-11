@@ -25,16 +25,14 @@ const ServicesPage = async ({ searchParams }) => {
   console.log(resolvedParams);
 
   // Fetch all services
-  const { services, totalPage, totalCount, currentPage } = await getAllServices(
-    {
-      searchTerm,
-      category,
-      division,
-      rating,
-      priceSort,
-      page,
-    },
-  );
+  const { success, services, totalPage, currentPage } = await getAllServices({
+    searchTerm,
+    category,
+    division,
+    rating,
+    priceSort,
+    page,
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -70,11 +68,22 @@ const ServicesPage = async ({ searchParams }) => {
               <SearchBar />
               {/* Services Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {services.length > 0 ? (
+                {!success ? (
+                  <div className="col-span-full text-center py-12 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-200 dark:border-red-800">
+                    <p className="text-red-600 dark:text-red-400 font-medium text-lg mb-2">
+                      Unable to load services at the moment.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Please try refreshing the page or check your connection.
+                    </p>
+                  </div>
+                ) : services.length > 0 ? (
+                  /* Service available */
                   services.map((service) => (
                     <ServiceCard key={service._id} service={service} />
                   ))
                 ) : (
+                  /* If No Service. (Filtered Empty) */
                   <div className="col-span-full text-center py-12">
                     <p className="text-muted-foreground text-lg">
                       No services found. Please adjust your filters.
@@ -83,10 +92,12 @@ const ServicesPage = async ({ searchParams }) => {
                 )}
               </div>
               {/* Pagination */}
-              <PaginationButton
-                totalPage={totalPage}
-                currentPage={currentPage}
-              />
+              {success && services.length > 0 && (
+                <PaginationButton
+                  totalPage={totalPage}
+                  currentPage={currentPage}
+                />
+              )}
             </main>
           </div>
         </div>

@@ -38,3 +38,8 @@ export const findPaymentByIntentId = async (paymentIntentId) => {
 // ==========================================
 // Find Payments by User ID
 // ==========================================
+export const findPaymentByEmail = async (email) => {
+  const query = {};
+  if (email) query.userEmail = email;
+  return await paymentCollection().find(query).toArray();
+};
