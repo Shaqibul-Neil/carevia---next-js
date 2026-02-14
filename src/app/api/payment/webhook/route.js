@@ -3,6 +3,7 @@
 
 import { sendEmail } from "@/lib/emailSender";
 import { generatePaymentReceiptEmail } from "@/lib/emailTemplate";
+import { notifySocketServer } from "@/lib/socketNotifier";
 import { stripe } from "@/lib/stripe";
 import { createConfirmedBooking } from "@/modules/booking/bookingRepository";
 import {
@@ -48,6 +49,15 @@ export async function POST(request) {
       );
       if (existingPayment) {
         console.log("Payment already processed, skipping");
+        // Notify socket about this booking
+        await notifySocketServer({
+          userId: metadata.userId,
+          userEmail: metadata.userEmail,
+          userName: metadata.userName,
+          serviceName: metadata.serviceName,
+          trackingId: existingPayment.trackingId,
+          amountPaid: metadata.amountPaid,
+        });
         return NextResponse.json({ received: true });
       }
 
@@ -81,31 +91,14 @@ export async function POST(request) {
         // ==========================================
         // SOCKET NOTIFICATION
         // ==========================================
-        try {
-          const customerData = {
-            userId: metadata.userId,
-            userEmail: metadata.userEmail,
-            userName: metadata.userName,
-            serviceName: metadata.serviceName,
-            trackingId: result.trackingId,
-            amountPaid: metadata.amountPaid,
-          };
-          const response = await fetch(
-            `${process.env.SOCKET_URL}/emit-booking`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(customerData),
-            },
-          );
-          if (response.ok) {
-            console.log("✅ socket notified");
-          } else {
-            throw new Error("Socket server error");
-          }
-        } catch (socketError) {
-          console.error("⚠️ Socket failed:", socketError.message);
-        }
+        await notifySocketServer({
+          userId: metadata.userId,
+          userEmail: metadata.userEmail,
+          userName: metadata.userName,
+          serviceName: metadata.serviceName,
+          trackingId: result.trackingId,
+          amountPaid: metadata.amountPaid,
+        });
         // ==========================================
         // SEND EMAIL NOTIFICATION
         // ==========================================

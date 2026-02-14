@@ -57,14 +57,25 @@ export const findUserByBooking = async () => {
         },
       },
       { $unwind: "$user" },
+      // Group by user._id to remove duplicates
+      {
+        $group: {
+          _id: "$user._id",
+          firstName: { $first: "$user.firstName" },
+          lastName: { $first: "$user.lastName" },
+          email: { $first: "$user.email" },
+          image: { $first: "$user.image" },
+          lastLoginAt: { $first: "$user.lastLoginAt" },
+        },
+      },
       {
         $project: {
-          _id: "$user._id",
-          firstName: "$user.firstName",
-          lastName: "$user.lastName",
-          email: "$user.email",
-          image: "$user.image",
-          lastLoginAt: "$user.lastLoginAt",
+          _id: 1,
+          firstName: 1,
+          lastName: 1,
+          email: 1,
+          image: 1,
+          lastLoginAt: 1,
         },
       },
     ])
