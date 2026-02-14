@@ -32,3 +32,8 @@ export const markMessagesAsRead = async (roomId, userId) => {
 
   return await messageCollection().updateMany(filter, update);
 };
+
+//Get all room id
+// export const getRoomId = async () => {
+//   return await messageCollection().distinct("roomId");
+// };
