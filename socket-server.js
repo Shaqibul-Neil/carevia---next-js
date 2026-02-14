@@ -1,7 +1,7 @@
 const { createServer } = require("http"); //create http server of nodejs
 const { parse } = require("url"); //url parse for route matching
 const next = require("next"); //initialize next js app
-const { Server } = require("socket.io"); //socket server class
+const { Server } = require("socket.io"); //socket server constructor function
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";

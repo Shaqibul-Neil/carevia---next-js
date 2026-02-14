@@ -6,7 +6,6 @@ import { getAllPayments } from "@/modules/payment/paymentService";
 export async function GET(req) {
   try {
     //Single Line authentication
-
     const auth = await authenticate(req);
     if (!auth) {
       return ApiResponse.unauthorized("Authentication required");

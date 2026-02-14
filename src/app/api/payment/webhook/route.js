@@ -79,6 +79,34 @@ export async function POST(request) {
         console.log("Payment record created");
 
         // ==========================================
+        // SOCKET NOTIFICATION
+        // ==========================================
+        try {
+          const customerData = {
+            userId: metadata.userId,
+            userEmail: metadata.userEmail,
+            userName: metadata.userName,
+            serviceName: metadata.serviceName,
+            trackingId: result.trackingId,
+            amountPaid: metadata.amountPaid,
+          };
+          const response = await fetch(
+            `${process.env.SOCKET_URL}/emit-booking`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(customerData),
+            },
+          );
+          if (response.ok) {
+            console.log("✅ socket notified");
+          } else {
+            throw new Error("Socket server error");
+          }
+        } catch (socketError) {
+          console.error("⚠️ Socket failed:", socketError.message);
+        }
+        // ==========================================
         // SEND EMAIL NOTIFICATION
         // ==========================================
         try {

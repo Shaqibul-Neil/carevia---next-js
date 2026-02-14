@@ -145,3 +145,9 @@ export const saveOAuthUser = async (user, account) => {
     return false;
   }
 };
+
+//=========ADMIN ONLY ROUTES=========
+
+// ==========================================
+// Find user based on booking for admin
+// ==========================================
