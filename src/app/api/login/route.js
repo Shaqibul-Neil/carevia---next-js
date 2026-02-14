@@ -34,6 +34,7 @@ export async function POST(req) {
     const responseData = {
       token,
       user: {
+        _id: user._id.toString(),
         name: `${user.firstName} ${user.lastName}`,
         email: user.email,
         role: user.role,
