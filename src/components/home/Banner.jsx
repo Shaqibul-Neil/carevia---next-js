@@ -5,7 +5,7 @@ import PrimaryButton from "../shared/button/PrimaryButton";
 
 const Banner = () => {
   return (
-    <div className="relative min-h-[90vh] w-full overflow-hidden bg-slate-50 dark:bg-[#0f172a] font-sans py-16 mb-12 md:mb-20">
+    <div className="relative min-h-[90vh] w-full overflow-hidden bg-slate-50 dark:bg-[#0f172a] font-sans py-16">
       {/* Aurora Layer */}
       <div className="aurora-container">
         <div className="aurora-glow glow-1"></div>

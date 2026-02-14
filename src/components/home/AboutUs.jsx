@@ -32,7 +32,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 overflow-hidden relative">
+    <section className="py-10 px-4 sm:px-6 lg:px-8 mt-10 md:mt-16 bg-white dark:bg-slate-950 overflow-hidden relative">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-emerald-50/50 dark:bg-emerald-900/5 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-teal-50/50 dark:bg-teal-900/5 blur-[100px] -z-10 pointer-events-none" />

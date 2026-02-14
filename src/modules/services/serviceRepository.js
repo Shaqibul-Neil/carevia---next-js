@@ -1,7 +1,7 @@
-const { dbConnect } = require("@/lib/dbConnect");
+const { dbConnect, collections } = require("@/lib/dbConnect");
 const { ObjectId } = require("mongodb");
 
-const serviceCollection = () => dbConnect("services");
+const serviceCollection = () => dbConnect(collections.SERVICES);
 
 // Find featured services
 export const findFeaturedServices = () => {
