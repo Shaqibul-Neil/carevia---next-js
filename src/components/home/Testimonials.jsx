@@ -9,6 +9,7 @@ import people5 from "@/assets/people5.jpg";
 import people6 from "@/assets/people6.jpg";
 import people7 from "@/assets/people7.jpg";
 import TestimonialSlider from "../slider/TestimonialSlider";
+import { ArrowRight } from "lucide-react";
 
 const Testimonials = () => {
   const testimonials = [
@@ -89,7 +90,15 @@ const Testimonials = () => {
             <div className="shrink-0">
               <PrimaryButton
                 label="Get Started Now"
-                className="w-60 py-2 text-base"
+                className="w-60 py-2 text-base group"
+                icon={
+                  <ArrowRight
+                    size={20}
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  />
+                }
+                iconPosition="right"
+                href={"/services"}
               />
             </div>
           </div>

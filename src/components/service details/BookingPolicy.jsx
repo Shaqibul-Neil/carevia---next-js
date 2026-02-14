@@ -1,4 +1,10 @@
-import { Calendar, Clock, XCircle, CheckCircle2, FileCheck } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  XCircle,
+  CheckCircle2,
+  FileCheck,
+} from "lucide-react";
 
 const BookingPolicy = ({ service }) => {
   const { bookingRules, availability } = service;
@@ -8,9 +14,9 @@ const BookingPolicy = ({ service }) => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Booking Rules */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-green-200 dark:border-green-800">
+              <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-green-200 dark:border-green-800">
                 <FileCheck className="w-5 h-5 text-green-600 dark:text-green-400" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -49,9 +55,9 @@ const BookingPolicy = ({ service }) => {
           </div>
 
           {/* Service Availability */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+              <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
                 <Calendar className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -86,9 +92,9 @@ const BookingPolicy = ({ service }) => {
           </div>
 
           {/* Cancellation Policy */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 flex items-center justify-center shrink-0 border border-red-200 dark:border-red-800">
+              <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 flex items-center justify-center shrink-0 border border-red-200 dark:border-red-800">
                 <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">

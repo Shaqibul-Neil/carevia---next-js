@@ -31,7 +31,7 @@ const ServiceCard = ({ service }) => {
     }
   };
   return (
-    <div className="group relative w-full h-full flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/5 hover:border-emerald-200 dark:hover:border-emerald-800/50 hover:-translate-y-1">
+    <div className="group relative w-full h-full flex flex-col bg-white dark:bg-slate-900 rounded-xs border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/5 hover:border-emerald-200 dark:hover:border-emerald-800/50 hover:-translate-y-1">
       {/* IMAGE SECTION */}
       <div className="relative w-full h-56 overflow-hidden">
         <Image
@@ -48,7 +48,7 @@ const ServiceCard = ({ service }) => {
         <div className="absolute top-4 left-4 z-10">
           <span
             className={cn(
-              "px-3 py-1 text-xs font-bold tracking-wide uppercase rounded-full border backdrop-blur-md shadow-sm",
+              "px-3 py-1 text-xs font-bold tracking-wide uppercase rounded-xs border backdrop-blur-md shadow-sm",
               getBadgeStyle(category),
             )}
           >
@@ -57,7 +57,7 @@ const ServiceCard = ({ service }) => {
         </div>
         {/* Bottom Right: Review Badge */}
         <div className="absolute bottom-4 right-4 z-10">
-          <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/20 shadow-lg">
+          <div className="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-xs border border-white/20 shadow-lg">
             <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
             <div className="flex items-baseline gap-1 text-xs font-bold text-slate-800 dark:text-slate-100">
               {ratingSummary.averageRating}

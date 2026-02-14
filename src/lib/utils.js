@@ -21,7 +21,7 @@ export const showLoadingAlert = (title, text) => {
       Swal.showLoading();
     },
     customClass: {
-      popup: "rounded-3xl shadow-2xl border border-green-100",
+      popup: "rounded-xs shadow-2xl border border-green-100",
       title: "text-slate-800 font-bold",
       htmlContainer: "text-slate-600",
     },
@@ -39,9 +39,9 @@ export const showSuccessAlert = (title, text) => {
     background: "#ffffff",
     color: "#1e293b",
     customClass: {
-      popup: "rounded-3xl shadow-2xl border border-green-100",
+      popup: "rounded-xs shadow-2xl border border-green-100",
       title: "text-slate-800 font-bold",
-      confirmButton: "rounded-xl px-6 py-3 font-bold",
+      confirmButton: "rounded-xs px-6 py-3 font-bold",
     },
   });
 };
@@ -57,9 +57,9 @@ export const showErrorAlert = (title, text) => {
     background: "#ffffff",
     color: "#1e293b",
     customClass: {
-      popup: "rounded-3xl shadow-2xl border border-red-100",
+      popup: "rounded-xs shadow-2xl border border-red-100",
       title: "text-slate-800 font-bold",
-      confirmButton: "rounded-xl px-6 py-3 font-bold",
+      confirmButton: "rounded-xs px-6 py-3 font-bold",
     },
   });
 };

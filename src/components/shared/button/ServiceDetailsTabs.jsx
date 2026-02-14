@@ -24,7 +24,7 @@ const ServiceDetailsTabs = ({ children }) => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer border-2 ${
+                className={`flex items-center gap-2 px-6 py-3.5 rounded-xs text-sm font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer border-2 ${
                   activeTab === tab.id
                     ? "bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400 shadow-md"
                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border-gray-300 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-sm"

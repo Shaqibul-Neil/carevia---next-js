@@ -39,7 +39,7 @@ const BookingPage = async ({ params }) => {
             {/* LEFT: Service Summary Card */}
             <div className="lg:col-span-2">
               <div className="sticky top-24">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                <div className="bg-white dark:bg-gray-800 rounded-xs shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
                   {/* Service Image */}
                   <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20">
                     <Image
@@ -56,7 +56,7 @@ const BookingPage = async ({ params }) => {
                       </span>
                     </div>
                     {/* Category Badge Overlay */}
-                    <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1 bg-muted px-2.5 py-1.5 rounded-lg transition-all duration-300">
+                    <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1 bg-muted px-2.5 py-1.5 rounded-xs transition-all duration-300">
                       <MapPin className="w-3.5 h-3.5 text-primary" />
                       <span className="text-[0.8125rem] font-medium text-slate-600 dark:text-slate-300">
                         {service?.locationCoverage?.supportedDivisions.join(
@@ -116,7 +116,7 @@ const BookingPage = async ({ params }) => {
 
             {/* RIGHT: Booking Configuration Card */}
             <div className="lg:col-span-3">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 rounded-xs shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div className="p-6 md:p-8 lg:p-10 space-y-6 md:space-y-8">
                   {/* Section Header */}
                   <div className="space-y-2">

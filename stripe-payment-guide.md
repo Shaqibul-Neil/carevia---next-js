@@ -1,6 +1,7 @@
 # 🎯 Stripe Payment Integration - Complete Guide
 
 ## 📚 Table of Contents
+
 1. [Stripe Checkout Go Back Button](#1-stripe-checkout-go-back-button)
 2. [Custom Checkout Design Options](#2-custom-checkout-design-options)
 3. [Why updateBookingSession is Critical](#3-why-updatebookingsession-is-critical)
@@ -12,9 +13,11 @@
 ## 1️⃣ Stripe Checkout Go Back Button
 
 ### ❓ **Question:**
+
 Stripe Checkout page এ Go Back button নেই কেন?
 
 ### ✅ **Answer:**
+
 Stripe Checkout page এ **default Go Back button নেই**, কিন্তু আপনি **browser back button** ব্যবহার করতে পারবেন।
 
 ### **Solution - Go Back Enable করুন:**
@@ -22,21 +25,22 @@ Stripe Checkout page এ **default Go Back button নেই**, কিন্ত�
 ```javascript
 const checkoutSession = await stripe.checkout.sessions.create({
   // ... existing options
-  
+
   // ✅ Add this to show back button
-  billing_address_collection: 'auto',
-  
+  billing_address_collection: "auto",
+
   // ✅ Add this to allow back navigation
   consent_collection: {
-    terms_of_service: 'none',
+    terms_of_service: "none",
   },
-  
+
   // ✅ User cancel করলে কোথায় যাবে
   cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/booking/cancel`,
 });
 ```
 
 ### **Important Notes:**
+
 - Stripe এর default UI তে dedicated "Go Back" button নেই
 - User শুধু browser back button use করতে পারবে
 - অথবা cancel link এ click করতে পারবে
@@ -46,17 +50,21 @@ const checkoutSession = await stripe.checkout.sessions.create({
 ## 2️⃣ Custom Checkout Design Options
 
 ### ❓ **Question:**
+
 আমি কি চাইলে Checkout session টা নিজের মতো design করতে পারবো?
 
 ### ✅ **Answer:**
+
 হ্যাঁ! দুইটা উপায় আছে:
 
 ---
 
 ### **Option A: Stripe Checkout (Hosted Page)**
+
 **যা আপনি এখন ব্যবহার করছেন**
 
 #### **Pros:**
+
 - ✅ PCI Compliance automatic
 - ✅ Security Stripe handle করে
 - ✅ Setup সহজ
@@ -64,21 +72,23 @@ const checkoutSession = await stripe.checkout.sessions.create({
 - ✅ Multiple payment methods support
 
 #### **Cons:**
+
 - ❌ Design customize করা যায় না (শুধু logo/color change করা যায়)
 - ❌ Stripe এর page এ redirect হয়
 
 #### **Customization Options:**
+
 ```javascript
 const checkoutSession = await stripe.checkout.sessions.create({
   // ... other options
-  
+
   // ✅ আপনার logo add করুন
   // Stripe Dashboard → Settings → Branding এ গিয়ে logo upload করুন
-  
+
   // ✅ Custom text add করুন
   custom_text: {
     submit: {
-      message: 'Complete your booking payment',
+      message: "Complete your booking payment",
     },
   },
 });
@@ -87,6 +97,7 @@ const checkoutSession = await stripe.checkout.sessions.create({
 ---
 
 ### **Option B: Stripe Payment Element (Custom UI)**
+
 **সম্পূর্ণ custom design এর জন্য**
 
 #### **Step 1: Create Payment Intent API**
@@ -135,7 +146,9 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+);
 
 function CheckoutForm({ bookingData }) {
   const stripe = useStripe();
@@ -164,16 +177,16 @@ function CheckoutForm({ bookingData }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* ✅ আপনার custom design */}
-      <div className="bg-white p-6 rounded-lg shadow-lg">
+      <div className="bg-white p-6 rounded-xs shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Payment Details</h2>
-        
+
         {/* Stripe Payment Element */}
         <PaymentElement />
-        
+
         <button
           type="submit"
           disabled={!stripe || loading}
-          className="mt-6 w-full bg-emerald-600 text-white py-3 rounded-lg"
+          className="mt-6 w-full bg-emerald-600 text-white py-3 rounded-xs"
         >
           {loading ? "Processing..." : "Pay Now"}
         </button>
@@ -192,11 +205,13 @@ export default function CustomPaymentPage({ clientSecret, bookingData }) {
 ```
 
 #### **Pros:**
+
 - ✅ সম্পূর্ণ custom design
 - ✅ আপনার website এ থাকে
 - ✅ Better UX
 
 #### **Cons:**
+
 - ❌ বেশি code লিখতে হয়
 - ❌ Security নিজে handle করতে হয়
 
@@ -205,9 +220,11 @@ export default function CustomPaymentPage({ clientSecret, bookingData }) {
 ## 3️⃣ Why `updateBookingSession()` is Critical
 
 ### ❓ **Question:**
+
 `updateBookingSession(bookingId, checkoutSession.id)` এই function টা কেন create করতেছো? এটা কি আমার কোনো কাজে লাগবে?
 
 ### ✅ **Answer:**
+
 **অত্যন্ত গুরুত্বপূর্ণ! এটা ছাড়া webhook কাজ করবে না।**
 
 ---
@@ -219,6 +236,7 @@ await updateBookingSession(bookingId, checkoutSession.id);
 ```
 
 এটা করছে:
+
 ```javascript
 // Database এ booking update করছে
 {
@@ -239,15 +257,15 @@ await updateBookingSession(bookingId, checkoutSession.id);
 // Stripe webhook থেকে event আসে
 if (event.type === "checkout.session.completed") {
   const sessionData = event.data.object;
-  
+
   // ✅ এই session ID দিয়ে booking খুঁজে বের করা
   const booking = await findBookingByStripeSession(sessionData.id);
-  
+
   if (!booking) {
     // ❌ যদি updateBookingSession না করতেন, এখানে booking পাওয়া যেত না!
     return ApiResponse.notFound("Booking not found");
   }
-  
+
   // ✅ Booking confirm করা
   await confirmBookingPayment(booking._id, amountPaid);
 }
@@ -262,7 +280,9 @@ if (event.type === "checkout.session.completed") {
 ```javascript
 // User payment status দেখতে চায়
 const booking = await findBookingById(bookingId);
-const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId);
+const session = await stripe.checkout.sessions.retrieve(
+  booking.stripeSessionId,
+);
 
 if (session.payment_status === "paid") {
   return "Payment completed";
@@ -276,7 +296,9 @@ if (session.payment_status === "paid") {
 ```javascript
 // Refund করতে হলে
 const booking = await findBookingById(bookingId);
-const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId);
+const session = await stripe.checkout.sessions.retrieve(
+  booking.stripeSessionId,
+);
 
 await stripe.refunds.create({
   payment_intent: session.payment_intent,
@@ -290,8 +312,10 @@ await stripe.refunds.create({
 const pendingBookings = await findPendingBookings();
 
 for (const booking of pendingBookings) {
-  const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId);
-  
+  const session = await stripe.checkout.sessions.retrieve(
+    booking.stripeSessionId,
+  );
+
   if (session.status === "open") {
     // Send reminder email with session.url
     await sendReminderEmail(booking.userId, session.url);
@@ -304,15 +328,18 @@ for (const booking of pendingBookings) {
 ## 4️⃣ Why `sessionId` is Sent to Frontend
 
 ### ❓ **Question:**
+
 ```javascript
 return ApiResponse.success({
-  sessionId: checkoutSession.id,  // ✅ এটা কেন?
+  sessionId: checkoutSession.id, // ✅ এটা কেন?
   url: checkoutSession.url,
 });
 ```
+
 `sessionId` কেন frontend এ পাঠাচ্ছি?
 
 ### ✅ **Answer:**
+
 Multiple important use cases আছে:
 
 ---
@@ -324,10 +351,10 @@ Multiple important use cases আছে:
 ```javascript
 export default async function SuccessPage({ searchParams }) {
   const sessionId = searchParams.session_id;
-  
+
   // ✅ Session verify করা
   const session = await stripe.checkout.sessions.retrieve(sessionId);
-  
+
   if (session.payment_status === "paid") {
     return <div>Payment Successful! ✅</div>;
   } else {
@@ -344,13 +371,13 @@ export default async function SuccessPage({ searchParams }) {
 // Frontend এ tracking
 if (data.success && data.data?.sessionId) {
   // Google Analytics
-  gtag('event', 'begin_checkout', {
+  gtag("event", "begin_checkout", {
     transaction_id: data.data.sessionId,
     value: totalPrice,
   });
-  
+
   // Facebook Pixel
-  fbq('track', 'InitiateCheckout', {
+  fbq("track", "InitiateCheckout", {
     content_ids: [serviceId],
     value: totalPrice,
   });
@@ -365,7 +392,7 @@ if (data.success && data.data?.sessionId) {
 // User payment incomplete রেখে দিলে
 const resumePayment = async (sessionId) => {
   const session = await stripe.checkout.sessions.retrieve(sessionId);
-  
+
   if (session.status === "open") {
     // User আবার payment page এ নিয়ে যাওয়া
     window.location.href = session.url;
@@ -384,7 +411,7 @@ const resumePayment = async (sessionId) => {
 const sendConfirmationEmail = async (sessionId) => {
   const session = await stripe.checkout.sessions.retrieve(sessionId);
   const booking = await findBookingByStripeSession(sessionId);
-  
+
   await sendEmail({
     to: session.customer_email,
     subject: "Booking Confirmation",
@@ -480,13 +507,13 @@ const sendConfirmationEmail = async (sessionId) => {
 
 ## ✅ Summary
 
-| Feature | Purpose | Critical? |
-|---------|---------|-----------|
-| `updateBookingSession()` | Webhook এ booking খুঁজে পেতে | ✅ Yes |
-| `sessionId` in response | Tracking, verification, analytics | ✅ Yes |
-| Stripe Checkout | Secure payment processing | ✅ Yes |
-| Custom UI (Optional) | Better UX, full control | ❌ No |
-| Go Back Button | User convenience | ❌ No |
+| Feature                  | Purpose                           | Critical? |
+| ------------------------ | --------------------------------- | --------- |
+| `updateBookingSession()` | Webhook এ booking খুঁজে পেতে      | ✅ Yes    |
+| `sessionId` in response  | Tracking, verification, analytics | ✅ Yes    |
+| Stripe Checkout          | Secure payment processing         | ✅ Yes    |
+| Custom UI (Optional)     | Better UX, full control           | ❌ No     |
+| Go Back Button           | User convenience                  | ❌ No     |
 
 ---
 

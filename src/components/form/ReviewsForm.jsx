@@ -69,7 +69,7 @@ const ReviewsForm = () => {
                     placeholder="Enter your full name"
                     {...field}
                     disabled={isSubmitting}
-                    className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                    className="h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   />
                 </FormControl>
                 <FormMessage className="text-xs font-medium" />
@@ -92,7 +92,7 @@ const ReviewsForm = () => {
                     placeholder="your.email@example.com"
                     {...field}
                     disabled={isSubmitting}
-                    className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                    className="h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   />
                 </FormControl>
                 <FormMessage className="text-xs font-medium" />
@@ -112,7 +112,7 @@ const ReviewsForm = () => {
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                  <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                     <SelectValue placeholder="Select your rating" />
                   </SelectTrigger>
                 </FormControl>
@@ -144,7 +144,7 @@ const ReviewsForm = () => {
                   placeholder="Summarize your experience"
                   {...field}
                   disabled={isSubmitting}
-                  className="h-10 md:h-11 text-sm rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                  className="h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                 />
               </FormControl>
               <FormMessage className="text-xs font-medium" />
@@ -167,7 +167,7 @@ const ReviewsForm = () => {
                   placeholder="Share details about your experience with this service. What did you like? What could be improved?"
                   {...field}
                   disabled={isSubmitting}
-                  className="text-sm rounded-lg border-gray-300 dark:border-gray-600 resize-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                  className="text-sm rounded-xs border-gray-300 dark:border-gray-600 resize-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                 />
               </FormControl>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5">

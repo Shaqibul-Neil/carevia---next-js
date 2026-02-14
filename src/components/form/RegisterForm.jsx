@@ -103,6 +103,67 @@ const RegisterForm = () => {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {/* Custom Photo Upload */}
+          <div className="flex flex-col items-center">
+            <div className="relative">
+              <div
+                role="button"
+                tabIndex={0}
+                className="w-24 h-24 overflow-hidden cursor-pointer border border-border transition-all flex items-center justify-center rounded-xs group hover:border-primary duration-300"
+              >
+                <div className="flex flex-col items-center justify-center text-muted-foreground">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#22c55e"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-8 h-8"
+                  >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  <span className="text-xs mt-1.5 group-hover:text-primary">
+                    Click to upload
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="absolute -bottom-2 -right-1 w-7 h-7 bg-primary flex items-center justify-center cursor-pointer focus:ring-secondary focus:border-secondary focus:outline-none focus:ring-1 active:scale-95   transition-all transform hover:-translate-y-0.5"
+                aria-label="Upload photo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-camera w-4 h-4 text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"></path>
+                  <circle cx="12" cy="13" r="3"></circle>
+                </svg>
+              </button>
+              <input type="file" className="hidden" />
+            </div>
+            <p className="text-muted-foreground text-xs mt-2">
+              Click avatar or camera icon to upload
+            </p>
+            <p className="text-muted-foreground text-xs">
+              Max 5MB (JPG, PNG, GIF, WebP)
+            </p>
+          </div>
+          {/* Text Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First Name */}
             <FormField

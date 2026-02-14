@@ -2,6 +2,7 @@ import FilterSidebar from "@/components/form/FilterSidebar";
 import SearchBar from "@/components/form/SearchBar";
 import PageHeading from "@/components/headings/PageHeading";
 import PaginationButton from "@/components/shared/button/PaginationButton";
+
 import ServiceCard from "@/components/shared/card/ServiceCard";
 import { getAllServices } from "@/modules/services/servicesService";
 import { Heart } from "lucide-react";
@@ -52,12 +53,13 @@ const ServicesPage = async ({ searchParams }) => {
         ]}
         variant="gradient"
       />
+
       <section className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Left Sidebar - Filters (1 column) */}
             <aside className="lg:col-span-1">
-              <div className="sticky top-24  rounded-lg border border-border bg-card shadow-sm">
+              <div className="sticky top-24  rounded-xs border border-border bg-card shadow-sm">
                 <FilterSidebar />
               </div>
             </aside>
@@ -69,7 +71,7 @@ const ServicesPage = async ({ searchParams }) => {
               {/* Services Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {!success ? (
-                  <div className="col-span-full text-center py-12 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-200 dark:border-red-800">
+                  <div className="col-span-full text-center py-12 bg-red-50 dark:bg-red-900/10 rounded-xs border border-red-200 dark:border-red-800">
                     <p className="text-red-600 dark:text-red-400 font-medium text-lg mb-2">
                       Unable to load services at the moment.
                     </p>

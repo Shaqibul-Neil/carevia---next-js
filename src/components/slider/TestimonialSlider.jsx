@@ -54,7 +54,7 @@ const TestimonialSlider = ({ testimonials }) => {
       >
         {testimonials.map((item, idx) => (
           <SwiperSlide key={idx} className="h-full">
-            <div className="relative h-80 w-full rounded-2xl overflow-hidden group">
+            <div className="relative h-80 w-full rounded-xs overflow-hidden group">
               {/* Background Image */}
               <Image
                 src={item.img}

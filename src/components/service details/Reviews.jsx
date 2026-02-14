@@ -40,7 +40,7 @@ const Reviews = ({ service }) => {
           {/* Left Side - Rating Summary & Distribution */}
           <div className="space-y-4 md:space-y-6">
             {/* Overall Rating Card */}
-            <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 rounded-2xl p-6 md:p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 rounded-xs p-6 md:p-8 shadow-lg">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
                 Overall Rating
               </h3>
@@ -70,7 +70,7 @@ const Reviews = ({ service }) => {
                 {/* Stats */}
                 <div className="flex-1 space-y-3 md:space-y-4 w-full sm:w-auto">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xs bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shrink-0">
                       <Users className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div>
@@ -83,7 +83,7 @@ const Reviews = ({ service }) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xs bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shrink-0">
                       <ThumbsUp className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div>
@@ -100,9 +100,9 @@ const Reviews = ({ service }) => {
             </div>
 
             {/* Rating Distribution */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4 md:mb-5 flex items-center gap-2">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 flex items-center justify-center border border-amber-200 dark:border-amber-800">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xs bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 flex items-center justify-center border border-amber-200 dark:border-amber-800">
                   <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-amber-600 dark:text-amber-400" />
                 </div>
                 <span className="text-sm md:text-lg">Rating Distribution</span>
@@ -139,13 +139,13 @@ const Reviews = ({ service }) => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4 md:mb-5">
                 Why Trust Our Reviews?
               </h3>
               <div className="space-y-3 md:space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xs bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
                     <Star className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   <div>
@@ -158,7 +158,7 @@ const Reviews = ({ service }) => {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xs bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
                     <ShieldCheck className="w-4 h-4 md:w-5 md:h-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
@@ -175,7 +175,7 @@ const Reviews = ({ service }) => {
           </div>
 
           {/* Right Side - Review Form */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2 md:mb-3">
               Share Your Experience
             </h3>

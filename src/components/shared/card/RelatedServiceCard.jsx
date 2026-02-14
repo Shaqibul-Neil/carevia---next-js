@@ -7,10 +7,10 @@ const RelatedServiceCard = ({ relatedService }) => {
   return (
     <Link
       href={`/services/${relatedService.slug}`}
-      className="flex gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-700 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md"
+      className="flex gap-4 p-4 rounded-xs border border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-700 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md"
     >
       {/* Left - Image */}
-      <div className="relative w-18 h-18 rounded-lg overflow-hidden shrink-0 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20">
+      <div className="relative w-18 h-18 rounded-xs overflow-hidden shrink-0 bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20">
         <Image
           src={relatedService.image}
           alt={relatedService.serviceName}

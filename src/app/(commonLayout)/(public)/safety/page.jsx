@@ -18,9 +18,9 @@ export const metadata = {
 const SafetyGuidePage = () => {
   // Safety Tip Card Component
   const SafetyCard = ({ icon: Icon, title, desc, color }) => (
-    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all duration-300 group">
+    <div className="bg-white dark:bg-slate-900 p-6 rounded-xs border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all duration-300 group">
       <div
-        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${color} group-hover:scale-110 transition-transform`}
+        className={`w-12 h-12 rounded-xs flex items-center justify-center mb-4 ${color} group-hover:scale-110 transition-transform`}
       >
         <Icon className="w-6 h-6" />
       </div>
@@ -43,7 +43,7 @@ const SafetyGuidePage = () => {
           {/* For Families Section */}
           <div>
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center text-emerald-600">
+              <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-xs flex items-center justify-center text-emerald-600">
                 <FaUsers className="w-7 h-7" />
               </div>
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
@@ -76,7 +76,7 @@ const SafetyGuidePage = () => {
           {/* For Caregivers Section */}
           <div>
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600">
+              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xs flex items-center justify-center text-blue-600">
                 <FaUserNurse className="w-7 h-7" />
               </div>
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
@@ -108,7 +108,7 @@ const SafetyGuidePage = () => {
         </div>
 
         {/* Emergency Banner */}
-        <div className="mt-20 bg-rose-50 dark:bg-rose-900/10 border border-rose-100 dark:border-rose-900/30 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6">
+        <div className="mt-20 bg-rose-50 dark:bg-rose-900/10 border border-rose-100 dark:border-rose-900/30 rounded-xs p-8 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-rose-100 dark:bg-rose-900/30 rounded-full flex items-center justify-center text-rose-600 animate-pulse">
               <FaFirstAid className="w-8 h-8" />
@@ -125,7 +125,7 @@ const SafetyGuidePage = () => {
           </div>
           <a
             href="tel:999"
-            className="px-8 py-4 bg-rose-600 text-white font-bold rounded-xl shadow-lg hover:bg-rose-700 transition-colors flex gap-1 items-center"
+            className="px-8 py-4 bg-rose-600 text-white font-bold rounded-xs shadow-lg hover:bg-rose-700 transition-colors flex gap-1 items-center"
           >
             <span>
               <FaMobile />

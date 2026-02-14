@@ -14,7 +14,7 @@ const NewsLetterForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto overflow-hidden rounded-xl border border-emerald-200 dark:border-emerald-800 shadow-lg mt-8 mb-4"
+      className="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto overflow-hidden rounded-xs border border-emerald-200 dark:border-emerald-800 shadow-lg mt-8 mb-4"
     >
       <Input
         type="email"

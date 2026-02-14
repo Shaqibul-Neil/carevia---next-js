@@ -30,7 +30,7 @@ const PageHeading = ({
         <div className="max-w-3xl mx-auto text-center space-y-4">
           {/* Badge */}
           {badge && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-emerald-200 dark:border-emerald-800 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xs bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-emerald-200 dark:border-emerald-800 shadow-sm">
               <Icon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
                 {badge}
@@ -65,7 +65,7 @@ const PageHeading = ({
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4 text-sm text-gray-500 dark:text-gray-500">
               {trustIndicators.map((indicator, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <div className="w-2 h-2 rounded-xs bg-emerald-500"></div>
                   <span>{indicator}</span>
                 </div>
               ))}

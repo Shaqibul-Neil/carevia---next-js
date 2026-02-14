@@ -1,4 +1,5 @@
 import AboutUs from "@/components/home/AboutUs";
+import Banner from "@/components/home/Banner";
 import FeaturedServicesSection from "@/components/home/FeaturedServiceSection";
 import Newsletter from "@/components/home/Newsletter";
 import Testimonials from "@/components/home/Testimonials";
@@ -19,6 +20,8 @@ export default async function Home() {
 
   return (
     <div>
+      {/* Banner */}
+      <Banner />
       {/* About us */}
       <AboutUs />
       {/* Featured Service */}

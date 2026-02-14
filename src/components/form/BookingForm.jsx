@@ -181,7 +181,7 @@ const BookingForm = ({ service }) => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             {/* Per Hour */}
-            <div className="p-4 md:p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-200 dark:border-emerald-800">
+            <div className="p-4 md:p-5 rounded-xs bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-200 dark:border-emerald-800">
               <p className="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
                 Hourly Rate
               </p>
@@ -193,7 +193,7 @@ const BookingForm = ({ service }) => {
               </p>
             </div>
             {/* Per Day */}
-            <div className="p-4 md:p-5 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border border-cyan-200 dark:border-cyan-800">
+            <div className="p-4 md:p-5 rounded-xs bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border border-cyan-200 dark:border-cyan-800">
               <p className="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
                 Daily Rate
               </p>
@@ -234,7 +234,7 @@ const BookingForm = ({ service }) => {
                         <Button
                           variant="outline"
                           className={cn(
-                            "w-full h-9 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 justify-start text-left font-normal",
+                            "w-full h-9 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400 justify-start text-left font-normal",
                             !field.value && "text-muted-foreground",
                           )}
                         >
@@ -279,7 +279,7 @@ const BookingForm = ({ service }) => {
                     disabled={isSubmitting}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                         <SelectValue placeholder="Start time" />
                       </SelectTrigger>
                     </FormControl>
@@ -310,7 +310,7 @@ const BookingForm = ({ service }) => {
                     disabled={isSubmitting}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                         <SelectValue placeholder="Duration type" />
                       </SelectTrigger>
                     </FormControl>
@@ -344,7 +344,7 @@ const BookingForm = ({ service }) => {
                     disabled={!durationType || isSubmitting}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                         <SelectValue
                           placeholder={
                             durationType
@@ -416,7 +416,7 @@ const BookingForm = ({ service }) => {
                     disabled={isSubmitting}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                         <SelectValue placeholder="Select your division" />
                       </SelectTrigger>
                     </FormControl>
@@ -448,7 +448,7 @@ const BookingForm = ({ service }) => {
                     disabled={!selectedDivision || isSubmitting}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
+                      <SelectTrigger className="w-full h-10 md:h-11 text-sm rounded-xs border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400">
                         <SelectValue placeholder="Select your district" />
                       </SelectTrigger>
                     </FormControl>
@@ -480,7 +480,7 @@ const BookingForm = ({ service }) => {
                       placeholder="House/Flat number, Street name, Landmark..."
                       {...field}
                       disabled={isSubmitting}
-                      className="text-sm rounded-xl border-gray-300 dark:border-gray-600 resize-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
+                      className="text-sm rounded-xs border-gray-300 dark:border-gray-600 resize-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                     />
                   </FormControl>
                   <FormMessage className="text-xs font-medium" />
@@ -494,7 +494,7 @@ const BookingForm = ({ service }) => {
         <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
         {/* Total Cost Summary */}
-        <div className="p-5 md:p-6 rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800">
+        <div className="p-5 md:p-6 rounded-xs bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">

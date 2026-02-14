@@ -27,7 +27,7 @@ const SearchBar = () => {
     <form className="w-full" onSubmit={handleSearch}>
       <InputGroup
         className={cn(
-          "h-12 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 shadow-sm",
+          "h-12 rounded-xs border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 shadow-sm",
         )}
       >
         {/* search icon */}
@@ -42,7 +42,7 @@ const SearchBar = () => {
             type="submit"
             size="icon-sm"
             variant="default"
-            className="bg-primary hover:bg-primary/90 text-white  w-20 h-8 font-medium transition-all cursor-pointer rounded-sm"
+            className="bg-primary hover:bg-primary/90 text-white  w-20 h-8 font-medium transition-all cursor-pointer rounded-xs"
             align="inline-end"
           >
             Search

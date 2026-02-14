@@ -21,9 +21,9 @@ const AdditionalInfo = ({ service }) => {
         {/* Row 1: Service Description + Caregiver Profile */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Service Description */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-8 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
+              <div className="w-12 h-12 rounded-xs bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
                 <FileText className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -37,9 +37,9 @@ const AdditionalInfo = ({ service }) => {
 
           {/* Caregiver Profile */}
           {caregiverProfile && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-8 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 flex items-center justify-center shrink-0 border border-amber-200 dark:border-amber-800">
+                <div className="w-12 h-12 rounded-xs bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 flex items-center justify-center shrink-0 border border-amber-200 dark:border-amber-800">
                   <Award className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                 </div>
                 <div className="flex items-center gap-3 flex-wrap">
@@ -62,7 +62,7 @@ const AdditionalInfo = ({ service }) => {
                       {caregiverProfile.certifications.map((cert, index) => (
                         <span
                           key={index}
-                          className="text-sm bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-xl font-medium border border-emerald-200 dark:border-emerald-800"
+                          className="text-sm bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-xs font-medium border border-emerald-200 dark:border-emerald-800"
                         >
                           {cert}
                         </span>
@@ -89,9 +89,9 @@ const AdditionalInfo = ({ service }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Service Highlights */}
           {serviceHighlights && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-green-200 dark:border-green-800">
+                <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-green-200 dark:border-green-800">
                   <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -113,9 +113,9 @@ const AdditionalInfo = ({ service }) => {
 
           {/* Responsibilities Included */}
           {responsibilitiesIncluded && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+                <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
                   <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -137,9 +137,9 @@ const AdditionalInfo = ({ service }) => {
 
           {/* Safety Measures */}
           {safetyMeasures && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
+                <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
                   <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">

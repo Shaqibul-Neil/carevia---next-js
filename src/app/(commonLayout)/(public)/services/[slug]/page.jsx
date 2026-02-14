@@ -123,7 +123,7 @@ const ServiceDetailsPage = async ({ params }) => {
                 {/* Service Image */}
                 <div className="lg:col-span-1">
                   <div className="sticky top-24">
-                    <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden group bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div className="relative h-96 lg:h-[500px] rounded-xs overflow-hidden group bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 shadow-lg border border-gray-200 dark:border-gray-700">
                       <Image
                         src={image}
                         alt={serviceName}
@@ -136,7 +136,7 @@ const ServiceDetailsPage = async ({ params }) => {
 
                       {/* Top Left - Status Badge */}
                       <div className="absolute top-4 left-4 z-10">
-                        <div className="flex items-center gap-2 bg-emerald-600/95 dark:bg-emerald-500/95 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg">
+                        <div className="flex items-center gap-2 bg-emerald-600/95 dark:bg-emerald-500/95 backdrop-blur-sm px-4 py-2 rounded-xs shadow-lg">
                           <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                           <span className="text-xs font-semibold text-white uppercase tracking-wide">
                             {status}
@@ -147,7 +147,7 @@ const ServiceDetailsPage = async ({ params }) => {
                       {/* Top Right - Featured Badge */}
                       {isFeatured && (
                         <div className="absolute top-4 right-4 z-10">
-                          <div className="flex items-center gap-2 bg-amber-500/95 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg">
+                          <div className="flex items-center gap-2 bg-amber-500/95 backdrop-blur-sm px-4 py-2 rounded-xs shadow-lg">
                             <Award className="w-4 h-4 text-white" />
                             <span className="text-xs font-semibold text-white uppercase tracking-wide">
                               Featured
@@ -158,7 +158,7 @@ const ServiceDetailsPage = async ({ params }) => {
 
                       {/* Bottom Left - Category */}
                       <div className="absolute bottom-4 left-4 z-10">
-                        <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-5 py-3 rounded-xl shadow-lg border border-emerald-200 dark:border-emerald-800">
+                        <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-5 py-3 rounded-xs shadow-lg border border-emerald-200 dark:border-emerald-800">
                           <p className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide mb-1">
                             Category
                           </p>
@@ -170,7 +170,7 @@ const ServiceDetailsPage = async ({ params }) => {
 
                       {/* Bottom Right - Rating */}
                       <div className="absolute bottom-4 right-4 z-10">
-                        <div className="flex items-center gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-5 py-3 rounded-xl shadow-lg border border-amber-200 dark:border-amber-800">
+                        <div className="flex items-center gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-5 py-3 rounded-xs shadow-lg border border-amber-200 dark:border-amber-800">
                           <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
                           <div>
                             <p className="text-base font-bold text-gray-900 dark:text-white leading-none">
@@ -199,7 +199,7 @@ const ServiceDetailsPage = async ({ params }) => {
                   </div>
 
                   {/* Price Card */}
-                  <div className="p-6 rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 shadow-lg">
+                  <div className="p-6 rounded-xs bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 shadow-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <CreditCard className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                       <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold uppercase tracking-wide">
@@ -222,7 +222,7 @@ const ServiceDetailsPage = async ({ params }) => {
                   {/* Trust Badges */}
                   <div className="grid grid-cols-2 gap-3">
                     {caregiverProfile?.verifiedCaregivers && (
-                      <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xl px-4 py-3 transition-all duration-300 hover:shadow-md">
+                      <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xs px-4 py-3 transition-all duration-300 hover:shadow-md">
                         <BadgeCheck className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
                         <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
                           Verified
@@ -230,7 +230,7 @@ const ServiceDetailsPage = async ({ params }) => {
                       </div>
                     )}
                     {caregiverProfile?.backgroundChecked && (
-                      <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl px-4 py-3 transition-all duration-300 hover:shadow-md">
+                      <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xs px-4 py-3 transition-all duration-300 hover:shadow-md">
                         <ShieldCheck className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
                         <span className="text-xs font-semibold text-green-700 dark:text-green-300">
                           Background Checked
@@ -238,7 +238,7 @@ const ServiceDetailsPage = async ({ params }) => {
                       </div>
                     )}
                     {safetyMeasures?.emergencyTraining && (
-                      <div className="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 transition-all duration-300 hover:shadow-md">
+                      <div className="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs px-4 py-3 transition-all duration-300 hover:shadow-md">
                         <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                         <span className="text-xs font-semibold text-gray-900 dark:text-white">
                           Emergency Trained
@@ -246,7 +246,7 @@ const ServiceDetailsPage = async ({ params }) => {
                       </div>
                     )}
                     {availability?.emergencySupport && (
-                      <div className="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 transition-all duration-300 hover:shadow-md">
+                      <div className="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs px-4 py-3 transition-all duration-300 hover:shadow-md">
                         <Phone className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                         <span className="text-xs font-semibold text-gray-900 dark:text-white">
                           24/7 Support
@@ -261,7 +261,7 @@ const ServiceDetailsPage = async ({ params }) => {
                   {/* Quick Info */}
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 rounded-xs bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
                         <Clock className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       <div>
@@ -276,7 +276,7 @@ const ServiceDetailsPage = async ({ params }) => {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 rounded-xs bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
                         <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       <div>
@@ -298,7 +298,7 @@ const ServiceDetailsPage = async ({ params }) => {
 
                     {ageGroupSupported && (
                       <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xs bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0">
                           <Users className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                         </div>
                         <div>
@@ -329,7 +329,7 @@ const ServiceDetailsPage = async ({ params }) => {
             {/* RIGHT: Related Services Sidebar (1 column) */}
             <div className="lg:col-span-1">
               <div className="sticky top-24">
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg">
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xs p-6 shadow-lg">
                   <div className="flex items-center gap-2 mb-6">
                     <Heart className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">

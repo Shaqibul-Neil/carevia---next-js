@@ -133,7 +133,7 @@ export default function PaymentSuccessPage() {
           animate={{ scale: 1, opacity: 1 }}
           className="max-w-md w-full"
         >
-          <div className="bg-card border border-border rounded-2xl p-8 shadow-lg text-center space-y-6">
+          <div className="bg-card border border-border rounded-xs p-8 shadow-lg text-center space-y-6">
             {/* Error Icon */}
             <motion.div
               initial={{ scale: 0 }}
@@ -158,7 +158,7 @@ export default function PaymentSuccessPage() {
             {/* Action Button */}
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-xl transition-all hover:scale-105 active:scale-95 font-medium shadow-lg shadow-emerald-500/30"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-xs transition-all hover:scale-105 active:scale-95 font-medium shadow-lg shadow-emerald-500/30"
             >
               <Home className="w-4 h-4" />
               Return to Home
@@ -252,7 +252,7 @@ export default function PaymentSuccessPage() {
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 rounded-2xl p-6 md:p-8 shadow-xl backdrop-blur-sm space-y-6"
+          className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-2 border-emerald-200 dark:border-emerald-800 rounded-xs p-6 md:p-8 shadow-xl backdrop-blur-sm space-y-6"
         >
           {/* Booking ID & Status */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-emerald-200 dark:border-emerald-800">
@@ -365,7 +365,7 @@ export default function PaymentSuccessPage() {
 
               {/* Due Amount (if applicable) */}
               {hasDueAmount && (
-                <div className="flex items-center justify-between p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
+                <div className="flex items-center justify-between p-4 rounded-xs bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
                   <span className="text-sm md:text-base font-medium text-amber-800 dark:text-amber-300">
                     Due Amount
                   </span>
@@ -383,7 +383,7 @@ export default function PaymentSuccessPage() {
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="mt-6 md:mt-8 bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg"
+          className="mt-6 md:mt-8 bg-card border border-border rounded-xs p-6 md:p-8 shadow-lg"
         >
           <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <Clock className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
@@ -434,14 +434,14 @@ export default function PaymentSuccessPage() {
           {/* View Booking Button */}
           <Link
             href="/"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-xl transition-all hover:scale-105 active:scale-95 font-semibold shadow-lg shadow-emerald-500/30"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-xs transition-all hover:scale-105 active:scale-95 font-semibold shadow-lg shadow-emerald-500/30"
           >
             <Calendar className="w-5 h-5" />
             View Booking
           </Link>
 
           {/* Download Receipt Button */}
-          <button className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-xl transition-all hover:scale-105 active:scale-95 font-semibold border border-gray-300 dark:border-gray-600">
+          <button className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-xs transition-all hover:scale-105 active:scale-95 font-semibold border border-gray-300 dark:border-gray-600">
             <Download className="w-5 h-5" />
             Download Receipt
           </button>

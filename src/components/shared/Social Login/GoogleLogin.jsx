@@ -17,7 +17,7 @@ const GoogleLogin = () => {
   return (
     <button
       onClick={handleGoogleSignIn}
-      className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors group cursor-pointer"
+      className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xs hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors group cursor-pointer"
     >
       <svg
         className="w-5 h-5 group-hover:scale-110 transition-transform"

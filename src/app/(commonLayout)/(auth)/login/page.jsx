@@ -20,7 +20,7 @@ const LoginPage = () => {
       </div>
 
       {/* Presentation Canvas */}
-      <div className="w-full max-w-360 bg-white dark:bg-slate-900 rounded-xl shadow-2xl overflow-hidden min-h-150 h-auto md:min-h-[85vh] py-2 md:py-0 flex flex-col xl:flex-row relative">
+      <div className="w-full max-w-360 bg-white dark:bg-slate-900 rounded-xs shadow-2xl overflow-hidden min-h-150 h-auto md:min-h-[85vh] py-2 md:py-0 flex flex-col xl:flex-row relative">
         {/* Top Left Bubbles */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
           {/* Big Bubble with Content */}
@@ -32,7 +32,7 @@ const LoginPage = () => {
                   <span className="font-bold text-primary"> Give peace</span>
                 </h2>
 
-                <div className="w-18 h-1.5 bg-gradient-to-r from-primary to-emerald-400 rounded-full"></div>
+                <div className="w-18 h-1.5 bg-gradient-to-r from-primary to-emerald-400 rounded-xs"></div>
               </div>
             </div>
           </div>
@@ -55,9 +55,9 @@ const LoginPage = () => {
         {/* Right Side */}
         <div className="w-full xl:w-[65%] relative flex items-center justify-center p-6 md:p-12 bg-slate-50/50 dark:bg-slate-800/50 xl:bg-transparent">
           {/* The Main Split Card */}
-          <div className="w-full max-w-4xl bg-white dark:bg-slate-900 rounded-[30px] shadow-2xl flex flex-col md:flex-row overflow-visible relative z-10 transition-transform duration-500 h-auto md:min-h-[600px]">
+          <div className="w-full max-w-4xl bg-white dark:bg-slate-900 rounded-xs shadow-2xl flex flex-col md:flex-row overflow-visible relative z-10 transition-transform duration-500 h-auto md:min-h-[600px]">
             {/* Floating Middle Card */}
-            <div className="hidden lg:flex absolute -left-16 lg:-left-10 xl:-left-24 top-[60%] -translate-y-1/2 z-30 w-[280px] h-[460px] bg-gradient-to-b from-primary via-emerald-600 to-[#0a2e1f] rounded-xl shadow-[0_20px_60px_-10px_rgba(34,197,94,0.5)] flex-col justify-center items-center overflow-hidden transform hover:-translate-y-[calc(50%+10px)] transition-transform duration-500">
+            <div className="hidden lg:flex absolute -left-16 lg:-left-10 xl:-left-24 top-[60%] -translate-y-1/2 z-30 w-[280px] h-[460px] bg-gradient-to-b from-primary via-emerald-600 to-[#0a2e1f] rounded-xs shadow-[0_20px_60px_-10px_rgba(34,197,94,0.5)] flex-col justify-center items-center overflow-hidden transform hover:-translate-y-[calc(50%+10px)] transition-transform duration-500">
               {/* Background Ambient Effect */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.2),transparent)] opacity-40 pointer-events-none"></div>
 
@@ -67,13 +67,13 @@ const LoginPage = () => {
                 <div className="relative w-28 h-28 flex items-center justify-center mb-10">
                   {/* Radiating Ripples */}
                   <span className="absolute inset-0 z-0 flex items-center justify-center">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-20 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite]"></span>
-                    <span className="absolute inline-flex h-[140%] w-[140%] rounded-full bg-emerald-400 opacity-10 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite_400ms]"></span>
-                    <span className="absolute inline-flex h-[180%] w-[180%] rounded-full bg-emerald-400 opacity-5 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite_800ms]"></span>
+                    <span className="absolute inline-flex h-full w-full rounded-xs bg-emerald-400 opacity-20 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite]"></span>
+                    <span className="absolute inline-flex h-[140%] w-[140%] rounded-xs bg-emerald-400 opacity-10 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite_400ms]"></span>
+                    <span className="absolute inline-flex h-[180%] w-[180%] rounded-xs bg-emerald-400 opacity-5 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite_800ms]"></span>
                   </span>
 
                   {/* The Glass Icon Container */}
-                  <div className="relative z-10 w-full h-full rounded-full bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_35px_rgba(0,0,0,0.2)] flex items-center justify-center group overflow-hidden">
+                  <div className="relative z-10 w-full h-full rounded-xs bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_35px_rgba(0,0,0,0.2)] flex items-center justify-center group overflow-hidden">
                     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <GiHeartInside className="w-14 h-14 text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.3)]" />
                   </div>
@@ -86,7 +86,7 @@ const LoginPage = () => {
                     <br />
                     Counts
                   </h4>
-                  <div className="w-12 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto mb-4 rounded-full"></div>
+                  <div className="w-12 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto mb-4 rounded-xs"></div>
                   <p className="text-emerald-100/90 text-sm font-medium leading-relaxed">
                     "Your care is the
                     <br />
@@ -104,7 +104,7 @@ const LoginPage = () => {
                       <GiHeartInside className="w-10 h-10 text-white/5 absolute -right-4 -top-2 rotate-15 blur-[0.5px] transition-all duration-500 group-hover:translate-x-4 group-hover:rotate-25 opacity-60" />
                     </div>
 
-                    <button className="relative z-10 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-[10px] font-bold tracking-[0.2em] uppercase text-white transition-all shadow-lg hover:shadow-white/10 hover:scale-105 active:scale-95">
+                    <button className="relative z-10 px-6 py-2 rounded-xs bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-[10px] font-bold tracking-[0.2em] uppercase text-white transition-all shadow-lg hover:shadow-white/10 hover:scale-105 active:scale-95">
                       Be A Caregiver
                     </button>
                   </div>
@@ -116,7 +116,7 @@ const LoginPage = () => {
             </div>
 
             {/* Main Card Left Image */}
-            <div className="md:w-1/2 relative bg-slate-900 group overflow-hidden rounded-t-xl md:rounded-l-xl md:rounded-tr-none h-70 md:h-auto md:min-h-full flex flex-col justify-between p-8 md:p-12">
+            <div className="md:w-1/2 relative bg-slate-900 group overflow-hidden rounded-t-xs md:rounded-l-xs md:rounded-tr-none h-70 md:h-auto md:min-h-full flex flex-col justify-between p-8 md:p-12">
               {/* Background Layers */}
               <div className="absolute inset-0 z-0">
                 <div
@@ -134,7 +134,7 @@ const LoginPage = () => {
               {/* Top: Branding & Tag */}
               <div className="relative z-20 flex flex-col lg:flex-row justify-between items-start space-y-4 lg:space-y-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-3xl bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg shadow-primary/20 text-white">
+                  <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg shadow-primary/20 text-white">
                     <GiHeartInside className="w-5 h-5" />
                   </div>
                   <div>
@@ -146,8 +146,8 @@ const LoginPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                <div className="px-3 py-1 rounded-xs bg-white/5 border border-white/10 backdrop-blur-md flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-xs bg-primary animate-pulse"></span>
                   <span className="text-[10px] font-bold text-white/50 uppercase tracking-wider">
                     Live System
                   </span>
@@ -157,8 +157,8 @@ const LoginPage = () => {
               {/* Right Squares */}
               <div className="absolute bottom-8 right-3 md:right-8 z-20 flex md:flex-col md:gap-4 gap-2">
                 {/* Square 1: Give Care */}
-                <div className="bg-white/10 backdrop-blur-xl border border-white/10 w-28 h-28 rounded-xl shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 group">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 mb-2 group-hover:scale-110 transition-transform">
+                <div className="bg-white/10 backdrop-blur-xl border border-white/10 w-28 h-28 rounded-xs shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 group">
+                  <div className="w-8 h-8 rounded-xs bg-primary/20 flex items-center justify-center border border-primary/30 mb-2 group-hover:scale-110 transition-transform">
                     <HandHeart className="text-primary w-4 h-4" />
                   </div>
                   <p className="text-white text-[10px] font-bold leading-tight">
@@ -170,7 +170,7 @@ const LoginPage = () => {
                 </div>
 
                 {/* Square 2: Caregivers */}
-                <div className="bg-white/5 backdrop-blur-xl border border-white/5 w-28 h-28 rounded-xl shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 delay-75">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/5 w-28 h-28 rounded-xs shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 delay-75">
                   <div className="flex -space-x-1.5 mb-2">
                     <Image
                       src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
@@ -199,8 +199,8 @@ const LoginPage = () => {
                 </div>
 
                 {/* Square 3: Find Caregivers */}
-                <div className="bg-gradient-to-br from-primary/80 to-emerald-800/80 backdrop-blur-xl border border-primary/30 w-28 h-28 rounded-xl shadow-lg hidden sm:flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 delay-150">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20 mb-2 animate-pulse">
+                <div className="bg-gradient-to-br from-primary/80 to-emerald-800/80 backdrop-blur-xl border border-primary/30 w-28 h-28 rounded-xs shadow-lg hidden sm:flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300 delay-150">
+                  <div className="w-8 h-8 rounded-xs bg-white/10 flex items-center justify-center border border-white/20 mb-2 animate-pulse">
                     <MapPin className="text-white w-4 h-4" />
                   </div>
                   <p className="text-white text-[10px] font-bold leading-tight">
@@ -214,7 +214,7 @@ const LoginPage = () => {
             </div>
 
             {/* Main Card Right - Form */}
-            <div className="md:w-1/2 p-4 md:p-8 lg:p-12 bg-white dark:bg-slate-900 rounded-b-xl md:rounded-r-xl md:rounded-bl-none flex flex-col justify-center">
+            <div className="md:w-1/2 p-4 md:p-8 lg:p-12 bg-white dark:bg-slate-900 rounded-b-xs md:rounded-r-xs md:rounded-bl-none flex flex-col justify-center">
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-white">
                   Welcome Back to <span className="text-primary">Carevia.</span>

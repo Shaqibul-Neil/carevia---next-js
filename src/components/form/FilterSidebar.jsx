@@ -72,7 +72,7 @@ const FilterSidebar = () => {
       {/* Filter Header */}
       <div className="flex justify-between items-center w-full h-11 mb-0 border-b">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-green-100 flex items-center justify-center rounded-md">
+          <div className="w-8 h-8 bg-green-100 flex items-center justify-center rounded-xs">
             <Filter className="w-4 h-4 text-primary" />
           </div>
 
@@ -219,7 +219,7 @@ const FilterSidebar = () => {
 
           {/* Clear Filters Button */}
           <button
-            className="w-full py-2.5 px-4 rounded-lg border border-border bg-background hover:bg-muted text-foreground font-medium text-sm transition-all duration-200 cursor-pointer mb-3"
+            className="w-full py-2.5 px-4 rounded-xs border border-border bg-background hover:bg-muted text-foreground font-medium text-sm transition-all duration-200 cursor-pointer mb-3"
             type="button"
             onClick={() => router.push("/services")}
           >

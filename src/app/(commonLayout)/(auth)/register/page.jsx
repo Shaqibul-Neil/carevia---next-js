@@ -19,7 +19,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Presentation Canvas */}
-      <div className="w-full max-w-360 bg-white dark:bg-slate-900 rounded-xl shadow-2xl overflow-hidden min-h-150 h-auto md:min-h-[85vh] py-2 md:py-0 flex flex-col xl:flex-row relative">
+      <div className="w-full max-w-360 bg-white dark:bg-slate-900 rounded-xs shadow-2xl overflow-hidden min-h-150 h-auto md:min-h-[85vh] py-2 md:py-0 flex flex-col xl:flex-row relative">
         {/* Top Left Bubbles */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
           {/* Big Bubble with Content */}
@@ -56,7 +56,7 @@ const RegisterPage = () => {
           {/* The Main Split Card */}
           <div className="w-full max-w-4xl bg-white dark:bg-slate-900 rounded-[30px] shadow-2xl flex flex-col md:flex-row overflow-visible relative z-10 transition-transform duration-500 h-auto md:min-h-[600px]">
             {/* Floating Middle Card */}
-            <div className="hidden lg:flex absolute -left-16 lg:-left-10 xl:-left-24 top-[50%] -translate-y-1/2 z-30 w-[280px] h-[460px] bg-gradient-to-b from-primary via-emerald-600 to-[#0a2e1f] rounded-xl shadow-[0_20px_60px_-10px_rgba(34,197,94,0.5)] flex-col justify-center items-center overflow-hidden transform hover:-translate-y-[calc(50%+10px)] transition-transform duration-500">
+            <div className="hidden lg:flex absolute -left-16 lg:-left-10 xl:-left-24 top-[50%] -translate-y-1/2 z-30 w-[280px] h-[460px] bg-gradient-to-b from-primary via-emerald-600 to-[#0a2e1f] rounded-xs shadow-[0_20px_60px_-10px_rgba(34,197,94,0.5)] flex-col justify-center items-center overflow-hidden transform hover:-translate-y-[calc(50%+10px)] transition-transform duration-500">
               {/* Background Ambient Effect */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.2),transparent)] opacity-40 pointer-events-none"></div>
 
@@ -133,7 +133,7 @@ const RegisterPage = () => {
               {/* Top: Branding & Tag */}
               <div className="relative z-20 flex flex-col justify-between items-start space-y-4 lg:space-y-0 gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg shadow-primary/20 text-white">
+                  <div className="w-10 h-10 rounded-xs bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg shadow-primary/20 text-white">
                     <GiHeartInside className="w-5 h-5" />
                   </div>
                   <div>
@@ -156,7 +156,7 @@ const RegisterPage = () => {
               {/* Right Squares */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex md:flex-col gap-4">
                 {/* Square: Caregivers */}
-                <div className="bg-white/5 backdrop-blur-xl border border-white/5 w-28 h-28 rounded-xl shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/5 w-28 h-28 rounded-xs shadow-lg flex flex-col items-center justify-center p-3 text-center transform hover:scale-105 transition-all duration-300">
                   <div className="flex -space-x-1.5 mb-2">
                     <Image
                       src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"

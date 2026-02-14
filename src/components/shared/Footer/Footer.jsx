@@ -64,7 +64,7 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-11 h-11 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 shadow-xs hover:-translate-y-1.5 hover:text-emerald-500 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-500"
+                  className="w-11 h-11 rounded-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 shadow-xs hover:-translate-y-1.5 hover:text-emerald-500 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-500"
                 >
                   <social.icon className="w-5 h-5" />
                 </Link>
@@ -74,7 +74,7 @@ const Footer = () => {
 
           {/* Column 2: Company */}
           <div className="space-y-6 lg:pl-4">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-md">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-xs">
               Company
             </h3>
             <ul className="space-y-4">
@@ -93,7 +93,7 @@ const Footer = () => {
 
           {/* Column 3: Support */}
           <div className="space-y-6 lg:pl-4">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-md">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-xs">
               Support
             </h3>
             <ul className="space-y-4">
@@ -112,7 +112,7 @@ const Footer = () => {
 
           {/* Column 4: Legal */}
           <div className="space-y-6 lg:pl-4">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-md">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 w-fit px-3 py-1 rounded-xs">
               Legal
             </h3>
             <ul className="space-y-4">

@@ -7,14 +7,14 @@ const ServicesLoading = () => {
         {[...Array(12)].map((_, i) => (
           <div key={i} className="w-full">
             {/* Main Card Container */}
-            <div className="relative w-full min-h-120 rounded-2xl overflow-hidden flex flex-col shadow-[0_8px_24px_rgba(34,197,94,0.08),0_2px_8px_rgba(34,197,94,0.04)]">
+            <div className="relative w-full min-h-120 rounded-xs overflow-hidden flex flex-col shadow-[0_8px_24px_rgba(34,197,94,0.08),0_2px_8px_rgba(34,197,94,0.04)]">
               {/* Background Layer */}
-              <div className="absolute inset-0.5 z-2 bg-white/98 dark:bg-slate-800/95 backdrop-blur-2xl rounded-xl border-[1.5px] border-slate-200/60 dark:border-slate-700/60"></div>
+              <div className="absolute inset-0.5 z-2 bg-white/98 dark:bg-slate-800/95 backdrop-blur-2xl rounded-xs border-[1.5px] border-slate-200/60 dark:border-slate-700/60"></div>
 
               {/* Card Content */}
               <div className="relative z-3 flex flex-col h-full p-5 space-y-4">
                 {/* Image Skeleton */}
-                <div className="w-full h-50 rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-700 animate-pulse relative">
+                <div className="w-full h-50 rounded-xs overflow-hidden bg-slate-200 dark:bg-slate-700 animate-pulse relative">
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 dark:via-slate-600/20 to-transparent"></div>
                 </div>
@@ -24,7 +24,7 @@ const ServicesLoading = () => {
                   {/* Service Name & Category Row */}
                   <div className="flex justify-between items-center">
                     {/* Service Name Skeleton */}
-                    <div className="h-6 w-3/4 bg-slate-200 dark:bg-slate-700 rounded-md animate-pulse"></div>
+                    <div className="h-6 w-3/4 bg-slate-200 dark:bg-slate-700 rounded-xs animate-pulse"></div>
                   </div>
 
                   {/* Rating & Category Row */}
@@ -37,7 +37,7 @@ const ServicesLoading = () => {
                     </div>
 
                     {/* Category Badge Skeleton */}
-                    <div className="h-6 w-20 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse"></div>
+                    <div className="h-6 w-20 bg-slate-200 dark:bg-slate-700 rounded-xs animate-pulse"></div>
                   </div>
 
                   {/* Description Skeleton */}
@@ -55,7 +55,7 @@ const ServicesLoading = () => {
                     </div>
 
                     {/* Button Skeleton */}
-                    <div className="h-8 w-24 bg-slate-200 dark:bg-slate-700 rounded-md animate-pulse"></div>
+                    <div className="h-8 w-24 bg-slate-200 dark:bg-slate-700 rounded-xs animate-pulse"></div>
                   </div>
                 </div>
               </div>

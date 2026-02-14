@@ -41,7 +41,7 @@ const Header = async () => {
           ) : (
             <Link
               href="/login"
-              className="px-8 py-3 bg-green-400 text-slate-800 hover:bg-green-800 rounded-full flex justify-center transition-all duration-500 items-center font-black text-xs uppercase tracking-widest shadow-sm shadow-green-100"
+              className="px-8 py-3 bg-green-400 text-slate-800 hover:bg-green-800 rounded-xs flex justify-center transition-all duration-500 items-center font-black text-xs uppercase tracking-widest shadow-sm shadow-green-100"
             >
               Login
             </Link>

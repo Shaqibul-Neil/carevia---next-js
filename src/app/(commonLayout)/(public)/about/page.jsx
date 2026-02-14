@@ -143,8 +143,8 @@ export default function AboutPage() {
           </div>
           <div className="space-y-4">
             {/* Vision  */}
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-8">
-              <div className="w-full md:w-1/2 relative h-48 md:h-full min-h-[200px] rounded-2xl overflow-hidden">
+            <div className="bg-slate-50 dark:bg-slate-900 rounded-xs p-8 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-8">
+              <div className="w-full md:w-1/2 relative h-48 md:h-full min-h-[200px] rounded-xs overflow-hidden">
                 <Image
                   src={professionalHealthcareImg}
                   alt="Vision"
@@ -153,7 +153,7 @@ export default function AboutPage() {
                 />
               </div>
               <div className="w-full md:w-1/2 space-y-3">
-                <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-xs flex items-center justify-center">
                   <TbEye className="w-6 h-6" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -168,8 +168,8 @@ export default function AboutPage() {
             </div>
             {/* Our Mission */}
 
-            <div className="bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl p-8 border border-emerald-100 dark:border-emerald-800 flex flex-col md:flex-row-reverse items-center gap-8">
-              <div className="w-full md:w-1/2 relative h-48 md:h-full min-h-[200px] rounded-2xl overflow-hidden">
+            <div className="bg-emerald-50 dark:bg-emerald-900/10 rounded-xs p-8 border border-emerald-100 dark:border-emerald-800 flex flex-col md:flex-row-reverse items-center gap-8">
+              <div className="w-full md:w-1/2 relative h-48 md:h-full min-h-[200px] rounded-xs overflow-hidden">
                 <Image
                   src={qualityHomeCareImg}
                   alt="Mission"
@@ -178,7 +178,7 @@ export default function AboutPage() {
                 />
               </div>
               <div className="w-full md:w-1/2 space-y-3">
-                <div className="w-12 h-12 bg-emerald-200 text-emerald-700 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-emerald-200 text-emerald-700 rounded-xs flex items-center justify-center">
                   <TbTargetArrow className="w-6 h-6" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -208,7 +208,7 @@ export default function AboutPage() {
             {awards.map((award, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center text-center p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all duration-300"
+                className="flex flex-col items-center text-center p-6 rounded-xs bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all duration-300"
               >
                 <div
                   className={`w-14 h-14 rounded-full flex items-center justify-center mb-4 ${award.color}`}
@@ -283,7 +283,7 @@ export default function AboutPage() {
             {visionaries.map((person, idx) => (
               <div
                 key={idx}
-                className="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 dark:border-slate-800"
+                className="group relative bg-white dark:bg-slate-900 rounded-xs overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 dark:border-slate-800"
               >
                 {/* Image */}
                 <div className="relative h-80 overflow-hidden">
@@ -301,7 +301,7 @@ export default function AboutPage() {
                       <Link
                         key={i}
                         href="#"
-                        className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-emerald-500 hover:border-emerald-500 transition-colors"
+                        className="w-10 h-10 rounded-xs bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-emerald-500 hover:border-emerald-500 transition-colors"
                       >
                         <Icon className="w-4 h-4" />
                       </Link>

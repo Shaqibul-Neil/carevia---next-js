@@ -25,7 +25,7 @@ const MobileNavbar = ({ navLinks }) => {
 
       {/* SM and md Navigation */}
       <div
-        className={`dark:bg-slate-800 bg-slate-100 border  border-green-800 dark:border-green-500 rounded-xl shadow-xl z-20 transform transition-all duration-500 top-full absolute w-40 left-0 ${
+        className={`dark:bg-slate-800 bg-slate-100 border  border-green-800 dark:border-green-500 rounded-xs shadow-xl z-20 transform transition-all duration-500 top-full absolute w-40 left-0 ${
           menuOpen
             ? "translate-y-2 opacity-100 pointer-events-auto"
             : "-translate-y-5 opacity-0 pointer-events-none"
