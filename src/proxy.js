@@ -68,7 +68,7 @@ export async function proxy(req) {
   //  Get token and Identity Check (Protected Route)
   // ==========================================
 
-  const token = await getToken({ req });
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   //checking if the user is authenticated by converting token into a boolean value
   const isAuthenticated = Boolean(token);
   const userRole = token?.role; // "admin" | "user"
