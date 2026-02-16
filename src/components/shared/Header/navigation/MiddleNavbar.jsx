@@ -21,7 +21,7 @@ const MiddleNavbar = ({ navLinks }) => {
               <Link
                 href={link.href}
                 className={cn(
-                  "px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] transition-all relative overflow-hidden group",
+                  "px-2 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] transition-all relative overflow-hidden group",
                   path === link.href
                     ? "text-green-800 dark:text-green-500"
                     : "dark:text-slate-200 text-slate-600 hover:text-green-600 hover:dark:text-green-600",

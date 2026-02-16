@@ -26,7 +26,7 @@ const NavbarDropdown = ({ session, dashboardUrl }) => {
               alt="User"
               width={100}
               height={100}
-              className="rounded-xs w-10 h-10 cursor-pointer border-2 border-white shadow-lg group-hover:border-green-500 transition-all duration-500"
+              className="rounded-full w-10 h-10 cursor-pointer border-2 border-white shadow-lg group-hover:border-green-500 transition-all duration-500"
             />
           </div>
         </DropdownMenuTrigger>

@@ -54,11 +54,46 @@ export async function generateMetadata({ params }) {
     description:
       service.detailedDescription ||
       `Book trusted ${service.category} services with verified caregivers at Carevia.`,
+    keywords: [
+      service.serviceName,
+      service.category,
+      "Home Care",
+      "Carevia Service",
+      "Medical Support",
+      "Patient Care",
+    ],
+    authors: [{ name: "Carevia Team" }],
+    // Canonical URL (Prevents duplicate content issues)
+    alternates: {
+      canonical: `${process.env.NEXTAUTH_URL}/services/${slug}`,
+    },
+
+    // Facebook / LinkedIn (Open Graph)
     openGraph: {
       title: `${service.serviceName} - Carevia`,
       description:
         service.detailedDescription ||
         `Reliable ${service.category} services delivered to your home.`,
+      url: `${process.env.NEXTAUTH_URL}/services/${slug}`,
+      siteName: "Carevia",
+      images: [
+        {
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: service.serviceName,
+        },
+      ],
+      locale: "en_US",
+      type: "article", // 'article' is better for specific detail pages
+      publishedTime: new Date().toISOString(), // Optional: if you have created_at
+      section: service.category,
+    },
+    // Twitter Card
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.serviceName} | Carevia`,
+      description: seoDescription,
       images: [service.image],
     },
   };

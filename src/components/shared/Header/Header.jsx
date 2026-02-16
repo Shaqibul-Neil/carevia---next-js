@@ -31,7 +31,7 @@ const Header = async () => {
         <MiddleNavbar navLinks={navLinks} />
         {/* Right: Login / Register */}
 
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-3 items-center">
           <ToggleButton />
           {session ? (
             <NavbarDropdown
