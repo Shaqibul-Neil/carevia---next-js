@@ -41,6 +41,11 @@ export function generateStaticParams() {
 =========================== */
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+
+  // Base URL management (Priority: Env Variable > Hardcoded Fallback)
+  const baseUrl =
+    process.env.NEXTAUTH_URL || "https://carevia-next-js.vercel.app";
+
   // fetch data
   const service = await getSingleServiceDetails(slug);
   if (!service) {
@@ -49,11 +54,19 @@ export async function generateMetadata({ params }) {
       description: "Care That Comes Home",
     };
   }
+
+  // Define seoDescription
+  const cleanDescription =
+    service.detailedDescription ||
+    `Book trusted ${service.category} services with verified caregivers at Carevia.`;
+  const seoDescription =
+    cleanDescription.length > 160
+      ? cleanDescription.slice(0, 157) + "..."
+      : cleanDescription;
+
   return {
     title: `${service.serviceName}`,
-    description:
-      service.detailedDescription ||
-      `Book trusted ${service.category} services with verified caregivers at Carevia.`,
+    description: seoDescription,
     keywords: [
       service.serviceName,
       service.category,
@@ -65,16 +78,14 @@ export async function generateMetadata({ params }) {
     authors: [{ name: "Carevia Team" }],
     // Canonical URL (Prevents duplicate content issues)
     alternates: {
-      canonical: `${process.env.NEXTAUTH_URL}/services/${slug}`,
+      canonical: `${baseUrl}/services/${slug}`,
     },
 
     // Facebook / LinkedIn (Open Graph)
     openGraph: {
       title: `${service.serviceName} - Carevia`,
-      description:
-        service.detailedDescription ||
-        `Reliable ${service.category} services delivered to your home.`,
-      url: `${process.env.NEXTAUTH_URL}/services/${slug}`,
+      description: seoDescription,
+      url: `${baseUrl}/services/${slug}`,
       siteName: "Carevia",
       images: [
         {
