@@ -14,12 +14,20 @@ export async function GET(req) {
     //  Fetch payments based on role
     let paymentData = { success: false, payments: [] };
 
+    //get the queries from the url
+    const { searchParams } = new URL(req.url);
+    const search = searchParams.get("search");
+    const sortby = searchParams.get("sortby");
+    const status = searchParams.get("status");
+    const method = searchParams.get("method");
+    const filterObject = { search, sortby, status, method };
+
     //check role
     if (user.role === "admin") {
-      paymentData = await getAllPayments();
+      paymentData = await getAllPayments(null, filterObject);
     } else if (user.role === "user") {
       const email = user.email;
-      paymentData = await getAllPayments(email);
+      paymentData = await getAllPayments(email, filterObject);
     } else {
       return ApiResponse.unauthorized("Invalid user role");
     }

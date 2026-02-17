@@ -119,9 +119,9 @@ import { findPaymentByEmail } from "./paymentRepository";
 // };
 
 //Get all payments
-export const getAllPayments = async (email = null) => {
+export const getAllPayments = async (email = null, filterObject) => {
   try {
-    const allPayments = await findPaymentByEmail(email);
+    const allPayments = await findPaymentByEmail(email, filterObject);
     return {
       success: true,
       payments: allPayments.map((payment) => ({
