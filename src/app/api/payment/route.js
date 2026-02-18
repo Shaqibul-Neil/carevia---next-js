@@ -16,11 +16,14 @@ export async function GET(req) {
 
     //get the queries from the url
     const { searchParams } = new URL(req.url);
+    console.log(searchParams);
     const search = searchParams.get("search");
     const sortby = searchParams.get("sortby");
     const status = searchParams.get("status");
     const method = searchParams.get("method");
-    const filterObject = { search, sortby, status, method };
+    const page = searchParams.get("page");
+    const limit = searchParams.get("limit");
+    const filterObject = { search, sortby, status, method, page, limit };
 
     //check role
     if (user.role === "admin") {

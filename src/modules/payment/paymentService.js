@@ -121,13 +121,17 @@ import { findPaymentByEmail } from "./paymentRepository";
 //Get all payments
 export const getAllPayments = async (email = null, filterObject) => {
   try {
-    const allPayments = await findPaymentByEmail(email, filterObject);
+    const { payments, totalPages, totalItems, currentPage } =
+      await findPaymentByEmail(email, filterObject);
     return {
       success: true,
-      payments: allPayments.map((payment) => ({
+      payments: payments.map((payment) => ({
         ...payment,
         _id: payment._id.toString(),
       })),
+      totalPages,
+      totalItems,
+      currentPage,
     };
   } catch (error) {
     //console.error("[getAllPayments] Error:", error.message);

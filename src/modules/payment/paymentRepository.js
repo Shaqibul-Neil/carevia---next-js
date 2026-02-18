@@ -39,7 +39,7 @@ export const findPaymentByIntentId = async (paymentIntentId) => {
 // Find Payments by User ID
 // ==========================================
 export const findPaymentByEmail = async (email, filterObject) => {
-  const { search, sortby, status, method } = filterObject;
+  const { search, sortby, status, method, page, limit } = filterObject;
   const query = {};
   if (email) query.userEmail = email;
   if (search && search.trim()) {
@@ -69,6 +69,17 @@ export const findPaymentByEmail = async (email, filterObject) => {
       : (query.paymentMethod = "cash");
   }
 
-  console.log(query);
-  return await paymentCollection().find(query).sort(sortOptions).toArray();
+  //pagination logic
+  const totalItems = await paymentCollection().countDocuments(query);
+  const totalPages = Math.ceil(totalItems / Number(limit));
+  const currentPage = Number(page);
+
+  console.log(totalPages);
+  const payments = await paymentCollection()
+    .find(query)
+    .skip((currentPage - 1) * Number(limit))
+    .limit(Number(limit))
+    .sort(sortOptions)
+    .toArray();
+  return { payments, totalPages, totalItems, currentPage };
 };
