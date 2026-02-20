@@ -1,6 +1,7 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import authenticate from "@/lib/authenticate";
-import { getPaymentsStats } from "@/modules/payment/paymentService";
+
+import { getPaymentMetricsTrends } from "@/modules/payment/paymentService";
 
 export async function GET(req) {
   try {
@@ -11,9 +12,9 @@ export async function GET(req) {
     const { user } = auth;
     let serviceResponse;
     if (user?.role === "admin") {
-      serviceResponse = await getPaymentsStats();
+      serviceResponse = await getPaymentMetricsTrends();
     } else if (user?.role === "user") {
-      serviceResponse = await getPaymentsStats(user?.email);
+      serviceResponse = await getPaymentMetricsTrends(user?.email);
     }
     //error handling
     if (!serviceResponse.success) {

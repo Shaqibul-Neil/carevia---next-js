@@ -147,26 +147,14 @@ export const getAllPayments = async (email = null, filterObject) => {
   }
 };
 
-//Get payments stats
-export const getPaymentsStats = async (email = null) => {
-  try {
-    const data = await createPaymentAggregation(email);
-    return {
-      success: true,
-      data: data,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error.message || "Failed to fetch payment stats",
-    };
-  }
-};
-
-// Get Monthly Trends/Metrics
+//Get payments stats with Monthly Trends/Metrics
 export const getPaymentMetricsTrends = async (email = null) => {
   try {
-    const { current, previous } = await getMonthlyComparisonStats(email);
+    const [allTime, monthlyData] = await Promise.all([
+      createPaymentAggregation(email),
+      getMonthlyComparisonStats(email),
+    ]);
+    const { current, previous } = monthlyData;
 
     //percentage change calculation formula: new-old/old*100
     const calculateGrowth = (prev, curr) => {
@@ -182,29 +170,29 @@ export const getPaymentMetricsTrends = async (email = null) => {
       {
         _id: "total-price",
         label: "Total Price",
-        value: current.totalPrice,
+        value: allTime.totalPrice,
         ...calculateGrowth(previous.totalPrice, current.totalPrice),
       },
       {
         _id: "amount-Paid",
         label: "Paid Amount",
-        value: current.amountPaid,
+        value: allTime.amountPaid,
         ...calculateGrowth(previous.amountPaid, current.amountPaid),
       },
       {
         _id: "due-amount",
         label: "Due Amount",
-        value: current.dueAmount,
+        value: allTime.dueAmount,
         ...calculateGrowth(previous.dueAmount, current.dueAmount),
       },
       {
         _id: "transactions",
         label: "Transactions",
-        value: current.totalTransaction,
+        value: allTime.totalTransaction,
         ...calculateGrowth(previous.totalTransaction, current.totalTransaction),
       },
     ];
-
+    console.log(metrics);
     return {
       success: true,
       data: metrics,
