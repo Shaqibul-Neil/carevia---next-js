@@ -74,7 +74,6 @@ export const findPaymentByEmail = async (email, filterObject) => {
   const totalPages = Math.ceil(totalItems / Number(limit));
   const currentPage = Number(page);
 
-  console.log(totalPages);
   const payments = await paymentCollection()
     .find(query)
     .skip((currentPage - 1) * Number(limit))
@@ -82,4 +81,38 @@ export const findPaymentByEmail = async (email, filterObject) => {
     .sort(sortOptions)
     .toArray();
   return { payments, totalPages, totalItems, currentPage };
+};
+
+// ==========================================
+// Payments Aggregation
+// ==========================================
+export const createPaymentAggregation = async (email = null) => {
+  let query = {};
+  if (email) {
+    query.userEmail = email;
+  }
+  const data = await paymentCollection()
+    .aggregate([
+      { $match: query },
+      {
+        $group: {
+          _id: null,
+          totalTransaction: { $sum: 1 || 0 },
+          totalPrice: { $sum: "$totalPrice" || 0 },
+          amountPaid: { $sum: "$amountPaid" || 0 },
+          dueAmount: { $sum: "$dueAmount" || 0 },
+        },
+      },
+      { $project: { _id: 0 } },
+    ])
+    .toArray();
+
+  //if no data then return default 0
+  const defaultStats = {
+    totalTransaction: 0,
+    totalPrice: 0,
+    amountPaid: 0,
+    dueAmount: 0,
+  };
+  return data.length > 0 ? data[0] : defaultStats;
 };

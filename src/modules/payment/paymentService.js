@@ -18,7 +18,10 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
-import { findPaymentByEmail } from "./paymentRepository";
+import {
+  createPaymentAggregation,
+  findPaymentByEmail,
+} from "./paymentRepository";
 
 //Notes: Always return response as a general object because it is not an api route. do not use apiResponse here Otherwise it will become Response object
 // import { stripe } from "@/lib/stripe";
@@ -139,6 +142,22 @@ export const getAllPayments = async (email = null, filterObject) => {
       success: false,
       error: error.message || "Failed to fetch payments",
       payments: [],
+    };
+  }
+};
+
+//Get payments stats
+export const getPaymentsStats = async (email = null) => {
+  try {
+    const data = await createPaymentAggregation(email);
+    return {
+      success: true,
+      data: data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message || "Failed to fetch payment stats",
     };
   }
 };
