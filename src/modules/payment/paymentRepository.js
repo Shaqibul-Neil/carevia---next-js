@@ -4,6 +4,21 @@ import { collections, dbConnect } from "@/lib/dbConnect";
 
 const paymentCollection = () => dbConnect(collections.PAYMENTS);
 
+const groupPayments = {
+  _id: null,
+  totalTransaction: { $sum: 1 },
+  totalPrice: { $sum: "$totalPrice" },
+  amountPaid: { $sum: "$amountPaid" },
+  dueAmount: { $sum: "$dueAmount" },
+};
+
+const defaultStats = {
+  totalTransaction: 0,
+  totalPrice: 0,
+  amountPaid: 0,
+  dueAmount: 0,
+};
+
 // ==========================================
 // Create Payment Record
 // ==========================================
@@ -84,7 +99,7 @@ export const findPaymentByEmail = async (email, filterObject) => {
 };
 
 // ==========================================
-// Payments Aggregation
+// Payments Aggregation All Time Stats
 // ==========================================
 export const createPaymentAggregation = async (email = null) => {
   let query = {};
@@ -95,24 +110,57 @@ export const createPaymentAggregation = async (email = null) => {
     .aggregate([
       { $match: query },
       {
-        $group: {
-          _id: null,
-          totalTransaction: { $sum: 1 || 0 },
-          totalPrice: { $sum: "$totalPrice" || 0 },
-          amountPaid: { $sum: "$amountPaid" || 0 },
-          dueAmount: { $sum: "$dueAmount" || 0 },
-        },
+        $group: groupPayments,
       },
       { $project: { _id: 0 } },
     ])
     .toArray();
 
-  //if no data then return default 0
-  const defaultStats = {
-    totalTransaction: 0,
-    totalPrice: 0,
-    amountPaid: 0,
-    dueAmount: 0,
-  };
   return data.length > 0 ? data[0] : defaultStats;
+};
+
+// ==========================================
+// Get Monthly Comparison Stats
+// ==========================================
+export const getMonthlyComparisonStats = async (email = null) => {
+  const now = new Date();
+  //get the timestamp of this month
+  const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  //get the last months timestamp
+  const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  //get the last day of last month
+  const endOfLastMonth = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    0,
+    23,
+    59,
+    59,
+  );
+  const matchEmail = email ? { userEmail: email } : {};
+  const stats = await paymentCollection()
+    .aggregate([
+      { $match: matchEmail },
+      {
+        $facet: {
+          currentMonth: [
+            { $match: { updatedAt: { $gte: startOfCurrentMonth } } },
+            { $group: groupPayments },
+          ],
+          previousMonth: [
+            {
+              $match: {
+                updatedAt: { $gte: startOfLastMonth, $lte: endOfLastMonth },
+              },
+            },
+            { $group: groupPayments },
+          ],
+        },
+      },
+    ])
+    .toArray();
+  return {
+    current: stats[0].currentMonth[0] || defaultStats,
+    previous: stats[0].previousMonth[0] || defaultStats,
+  };
 };

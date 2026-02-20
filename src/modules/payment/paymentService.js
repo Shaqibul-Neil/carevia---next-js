@@ -21,6 +21,7 @@ import { getServerSession } from "next-auth";
 import {
   createPaymentAggregation,
   findPaymentByEmail,
+  getMonthlyComparisonStats,
 } from "./paymentRepository";
 
 //Notes: Always return response as a general object because it is not an api route. do not use apiResponse here Otherwise it will become Response object
@@ -153,6 +154,60 @@ export const getPaymentsStats = async (email = null) => {
     return {
       success: true,
       data: data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message || "Failed to fetch payment stats",
+    };
+  }
+};
+
+// Get Monthly Trends/Metrics
+export const getPaymentMetricsTrends = async (email = null) => {
+  try {
+    const { current, previous } = await getMonthlyComparisonStats(email);
+
+    //percentage change calculation formula: new-old/old*100
+    const calculateGrowth = (prev, curr) => {
+      const divisor = prev > 0 ? prev : 1;
+      const percent = ((curr - prev) * 100) / divisor;
+      return {
+        change: `${percent.toFixed(2)}%`,
+        changeType: percent >= 0 ? "increase" : "decrease",
+      };
+    };
+
+    const metrics = [
+      {
+        _id: "total-price",
+        label: "Total Price",
+        value: current.totalPrice,
+        ...calculateGrowth(previous.totalPrice, current.totalPrice),
+      },
+      {
+        _id: "amount-Paid",
+        label: "Paid Amount",
+        value: current.amountPaid,
+        ...calculateGrowth(previous.amountPaid, current.amountPaid),
+      },
+      {
+        _id: "due-amount",
+        label: "Due Amount",
+        value: current.dueAmount,
+        ...calculateGrowth(previous.dueAmount, current.dueAmount),
+      },
+      {
+        _id: "transactions",
+        label: "Transactions",
+        value: current.totalTransaction,
+        ...calculateGrowth(previous.totalTransaction, current.totalTransaction),
+      },
+    ];
+
+    return {
+      success: true,
+      data: metrics,
     };
   } catch (error) {
     return {
