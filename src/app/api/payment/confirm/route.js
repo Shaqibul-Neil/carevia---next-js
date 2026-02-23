@@ -42,7 +42,7 @@ export async function POST(request) {
     );
 
     if (existingPayment) {
-      console.log(".........payment exist check------");
+      //console.log(".........payment exist check------");
       // Webhook already did the job! Return data.
       return ApiResponse.success(
         {
@@ -57,9 +57,7 @@ export async function POST(request) {
     // ===============================================
     // FALLBACK: Webhook didn't run yet?
     // ===============================================
-    console.log(
-      "⚠️ Webhook delay detected. Creating booking manually from client confirmation.",
-    );
+    //console.log("⚠️ Webhook delay detected. Creating booking manually from client confirmation.");
     const metadata = stripeSession.metadata;
     //7. Create booking manually
     const bookingData = {

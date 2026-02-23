@@ -5,7 +5,7 @@ import { getPaymentMetricsTrends } from "@/modules/payment/paymentService";
 
 export async function GET(req) {
   try {
-    const auth = await authenticate();
+    const auth = await authenticate(req);
     if (!auth) {
       return ApiResponse.unauthorized("Authentication required");
     }

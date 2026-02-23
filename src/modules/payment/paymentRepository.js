@@ -51,7 +51,7 @@ export const findPaymentByIntentId = async (paymentIntentId) => {
   });
 };
 // ==========================================
-// Find Payments by User ID
+// Find Payments by User Email
 // ==========================================
 export const findPaymentByEmail = async (email, filterObject) => {
   const { search, sortby, status, method, page, limit } = filterObject;
@@ -69,7 +69,11 @@ export const findPaymentByEmail = async (email, filterObject) => {
   if (sortby && sortby !== "all") {
     //break down the sort field like 'createdAt-desc' should be createdAt(mongodb property) and desc
     const [fieldName, direction] = sortby.split("-");
-    sortOptions[fieldName] = direction === "desc" ? -1 : 1;
+    if (direction === "desc") {
+      sortOptions[fieldName] = -1;
+    } else {
+      sortOptions[fieldName] = 1;
+    } //sortOptions["createdAt"]
   }
   if (status && status !== "all") {
     if (status === "paid") {

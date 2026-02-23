@@ -16,7 +16,6 @@ export async function GET(req) {
 
     //get the queries from the url
     const { searchParams } = new URL(req.url);
-    console.log(searchParams);
     const search = searchParams.get("search");
     const sortby = searchParams.get("sortby");
     const status = searchParams.get("status");

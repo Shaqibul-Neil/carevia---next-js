@@ -21,7 +21,7 @@ export default function PaymentSuccessPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bookingData, setBookingData] = useState(null);
-  console.log("sessionId", sessionId);
+  //console.log("sessionId", sessionId);
 
   useEffect(() => {
     if (!sessionId) {
@@ -41,9 +41,9 @@ export default function PaymentSuccessPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sessionId }),
         });
-        console.log("confirmPayment---response", response);
+        //console.log("confirmPayment---response", response);
         const result = await response.json();
-        console.log("confirmPayment---result", result);
+        //console.log("confirmPayment---result", result);
         if (!result.success) {
           setError(result.message || "Payment confirmation failed");
           setLoading(false);
@@ -52,7 +52,7 @@ export default function PaymentSuccessPage() {
         setBookingData(result.data);
         setLoading(false);
       } catch (error) {
-        console.error("Payment confirmation error:", error);
+        //console.error("Payment confirmation error:", error);
         setError("Failed to confirm payment. Please contact support.");
         setLoading(false);
       }

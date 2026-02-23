@@ -10,7 +10,7 @@ export async function POST(request) {
   try {
     //1. Check authentication
     const session = await getServerSession(authOptions);
-    console.log(session);
+    //console.log(session);
 
     if (!session) {
       return ApiResponse.unauthorized();

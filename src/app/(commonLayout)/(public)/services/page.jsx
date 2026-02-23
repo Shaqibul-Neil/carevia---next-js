@@ -23,7 +23,7 @@ const ServicesPage = async ({ searchParams }) => {
   const rating = resolvedParams.rating || "";
   const priceSort = resolvedParams.priceSort || "";
   const page = resolvedParams.page || "";
-  console.log(resolvedParams);
+  //.log(resolvedParams);
 
   // Fetch all services
   const { success, services, totalPage, currentPage } = await getAllServices({

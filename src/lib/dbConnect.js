@@ -1,3 +1,6 @@
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.URI;
 const dbName = process.env.DBNAME;

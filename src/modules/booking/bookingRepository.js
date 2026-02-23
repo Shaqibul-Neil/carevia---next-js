@@ -13,6 +13,7 @@ export const createConfirmedBooking = async (bookingData) => {
   const booking = {
     _id: bookingId,
     userId: new ObjectId(bookingData.userId),
+    userEmail: bookingData.userEmail,
     serviceId: new ObjectId(bookingData.serviceId),
     trackingId: trackingId,
     serviceName: bookingData.serviceName,
@@ -27,7 +28,21 @@ export const createConfirmedBooking = async (bookingData) => {
     totalPrice: parseFloat(bookingData.totalPrice),
     amountPaid: parseFloat(bookingData.amountPaid),
     dueAmount: parseFloat(bookingData.dueAmount),
-    status: "confirmed",
+    status: "booked",
+    caregiver: {
+      assigned: false,
+      id: null,
+      name: null,
+      email: null,
+      assignedAt: null,
+      phone: null,
+    },
+    serviceFlow: {
+      assignedAt: null,
+      startedAt: null,
+      completedAt: null,
+    },
+    userFeedback: null,
     stripePaymentIntentId: bookingData.stripePaymentIntentId,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -47,5 +62,73 @@ export const createConfirmedBooking = async (bookingData) => {
 // ==========================================
 
 // ==========================================
-// Find bookings by user ID
+// Find bookings by user id
 // ==========================================
+export const findBookingByEmail = async (email = null, filterObject) => {
+  const { search, sortby, status, duration, caregiver, division } =
+    filterObject;
+  let query = {};
+  if (email) query.userEmail = email;
+  if (search && search.trim()) {
+    query.$or = [
+      { trackingId: { $regex: search, $options: "i" } },
+      { userEmail: { $regex: search, $options: "i" } },
+      { division: { $regex: division, $options: "i" } },
+      { serviceName: { $regex: search, $options: "i" } },
+    ];
+  }
+  let sortOptions = {};
+  //sorting
+  if (sortby && sortby !== "all") {
+    const [fieldName, direction] = sortby.split("-");
+    if (direction === "desc") {
+      sortOptions[fieldName] = -1;
+    } else sortOptions[fieldName] = 1;
+  }
+  //filter - on status
+  if (status && status !== "all") {
+    if (status === "booked") {
+      query.status = status;
+    } else if (status === "confirmed") {
+      query.status = status;
+    } else if (status === "cancelled") {
+      query.status = status;
+    }
+  }
+  //filter - on duration
+  if (duration && duration !== "all") {
+    if (duration === "days") {
+      query.duration = duration;
+    } else {
+      query.duration = duration;
+    }
+  }
+  //filter - on caregiver
+  if (caregiver && caregiver !== "all") {
+    if (caregiver === "assigned") {
+      query[caregiver.assigned] = true;
+    } else {
+      query[caregiver.assigned] = false;
+    }
+  }
+  //filter - on division
+  if (division && division !== "all") {
+    if (division === "dhaka") {
+      query[division] = division;
+    } else if (division === "chattogram") {
+      query[division] = division;
+    } else if (division === "sylhet") {
+      query[division] = division;
+    } else if (division === "rajshahi") {
+      query[division] = division;
+    } else if (division === "khulna") {
+      query[division] = division;
+    }
+  }
+
+  const bookings = await bookingCollection()
+    .find(query)
+    .sort(sortOptions)
+    .toArray();
+  return { bookings };
+};

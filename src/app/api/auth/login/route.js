@@ -41,7 +41,7 @@ export async function POST(req) {
     };
     return ApiResponse.success(responseData, "Successfully logged in");
   } catch (error) {
-    console.error("[LOGIN_ERROR]", error);
+    //console.error("[LOGIN_ERROR]", error);
     return ApiResponse.error(
       "Something went wrong during login",
       500,
