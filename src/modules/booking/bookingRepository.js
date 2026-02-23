@@ -73,7 +73,6 @@ export const findBookingByEmail = async (email = null, filterObject) => {
     query.$or = [
       { trackingId: { $regex: search, $options: "i" } },
       { userEmail: { $regex: search, $options: "i" } },
-      { division: { $regex: division, $options: "i" } },
       { serviceName: { $regex: search, $options: "i" } },
     ];
   }
@@ -97,33 +96,19 @@ export const findBookingByEmail = async (email = null, filterObject) => {
   }
   //filter - on duration
   if (duration && duration !== "all") {
-    if (duration === "days") {
-      query.duration = duration;
-    } else {
-      query.duration = duration;
-    }
+    query.durationType = duration;
   }
   //filter - on caregiver
   if (caregiver && caregiver !== "all") {
     if (caregiver === "assigned") {
-      query[caregiver.assigned] = true;
+      query["caregiver.assigned"] = true;
     } else {
-      query[caregiver.assigned] = false;
+      query["caregiver.assigned"] = false;
     }
   }
   //filter - on division
   if (division && division !== "all") {
-    if (division === "dhaka") {
-      query[division] = division;
-    } else if (division === "chattogram") {
-      query[division] = division;
-    } else if (division === "sylhet") {
-      query[division] = division;
-    } else if (division === "rajshahi") {
-      query[division] = division;
-    } else if (division === "khulna") {
-      query[division] = division;
-    }
+    query.division = division;
   }
 
   const bookings = await bookingCollection()
