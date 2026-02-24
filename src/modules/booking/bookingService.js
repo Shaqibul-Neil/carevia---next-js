@@ -33,13 +33,17 @@ export const createBookingFromWebhook = async (metadata, stripeSessionId) => {
 // ==========================================
 export const getAllBookings = async (email, filterObject) => {
   try {
-    const { bookings } = await findBookingByEmail(email, filterObject);
+    const { bookings, totalPages, totalItems, currentPage } =
+      await findBookingByEmail(email, filterObject);
     return {
       success: true,
       bookings: bookings.map((booking) => ({
         ...booking,
         _id: booking._id.toString(),
       })),
+      totalPages,
+      totalItems,
+      currentPage,
     };
   } catch (error) {
     return {

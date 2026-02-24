@@ -33,7 +33,7 @@ export async function GET(req) {
     } else {
       return ApiResponse.unauthorized("Invalid user role");
     }
-    // // STEP 4: Return data &  Remove 'success' property
+    // STEP 4: Return data &  Remove 'success' property
     const { success, ...rest } = paymentData;
 
     return ApiResponse.success(rest, "Payment fetched successfully");

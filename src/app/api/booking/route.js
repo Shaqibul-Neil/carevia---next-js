@@ -7,8 +7,9 @@ export async function GET(req) {
     const auth = await authenticate(req);
     if (!auth) return ApiResponse.unauthorized("Authentication required");
     const { user } = auth;
-    let serviceResponse;
 
+    //  Fetch payments based on role
+    let serviceResponse = { success: false, bookings: [] };
     //get the queries from the url
     const { searchParams } = new URL(req.url);
     const search = searchParams.get("search");
@@ -17,6 +18,8 @@ export async function GET(req) {
     const duration = searchParams.get("duration");
     const caregiver = searchParams.get("caregiver");
     const division = searchParams.get("division");
+    const page = searchParams.get("page");
+    const limit = searchParams.get("limit");
     const filterObject = {
       search,
       sortby,
@@ -24,6 +27,8 @@ export async function GET(req) {
       duration,
       caregiver,
       division,
+      page,
+      limit,
     };
 
     if (user?.role === "admin") {
@@ -38,8 +43,8 @@ export async function GET(req) {
     if (!serviceResponse.success) {
       return ApiResponse.error(serviceResponse.error, 400);
     }
-    const { bookings } = serviceResponse;
-    return ApiResponse.success(bookings, "All bookings fetched successfully");
+    const { success, ...rest } = serviceResponse;
+    return ApiResponse.success(rest, "All bookings fetched successfully");
   } catch (error) {
     return ApiResponse.error(
       "Failed to fetch payment stats",

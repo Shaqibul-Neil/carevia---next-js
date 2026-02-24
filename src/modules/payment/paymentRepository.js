@@ -99,6 +99,7 @@ export const findPaymentByEmail = async (email, filterObject) => {
     .limit(Number(limit))
     .sort(sortOptions)
     .toArray();
+
   return { payments, totalPages, totalItems, currentPage };
 };
 

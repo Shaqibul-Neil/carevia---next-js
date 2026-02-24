@@ -65,7 +65,7 @@ export const createConfirmedBooking = async (bookingData) => {
 // Find bookings by user id
 // ==========================================
 export const findBookingByEmail = async (email = null, filterObject) => {
-  const { search, sortby, status, duration, caregiver, division } =
+  const { search, sortby, status, duration, caregiver, division, limit, page } =
     filterObject;
   let query = {};
   if (email) query.userEmail = email;
@@ -111,9 +111,17 @@ export const findBookingByEmail = async (email = null, filterObject) => {
     query.division = division;
   }
 
+  //pagination
+  const totalItems = await bookingCollection().countDocuments(query);
+  const totalPages = Math.ceil(totalItems / Number(limit));
+  const currentPage = Number(page);
+  console.log({ totalItems, totalPages, currentPage, limit });
+
   const bookings = await bookingCollection()
     .find(query)
+    .skip((currentPage - 1) * Number(limit))
+    .limit(Number(limit))
     .sort(sortOptions)
     .toArray();
-  return { bookings };
+  return { bookings, totalPages, totalItems, currentPage };
 };
