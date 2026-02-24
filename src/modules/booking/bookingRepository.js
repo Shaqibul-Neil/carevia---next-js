@@ -1,7 +1,21 @@
 import { ObjectId } from "mongodb";
 import { collections, dbConnect } from "@/lib/dbConnect";
+import { dateComparison } from "@/lib/utils";
+import { previousDay } from "date-fns";
 
 const bookingCollection = () => dbConnect(collections.BOOKINGS);
+
+const groupBookings = {
+  _id: null,
+  totalBookings: { $sum: 1 },
+  confirmed: {
+    $sum: { $cond: [{ $eq: ["$status", "confirmed"] }, 1, 0] },
+  },
+  cancelled: {
+    $sum: { $cond: [{ $eq: ["$status", "cancelled"] }, 1, 0] },
+  },
+};
+const defaultStats = { totalBookings: 0, confirmed: 0, cancelled: 0 };
 
 // ==========================================
 // Create Confirmed Booking (after payment)
@@ -115,7 +129,6 @@ export const findBookingByEmail = async (email = null, filterObject) => {
   const totalItems = await bookingCollection().countDocuments(query);
   const totalPages = Math.ceil(totalItems / Number(limit));
   const currentPage = Number(page);
-  console.log({ totalItems, totalPages, currentPage, limit });
 
   const bookings = await bookingCollection()
     .find(query)
@@ -124,4 +137,58 @@ export const findBookingByEmail = async (email = null, filterObject) => {
     .sort(sortOptions)
     .toArray();
   return { bookings, totalPages, totalItems, currentPage };
+};
+
+// ==========================================
+// Booking Aggregation All Time Stats
+// ==========================================
+export const createBookingAggregation = async (email = null) => {
+  let query = {};
+  if (email) query.userEmail = email;
+  const data = await bookingCollection()
+    .aggregate([
+      { $match: query },
+      {
+        $group: groupBookings,
+      },
+
+      { $project: { _id: 0 } },
+    ])
+    .toArray();
+  return data.length > 0 ? data[0] : defaultStats;
+};
+
+// ==========================================
+// Get Monthly Comparison Stats
+// ==========================================
+export const getMonthlyBookingStats = async (email = null) => {
+  console.log("🔍 Function Called with email:", email);
+  const { startOfCurrentMonth, startOfLastMonth, endOfLastMonth } =
+    await dateComparison();
+  const matchEmail = email ? { userEmail: email } : {};
+  const stats = await bookingCollection()
+    .aggregate([
+      { $match: matchEmail },
+      {
+        $facet: {
+          currentMonth: [
+            { $match: { updatedAt: { $gte: startOfCurrentMonth } } },
+            { $group: groupBookings },
+          ],
+          previousMonth: [
+            {
+              $match: {
+                updatedAt: { $gte: startOfLastMonth, $lte: endOfLastMonth },
+              },
+            },
+            { $group: groupBookings },
+          ],
+        },
+      },
+    ])
+    .toArray();
+  return {
+    current: stats[0].currentMonth[0] || defaultStats,
+    previous: stats[0].previousMonth[0] || defaultStats,
+  };
 };

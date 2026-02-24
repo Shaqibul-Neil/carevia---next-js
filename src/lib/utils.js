@@ -122,3 +122,30 @@ export const generatePagination = (currentPage, totalPage) => {
   }
   return pages;
 };
+
+//monthly date comparison logic
+export const dateComparison = () => {
+  const now = new Date();
+  const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1); //now.getFullYear() → 2026, now.getMonth() → 1(JS months 0-indexed, 0 = Jan),1- first day of the month
+  const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1); //now.getMonth() - 1 -> current month - 1= previous month
+  const endOfLastMonth = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    0,
+    23,
+    59,
+    59,
+  );
+  return { startOfCurrentMonth, startOfLastMonth, endOfLastMonth };
+};
+
+//percentage change calculation
+export const calculateGrowth = (prev, curr) => {
+  const divisor = prev > 0 ? prev : 1;
+  const percent = ((curr - prev) * 100) / divisor;
+  return {
+    change: `${percent.toFixed(2)}%`,
+    changeType:
+      percent === 0 ? "unchanged" : percent >= 0 ? "increase" : "decrease",
+  };
+};

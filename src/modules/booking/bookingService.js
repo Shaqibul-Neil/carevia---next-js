@@ -1,6 +1,9 @@
+import { calculateGrowth } from "@/lib/utils";
 import {
+  createBookingAggregation,
   createConfirmedBooking,
   findBookingByEmail,
+  getMonthlyBookingStats,
 } from "./bookingRepository";
 
 // ==========================================
@@ -50,6 +53,46 @@ export const getAllBookings = async (email, filterObject) => {
       success: false,
       error: error.message || "Failed to fetch bookings",
       bookings: [],
+    };
+  }
+};
+
+//Get booking stats with Monthly Trends/Metrics
+export const getBookingMetricsTrends = async (email = null) => {
+  try {
+    const [allTime, monthlyData] = await Promise.all([
+      createBookingAggregation(email),
+      getMonthlyBookingStats(email),
+    ]);
+    const { current, previous } = monthlyData;
+    const metrics = [
+      {
+        _id: "total-bookings",
+        label: "Total Bookings",
+        value: allTime.totalBookings,
+        ...calculateGrowth(previous.totalBookings, current.totalBookings),
+      },
+      {
+        _id: "confirmed",
+        label: "Confirmed",
+        value: allTime.confirmed,
+        ...calculateGrowth(previous.confirmed, current.confirmed),
+      },
+      {
+        _id: "cancelled",
+        label: "Cancelled",
+        value: allTime.cancelled,
+        ...calculateGrowth(previous.cancelled, current.cancelled),
+      },
+    ];
+    return {
+      success: true,
+      data: metrics,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message || "Failed to fetch payment stats",
     };
   }
 };

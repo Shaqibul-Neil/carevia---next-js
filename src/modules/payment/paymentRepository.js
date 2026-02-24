@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
 import { collections, dbConnect } from "@/lib/dbConnect";
+import { dateComparison } from "@/lib/utils";
 
 const paymentCollection = () => dbConnect(collections.PAYMENTS);
 
@@ -127,21 +128,9 @@ export const createPaymentAggregation = async (email = null) => {
 // ==========================================
 // Get Monthly Comparison Stats
 // ==========================================
-export const getMonthlyComparisonStats = async (email = null) => {
-  const now = new Date();
-  //get the timestamp of this month
-  const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  //get the last months timestamp
-  const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  //get the last day of last month
-  const endOfLastMonth = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    0,
-    23,
-    59,
-    59,
-  );
+export const getMonthlyPaymentStats = async (email = null) => {
+  const { startOfCurrentMonth, startOfLastMonth, endOfLastMonth } =
+    await dateComparison();
   const matchEmail = email ? { userEmail: email } : {};
   const stats = await paymentCollection()
     .aggregate([

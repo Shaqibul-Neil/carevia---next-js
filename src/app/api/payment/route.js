@@ -10,9 +10,9 @@ export async function GET(req) {
     if (!auth) {
       return ApiResponse.unauthorized("Authentication required");
     }
-    const { user, authMethod } = auth;
+    const { user } = auth;
     //  Fetch payments based on role
-    let paymentData = { success: false, payments: [] };
+    let serviceResponse = { success: false, payments: [] };
 
     //get the queries from the url
     const { searchParams } = new URL(req.url);
@@ -26,15 +26,15 @@ export async function GET(req) {
 
     //check role
     if (user.role === "admin") {
-      paymentData = await getAllPayments(null, filterObject);
+      serviceResponse = await getAllPayments(null, filterObject);
     } else if (user.role === "user") {
       const email = user.email;
-      paymentData = await getAllPayments(email, filterObject);
+      serviceResponse = await getAllPayments(email, filterObject);
     } else {
       return ApiResponse.unauthorized("Invalid user role");
     }
     // STEP 4: Return data &  Remove 'success' property
-    const { success, ...rest } = paymentData;
+    const { success, ...rest } = serviceResponse;
 
     return ApiResponse.success(rest, "Payment fetched successfully");
   } catch (error) {
