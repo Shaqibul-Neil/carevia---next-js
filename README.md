@@ -1,64 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 Carevia
 
-## Getting Started
+### **Real-time Healthcare Service Marketplace**
+*A high-performance, decoupled healthcare platform connecting patients with caregivers, featuring low-latency updates and a secure financial layer.*
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Live Demo & Proof of Concept
+- **Main Patient Website:** [carevia-next-js.vercel.app](https://carevia-next-js.vercel.app/)
+- **Provider/Admin Dashboard:** [carevia-portal.netlify.app](https://carevia-portal.netlify.app/)
+- **Status:** 🛠️ Work in Progress (Development phase)
+
+---
+
+## 🛠️ Tech Stack (The Intentional Choice)
+
+### **Core Infrastructure**
+- **Next.js 16 (App Router):** Leveraging server components for SEO and client-side interactivity where needed.
+- **MongoDB:** Flexible document schema to handle diverse healthcare service types and booking metadata.
+- **Node.js + Express (Socket Server):** Dedicated microservice for real-time WebSocket communication.
+
+### **Security & Payments**
+- **NextAuth + JWT:** Hybrid authentication strategy sharing sessions across decoupled applications.
+- **Stripe API + Webhooks:** Reliable asynchronous payment processing with idempotency checks.
+- **Jose:** Modern, edge-compatible JWT signing and verification.
+
+### **Frontend & UX**
+- **Vite + React 19:** Lightweight, high-speed SPA for the provider dashboard.
+- **TanStack Query (React Query):** Efficient server-state management with automatic caching and refetching.
+- **Framer Motion:** Smooth micro-interactions and transitions for a premium feel.
+- **Tailwind CSS + DaisyUI:** Utility-first styling with a consistent healthcare-themed design system.
+
+---
+
+## 🏗️ Architecture Overview
+
+The project follows a **Decoupled Monolith** architecture split into three core modules:
+
+1.  **`carevia` (Main App):** Next.js application handling the patient-facing marketplace, SEO routes, and core API layer.
+2.  **`carevia-dashboard` (Portal):** A separate Vite-based SPA for providers and admins, communicating via JWT-secured REST APIs.
+3.  **`carevia-socket` (Real-time Hub):** An independent Node.js server managing WebSocket connections for live notifications and eventual chat features.
+
+### **Folder Structure Philosophy**
+```text
+/carevia                # Next.js Mother App
+├── src/app/api         # Layered REST API (Routes -> Repository -> Service)
+├── src/components      # Reusable UI components (shadcn-inspired)
+└── src/lib             # Shared utilities (DB connection, JWT verify)
+
+/carevia-dashboard      # Vite Provider Portal
+├── src/hooks           # Custom TanStack Query hooks (Feature-based)
+└── src/pages           # Role-based dashboard views
+
+/carevia-socket         # Socket.io Server
+└── index.js            # WebSocket event handlers & HTTP bridge
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔥 Key Engineering Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Decoupled Dual-Auth:** Shared authentication between Next.js (Cookie-based) and Vite (Bearer Token-based) using the same `NEXTAUTH_SECRET`.
+- **Reliable Payment Flow:** Stripe Webhooks ensure 100% booking success even if the user closes the browser during payment.
+- **Real-time Event Bridge:** Payment completion triggers a server-to-server POST to the Socket server, which then emits a live notification to the Dashboard.
+- **Automated Communication:** Integration with **Nodemailer** for instant email receipts and booking confirmations.
+- **Performance Optimized:** 
+    - Layered backend separation for testability.
+    - TanStack Query used in the dashboard for zero-loading state transitions.
+    - Image optimization via Next.js `<Image />` component.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧠 Technical Challenges & Solutions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. The Webhook Reliability Gap
+**Challenge:** Users sometimes close browsers after a Stripe payment but before redirecting back, causing "Paid but no Booking" errors.
+**Solution:** Implemented **Stripe Webhooks** with cryptographic signature verification (`stripe.webhooks.constructEvent`). Added **Idempotency checks** using `payment_intent_id` to prevent duplicate bookings during network retries.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Cross-App Authentication (JWT Sharing)
+**Challenge:** Sharing a login session between a Next.js app (Cookies) and a separate Vite app (Headers) on different domains.
+**Solution:** Created a hybrid auth layer. The Next.js backend creates a JWT signed with `jose`. The Dashboard stores this in `localStorage` and attaches it via an **Axios Interceptor** (`Authorization: Bearer <token>`). The API then verifies either the Cookie or the Header.
 
-## Deploy on Vercel
+### 3. Real-time Synchronization
+**Challenge:** Notifying the Admin dashboard immediately when a patient makes a payment on the main site.
+**Solution:** Established a **Server-to-Server bridge**. The Next.js webhook handler sends a POST request to the `carevia-socket` server, which then broadcasts the event to the connected Admin client.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Installation & Setup
 
-Palette
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Shaqibul-Neil/carevia---next-js.git
+   ```
 
-Primary: #22C55E (green-500)
+2. **Setup Carevia (Main App):**
+   ```bash
+   cd carevia
+   npm install
+   cp .env.example .env
+   npm run dev
+   ```
 
-Secondary: #DCFCE7 (green-100)
+3. **Setup Dashboard:**
+   ```bash
+   cd ../carevia-dashboard
+   npm install
+   npm run dev
+   ```
 
-Text: #0F172A (slate-900)
+4. **Setup Socket Server:**
+   ```bash
+   cd ../carevia-socket
+   npm install
+   node index.js
+   ```
 
-Muted text: #64748B
+---
 
-Surface: #FFFFFF
-Bonus UX Tip (elite level)
+## 🔐 Environment Variables
 
-Buttons → solid green
+Required variables for the project to function:
 
-Success → softer green
+```env
+# Database & Auth
+MONGODB_URI=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
 
-Emergency/alert → amber, NOT red
+# Payments
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
 
-Caregiver profile cards → white + soft shadow
+# Communication
+NODEMAILER_USER=
+NODEMAILER_PASS=
 
-Forms → neutral background, zero aggression
+# Real-time
+NEXT_PUBLIC_SOCKET_URL=
+```
 
-This is a trust product, not a “cool app”.
-Design should whisper: “You’re safe here.”
-Soft Green + Warm Neutral
-Simple, scalable, regulation-safe, culturally universal.
+---
+
+## 📈 Roadmap & Future Improvements
+- [ ] **AI-Powered Matching:** Smart caregiver suggestions based on patient history.
+- [ ] **Real-time Chat:** Implementing the `carevia-socket` chat logic (currently in progress).
+- [ ] **Telehealth Integration:** Video consultation via WebRTC.
+- [ ] **Mobile App:** React Native entry point using the same API layer.
+
+---
+
+## ⚖️ License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+*Built with ❤️ for better healthcare accessibility.*
