@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { collections, dbConnect } from "@/lib/dbConnect";
 import { dateComparison } from "@/lib/utils";
-import { previousDay } from "date-fns";
 
 const bookingCollection = () => dbConnect(collections.BOOKINGS);
 
@@ -15,7 +14,7 @@ const groupBookings = {
     $sum: { $cond: [{ $eq: ["$status", "cancelled"] }, 1, 0] },
   },
 };
-const defaultStats = { totalBookings: 0, confirmed: 0, cancelled: 0 };
+export const defaultStats = { totalBookings: 0, confirmed: 0, cancelled: 0 };
 
 // ==========================================
 // Create Confirmed Booking (after payment)
@@ -162,7 +161,6 @@ export const createBookingAggregation = async (email = null) => {
 // Get Monthly Comparison Stats
 // ==========================================
 export const getMonthlyBookingStats = async (email = null) => {
-  console.log("🔍 Function Called with email:", email);
   const { startOfCurrentMonth, startOfLastMonth, endOfLastMonth } =
     await dateComparison();
   const matchEmail = email ? { userEmail: email } : {};
@@ -191,4 +189,61 @@ export const getMonthlyBookingStats = async (email = null) => {
     current: stats[0].currentMonth[0] || defaultStats,
     previous: stats[0].previousMonth[0] || defaultStats,
   };
+};
+
+// ******************************************
+// Admin Specific Action
+// ******************************************
+
+// ==========================================
+// Get Last & days Comparison Stats
+// ==========================================
+export const getLastSevenDaysBookingStats = async () => {
+  const now = new Date();
+  const sevenDaysAgo = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - 7,
+  );
+  const data = await bookingCollection()
+    .aggregate([
+      { $match: { createdAt: { $gte: sevenDaysAgo } } },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$createdAt",
+            },
+          },
+          totalBookings: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } }, //after grouping to make sure the data stays in serial.
+    ])
+    .toArray();
+  return data;
+};
+
+// ******************************************
+// Users Specific Action
+// ******************************************
+
+// ==========================================
+// Get Upcoming Booking for users
+// ==========================================
+export const getUpcomingBooking = async (email) => {
+  const query = { userEmail: email, date: { $gte: new Date() } };
+  const data = await bookingCollection()
+    .find(query)
+    .sort({ date: 1 })
+    .limit(2)
+    .project({
+      serviceName: 1,
+      date: 1,
+      trackingId: 1,
+    })
+    .toArray();
+
+  return data;
 };

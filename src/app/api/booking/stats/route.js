@@ -1,16 +1,14 @@
 import { ApiResponse } from "@/lib/apiResponse";
 import authenticate from "@/lib/authenticate";
-import {
-  createBookingAggregation,
-  getMonthlyBookingStats,
-} from "@/modules/booking/bookingRepository";
 import { getBookingMetricsTrends } from "@/modules/booking/bookingService";
 
 export async function GET(req) {
   try {
     const auth = await authenticate(req);
     if (!auth) return ApiResponse.unauthorized("Authentication required");
+
     const { user } = auth;
+    if (!user) return ApiResponse.unauthorized("Authentication required");
 
     //  Fetch payments based on role
     let serviceResponse;
